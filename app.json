@@ -1,4 +1,11 @@
 {
   "name": "React_Native_Project",
-  "displayName": "React_Native_Project"
+  "displayName": "React_Native_Project",
+  "android": {
+    "package":"com.sidemenu.sidemenuapp",
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/adaptive-icon.png",
+      "backgroundColor": "#FFFFFF"
+    }
+  }
 }

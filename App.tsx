@@ -7,28 +7,16 @@
  * @format
  */
 
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {View} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
-import DrawerNavigation from './components/tabs/DrawerNavigation';
+import React from "react";
+import Navigate from "./components/tabs/Navigate";
+import { View } from "react-native";
 
-const Stack = createStackNavigator();
 
 function App(): JSX.Element {
-
   return (
     // eslint-disable-next-line react-native/no-inline-styles
-    <View style={{minHeight: '100%', width: '100%'}}>
-      <NavigationContainer>
-      <Stack.Navigator initialRouteName="DrawerNavigation">
-        <Stack.Screen
-          name="DrawerNavigation"
-          component={DrawerNavigation}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator>
-      </NavigationContainer>
+    <View style={{ minHeight: "100%", width: "100%" }}>
+      <Navigate />
     </View>
   );
 }

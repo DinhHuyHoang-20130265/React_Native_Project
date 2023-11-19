@@ -43,3 +43,4 @@ com.react_native_project.app-packaged_res-41 C:\Users\Admin\Documents\ReactNativ
 com.react_native_project.app-packaged_res-42 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-reanimated\android\build\intermediates\packaged_res\debug
 com.react_native_project.app-packaged_res-43 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-safe-area-context\android\build\intermediates\packaged_res\debug
 com.react_native_project.app-packaged_res-44 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-screens\android\build\intermediates\packaged_res\debug
+com.react_native_project.app-packaged_res-45 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-vector-icons\android\build\intermediates\packaged_res\debug

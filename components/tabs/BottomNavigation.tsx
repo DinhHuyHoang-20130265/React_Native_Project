@@ -6,6 +6,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../../screens/Home';
 import Settings from '../../screens/Settings';
 import BottomTabNavigator from './BottomTabNavigator';
+import Search from "../../screens/Search";
+import Categories from "../../screens/Categories";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,22 +21,12 @@ function BottomNavigation() {
         {
             name: 'search',
             label: 'Tìm kiếm',
-            component: Home,
+            component: Search,
         },
         {
             name: 'list',
             label: 'Danh mục',
-            component: Settings,
-        },
-        {
-            name: 'bookmark-o',
-            label: 'Đã lưu',
-            component: Home,
-        },
-        {
-            name: 'gear',
-            label: 'Cài đặt',
-            component: Settings,
+            component: Categories,
         },
       ];
   return (
@@ -51,6 +43,7 @@ function BottomNavigation() {
           options={{
             tabBarLabel: _.label,
             headerShown: false,
+            title: _.label
           }}
         />
       );

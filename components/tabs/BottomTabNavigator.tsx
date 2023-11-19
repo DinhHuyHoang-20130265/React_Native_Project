@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const windowWidth = Dimensions.get('window').width - 2;
 const windowHeight = Dimensions.get('window').height;
 
-const TAB_BAR_WIDTH = (windowWidth - 10)  / 5;
+const TAB_BAR_WIDTH = (windowWidth - 10)  / 3;
 
 const BottomTabNavigator = ({state, descriptors, navigation} : any): React.JSX.Element => {
   const animationHorizontalValue = useRef(new Animated.Value(0)).current;
@@ -139,9 +139,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   animatedView: {
-    bottom: -TAB_BAR_WIDTH + 28,
+    bottom: -TAB_BAR_WIDTH / 2 + 15,
     width: TAB_BAR_WIDTH + 2,
-    height: TAB_BAR_WIDTH - 25,
+    height: TAB_BAR_WIDTH / 2 - 10,
     backgroundColor: 'rgba(47, 75, 197, 1)',
     position: 'absolute',
     borderRadius: 15,

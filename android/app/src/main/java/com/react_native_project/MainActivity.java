@@ -13,7 +13,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "React_Native_Project";
+    return "Nông Lâm News";
   }
 
   /**

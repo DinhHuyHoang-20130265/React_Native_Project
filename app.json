@@ -1,11 +1,14 @@
 {
-  "name": "React_Native_Project",
-  "displayName": "React_Native_Project",
+  "name": "Nông Lâm News",
+  "displayName": "Nông Lâm News",
   "android": {
     "package":"com.sidemenu.sidemenuapp",
     "adaptiveIcon": {
       "foregroundImage": "./assets/adaptive-icon.png",
       "backgroundColor": "#FFFFFF"
     }
+  },
+  "expo": {
+
   }
 }

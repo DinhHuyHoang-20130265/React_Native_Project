@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   animatedView: {
-    bottom: -TAB_BAR_WIDTH / 2 + 15,
+    bottom: -windowHeight / 12 + 15,
     width: TAB_BAR_WIDTH + 2,
     height: TAB_BAR_WIDTH / 2 - 10,
     backgroundColor: 'rgba(47, 75, 197, 1)',

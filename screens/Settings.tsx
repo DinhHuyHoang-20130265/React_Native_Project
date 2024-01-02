@@ -2,19 +2,9 @@
 import React, { useState } from "react";
 import { View, Text, Switch, StyleSheet, TouchableOpacity, Button, TouchableHighlight } from "react-native";
 import { theme } from "../components/elements/theme";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const Settings: React.FC = ({ navigation }: any) => {
-
-  const [notificationSwitch, setNotificationSwitch] = useState<boolean>(false);
-  const [darkModeSwitch, setDarkModeSwitch] = useState<boolean>(false);
-
-  const onNotificationSwitchChange = () => {
-    setNotificationSwitch(!notificationSwitch);
-  };
-
-  const onDarkModeSwitchChange = () => {
-    setDarkModeSwitch(!darkModeSwitch);
-  };
 
   return (
     <View style={styles.container}>
@@ -34,18 +24,16 @@ const Settings: React.FC = ({ navigation }: any) => {
           <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng nhập".toUpperCase()}</Text>
         </TouchableHighlight>
       </View>
-
-      <View style={styles.settingOption}>
-        <Text style={{ color: "black" }}>Enable Notifications</Text>
-        <Switch
-          value={notificationSwitch}
-          onValueChange={onNotificationSwitchChange}
-        />
-      </View>
-
+      <TouchableOpacity onPress={() => navigation.navigate("History")}>
+        <View style={styles.settingOption}>
+          <Icon color="green"
+                name={"history"}
+                style={{ fontSize: 22, marginRight: 10 }} />
+          <Text style={{ color: "black" }}>Đã đọc gần đây</Text>
+        </View>
+      </TouchableOpacity>
       <View style={styles.settingOption}>
         <Text style={{ color: "black" }}>Dark Mode</Text>
-        <Switch value={darkModeSwitch} onValueChange={onDarkModeSwitchChange} />
       </View>
 
       {/* Add more setting options as needed */}
@@ -65,7 +53,7 @@ const styles = StyleSheet.create({
   },
   settingOption: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     alignItems: "center",
     marginBottom: 16
   }

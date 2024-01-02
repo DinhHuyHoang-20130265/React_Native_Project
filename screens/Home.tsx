@@ -1,7 +1,8 @@
+/* eslint-disable quotes */
+/* eslint-disable prettier/prettier */
 import React from "react";
 import {
   View,
-  FlatList,
   ScrollView
 } from "react-native";
 import CateHome from "../components/elements/CateHome";

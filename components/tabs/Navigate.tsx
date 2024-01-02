@@ -2,14 +2,21 @@ import BottomNavigation from "./BottomNavigation";
 import Settings from "../../screens/Settings";
 import { getFocusedRouteNameFromRoute, NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import { CardStyleInterpolators, createStackNavigator, TransitionPresets } from "@react-navigation/stack";
+import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/stack";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { ImagesAssets } from "../../assets/img/ImagesAssets";
 import AboutUs from "../../screens/AboutUs";
 import Login from "../../screens/Login";
 import SignUp from "../../screens/SignUp";
 import ForgotPassword from "../../screens/ForgotPassword";
+import ListNews from "../../screens/ListNews";
+import Details from "../../screens/Details";
+import { useDispatch } from "react-redux";
+import { getInitialState } from "../../ReduxStore/getInitialState";
+import { useEffect } from "react";
+import { init, removeAllViewed } from "../../ReduxStore/Action";
+import History from "../../screens/History";
 
 const Stack = createStackNavigator();
 
@@ -27,6 +34,22 @@ function getHeaderTitle(route: any) {
 }
 
 export default function Navigate() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const initState = async () => {
+      try {
+        const initialState = await getInitialState();
+        if (initialState) {
+          dispatch(init(initialState));
+        }
+      } catch (error) {
+        console.error("Error", error);
+      }
+    };
+
+    initState();
+  }, []);
+
   return (<NavigationContainer>
     <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
       <Stack.Screen
@@ -112,6 +135,58 @@ export default function Navigate() {
         headerStyle: {
           elevation: 100,
           borderBottomWidth: 0.5
+        }
+      })} />
+      <Stack.Screen name="ListNews" component={ListNews} options={({ navigation, route }: any) => ({
+        title: route.params.item.name,
+        headerTitleStyle: styles.headerTitle,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
+        }
+      })} />
+      <Stack.Screen name="Details" component={Details} options={({ navigation, route }: any) => ({
+        headerTitle: "",
+        headerTitleStyle: styles.headerTitle,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
+        }
+      })} />
+      <Stack.Screen name="History" component={History} options={({ navigation, route }: any) => ({
+        headerTitle: "Lịch sử",
+        headerTitleStyle: styles.headerTitle,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
+        },
+        headerRight: () => {
+          const showAlert = () => {
+            Alert.alert(
+              "Xoá các bài viết",
+              "Xoá tất cả các bài viết ?",
+              [{
+                text: "Huỷ",
+                style: "cancel"
+              }, {
+                text: "Xoá",
+                onPress: () => {
+                  dispatch(removeAllViewed());
+                },
+                style: "default"
+              }]
+            );
+          };
+          return (
+            <Icon
+              onPress={showAlert}
+              color="black"
+              name={"trash"}
+              style={{ fontSize: 23, marginRight: 10 }} />
+          );
         }
       })} />
     </Stack.Navigator>

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.react_native_project.app-mergeDebugResources-35:/values-gl/values-gl.xml",
+            "outputFile": "com.react_native_project.app-mergeDebugResources-36:/values-gl/values-gl.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-3\\9623e378e4dfc57c47793d0ffd25ee05\\transformed\\core-1.8.0\\res\\values-gl\\values-gl.xml",

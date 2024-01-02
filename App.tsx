@@ -6,18 +6,22 @@
  *
  * @format
  */
+global.Buffer = global.Buffer || require("buffer").Buffer;
 
 import React from "react";
 import Navigate from "./components/tabs/Navigate";
 import { View } from "react-native";
+import { store } from "./ReduxStore/Store";
+import { Provider } from "react-redux";
 
 
 function App(): JSX.Element {
   return (
-    // eslint-disable-next-line react-native/no-inline-styles
-    <View style={{ minHeight: "100%", width: "100%" }}>
-      <Navigate />
-    </View>
+    <Provider store={store}>
+      <View style={{ minHeight: "100%", width: "100%" }}>
+        <Navigate />
+      </View>
+    </Provider>
   );
 }
 

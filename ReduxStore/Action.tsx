@@ -35,3 +35,10 @@ export const removeItem = (data: any) => {
     payload: data
   };
 };
+
+export const lockUser= (data: any) => {
+  return {
+    type: "user/lock",
+    payload: data
+  };
+}

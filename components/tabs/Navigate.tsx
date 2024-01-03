@@ -1,40 +1,17 @@
-import BottomNavigation from "./BottomNavigation";
-import Settings from "../../screens/Settings";
-import { getFocusedRouteNameFromRoute, NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/stack";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { Image, StyleSheet, TouchableOpacity, Alert } from "react-native";
-import { ImagesAssets } from "../../assets/img/ImagesAssets";
-import AboutUs from "../../screens/AboutUs";
-import Login from "../../screens/Login";
-import SignUp from "../../screens/SignUp";
-import ForgotPassword from "../../screens/ForgotPassword";
-import ListNews from "../../screens/ListNews";
-import Details from "../../screens/Details";
-import { useDispatch } from "react-redux";
+import { StyleSheet } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { getInitialState } from "../../ReduxStore/getInitialState";
 import { useEffect } from "react";
-import { init, removeAllViewed } from "../../ReduxStore/Action";
-import History from "../../screens/History";
+import { init } from "../../ReduxStore/Action";
+import NavigateUser from "./NavigateUser";
+import NavigateAdmin from "./NavigateAdmin";
 
-const Stack = createStackNavigator();
-
-function getHeaderTitle(route: any) {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? "home";
-
-  switch (routeName) {
-    case "home":
-      return "Trang chủ".toUpperCase();
-    case "search":
-      return "Tìm kiếm".toUpperCase();
-    case "list":
-      return "Danh mục".toUpperCase();
-  }
-}
 
 export default function Navigate() {
   const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.userObj);
   useEffect(() => {
     const initState = async () => {
       try {
@@ -48,148 +25,10 @@ export default function Navigate() {
     };
 
     initState();
-  }, []);
+  }, [user, dispatch]);
 
   return (<NavigationContainer>
-    <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
-      <Stack.Screen
-        name="Home"
-        component={BottomNavigation}
-        options={({ route, navigation }) => ({
-          title: getHeaderTitle(route),
-          headerTitleStyle: styles.headerTitle,
-          headerStyle: {
-            elevation: 100,
-            borderBottomWidth: 0.5
-          },
-          headerShow: true,
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("AboutUs")}>
-              <Image
-                source={ImagesAssets.logo}
-                style={{ marginLeft: 10, width: 40, height: 40, borderRadius: 8 }} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <Icon
-              onPress={() => navigation.navigate("Settings")}
-              color="black"
-              name={"gear"}
-              style={{ fontSize: 26, marginRight: 10 }} />
-          )
-        })}
-      />
-      <Stack.Screen name="Settings" component={Settings} options={({ navigation }) => ({
-        title: "Cài đặt".toUpperCase(), headerTitleStyle: styles.headerTitle,
-        headerStyle: {
-          elevation: 100,
-          borderBottomWidth: 0.5
-        },
-        cardStyleInterpolator: ({ current, layouts }: any) => {
-          return {
-            cardStyle: {
-              transform: [
-                {
-                  translateX: current.progress.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [layouts.screen.width, 0]
-                  })
-                }
-              ]
-            }
-          };
-        }
-
-      })} />
-      <Stack.Screen name="AboutUs" component={AboutUs} options={({ navigation, screenProps }: any) => ({
-        title: "Về ứng dụng này".toUpperCase(),
-        headerTitleStyle: styles.headerTitle,
-        cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
-        headerStyle: {
-          elevation: 100,
-          borderBottomWidth: 0.5
-        }
-      })} />
-      <Stack.Screen name="Login" component={Login} options={({ navigation }: any) => ({
-        title: "Đăng nhập".toUpperCase(),
-        headerTitleStyle: styles.headerTitle,
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-        headerStyle: {
-          elevation: 100,
-          borderBottomWidth: 0.5
-        }
-      })} />
-      <Stack.Screen name="SignUp" component={SignUp} options={({ navigation }: any) => ({
-        title: "Đăng ký".toUpperCase(),
-        headerTitleStyle: styles.headerTitle,
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-        headerStyle: {
-          elevation: 100,
-          borderBottomWidth: 0.5
-        }
-      })} />
-      <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={({ navigation }: any) => ({
-        title: "Quên mật khẩu".toUpperCase(),
-        headerTitleStyle: styles.headerTitle,
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-        headerStyle: {
-          elevation: 100,
-          borderBottomWidth: 0.5
-        }
-      })} />
-      <Stack.Screen name="ListNews" component={ListNews} options={({ navigation, route }: any) => ({
-        title: route.params.item.name,
-        headerTitleStyle: styles.headerTitle,
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-        headerStyle: {
-          elevation: 100,
-          borderBottomWidth: 0.5
-        }
-      })} />
-      <Stack.Screen name="Details" component={Details} options={({ navigation, route }: any) => ({
-        headerTitle: "",
-        headerTitleStyle: styles.headerTitle,
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-        headerStyle: {
-          elevation: 100,
-          borderBottomWidth: 0.5
-        }
-      })} />
-      <Stack.Screen name="History" component={History} options={({ navigation, route }: any) => ({
-        headerTitle: "Lịch sử",
-        headerTitleStyle: styles.headerTitle,
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-        headerStyle: {
-          elevation: 100,
-          borderBottomWidth: 0.5
-        },
-        headerRight: () => {
-          const showAlert = () => {
-            Alert.alert(
-              "Xoá các bài viết",
-              "Xoá tất cả các bài viết ?",
-              [{
-                text: "Huỷ",
-                style: "cancel"
-              }, {
-                text: "Xoá",
-                onPress: () => {
-                  dispatch(removeAllViewed());
-                },
-                style: "default"
-              }]
-            );
-          };
-          return (
-            <Icon
-              onPress={showAlert}
-              color="black"
-              name={"trash"}
-              style={{ fontSize: 23, marginRight: 10 }} />
-          );
-        }
-      })} />
-    </Stack.Navigator>
+    {user === null || user.isAdmin === 0 ? <NavigateUser /> : <NavigateAdmin />}
   </NavigationContainer>);
 }
 

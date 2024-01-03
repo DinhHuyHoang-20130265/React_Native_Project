@@ -20,7 +20,7 @@ const Speech = (props: any) => {
   };
 
   const handlePlay = () => {
-
+    Tts.requestInstallEngine();
     Tts.getInitStatus().then(() => {
       Tts.setDefaultLanguage("vi-VN");
       // @ts-ignore

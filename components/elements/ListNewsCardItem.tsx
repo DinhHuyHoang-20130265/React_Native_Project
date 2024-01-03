@@ -13,8 +13,8 @@ export function ListNewsCardItem(props: any) {
   const dispatch = useDispatch();
   const showAlert = () => {
     Alert.alert(
-      "Xoá bài viết",
-      "Xoá bài viết này ?",
+      "Tùy chọn",
+      "Chọn thao tác:",
       [{
         text: "Huỷ",
         style: "cancel"
@@ -27,14 +27,36 @@ export function ListNewsCardItem(props: any) {
       }]
     );
   };
+  const showAlertAdminNews = () => {
+    Alert.alert(
+      "Tùy chọn",
+      "Thực hiện tùy chọn",
+      [{
+        text: "Huỷ",
+        style: "cancel"
+      }, {
+        text: "Xoá",
+        onPress: () => {
+        },
+        style: "default"
+      },
+        {
+          text:"Thêm",
+          onPress: () => {
+          },
+          style:"default"
+        }]
+    );
+  };
 
 
   return (
     <TouchableNativeFeedback
-      onPress={() => props.navigation.navigate("Details", { item: props.itemNews, screen: props.screen })}
       onLongPress={() => {
         if (props.screen === "History")
           return showAlert();
+        else if (props.screen === "NewsDashBoard")
+          return showAlertAdminNews();
       }}
       delayLongPress={650}
     >

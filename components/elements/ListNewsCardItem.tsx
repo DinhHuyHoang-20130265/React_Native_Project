@@ -31,7 +31,6 @@ export function ListNewsCardItem(props: any) {
 
   return (
     <TouchableNativeFeedback
-      onPress={() => props.navigation.navigate("Details", { item: props.itemNews, screen: props.screen })}
       onLongPress={() => {
         if (props.screen === "History")
           return showAlert();

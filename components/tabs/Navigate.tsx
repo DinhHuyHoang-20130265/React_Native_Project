@@ -28,7 +28,7 @@ export default function Navigate() {
   }, [user, dispatch]);
 
   return (<NavigationContainer>
-    {user === null || user.isAdmin === 0 ? <NavigateUser /> : <NavigateAdmin />}
+    {user === null || !user.admin ? <NavigateUser /> : <NavigateAdmin />}
   </NavigationContainer>);
 }
 

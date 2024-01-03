@@ -1,13 +1,13 @@
-#Thu Nov 16 20:13:07 ICT 2023
-base.0=C\:\\Users\\Admin\\Documents\\ReactNative\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=C\:\\Users\\Admin\\Documents\\ReactNative\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.2=C\:\\Users\\Admin\\Documents\\ReactNative\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
-base.3=C\:\\Users\\Admin\\Documents\\ReactNative\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
-path.0=classes.dex
-path.1=0/classes.dex
-path.2=14/classes.dex
+#Wed Jan 03 13:28:09 ICT 2024
 path.3=7/classes.dex
-renamed.0=classes.dex
-renamed.1=classes2.dex
-renamed.2=classes3.dex
+path.2=14/classes.dex
+path.1=0/classes.dex
+path.0=classes.dex
+base.3=D\:\\Semester7\\mobile\\code\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
+base.2=D\:\\Semester7\\mobile\\code\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
+base.1=D\:\\Semester7\\mobile\\code\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.0=D\:\\Semester7\\mobile\\code\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 renamed.3=classes4.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex

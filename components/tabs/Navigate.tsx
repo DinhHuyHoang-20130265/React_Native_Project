@@ -26,7 +26,7 @@ export default function Navigate() {
 
     initState();
   }, [user, dispatch]);
-
+  console.log(user)
   return (<NavigationContainer>
     {user === null || !user.admin ? <NavigateUser /> : <NavigateAdmin />}
   </NavigationContainer>);

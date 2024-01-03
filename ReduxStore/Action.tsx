@@ -1,6 +1,6 @@
 export const login = (data: any) => {
   return {
-    type: "user/login",
+    type: "user/loginUser",
     payload: data
   };
 };

@@ -9,13 +9,14 @@ import Background from "../components/elements/Background";
 import TextInput from "../components/elements/TextInput";
 import Button from "../components/elements/Button";
 import { ImagesAssets } from "../assets/img/ImagesAssets";
+import { signUp } from "../apiCalls/signUp";
 
 export default function SignUp({ navigation }: any) {
   const [name, setName] = useState({ value: "", error: "" });
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
-  const onSignUpPressed = () => {
+  const onSignUpPressed = async () => {
     const nameError = nameValidator(name.value);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
@@ -25,10 +26,15 @@ export default function SignUp({ navigation }: any) {
       setPassword({ ...password, error: passwordError });
       return;
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Dashboard" }]
-    });
+    try {
+      await signUp(name.value, email.value, password.value);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "SignUp" }]
+      });
+    } catch (error) {
+      console.error("Đã xảy ra lỗi:", error);
+    }
   };
 
   return (

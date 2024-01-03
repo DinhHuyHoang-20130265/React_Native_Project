@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { View, Text, Switch, StyleSheet, TouchableOpacity, Button, TouchableHighlight } from "react-native";
 import { theme } from "../components/elements/theme";
 import Icon from "react-native-vector-icons/FontAwesome";
+import {useSelector} from "react-redux"
 
 const Settings: React.FC = ({ navigation }: any) => {
+  const user = useSelector((state:any)=> state.userObj)
 
   return (
     <View style={styles.container}>
@@ -12,17 +14,19 @@ const Settings: React.FC = ({ navigation }: any) => {
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 16
-      }}>
-        <TouchableHighlight onPress={() => navigation.navigate("Login")} underlayColor="#400B96FF"
-                            style={{
-                              backgroundColor: theme.colors.primary,
-                              width: 160,
-                              height: 40,
-                              justifyContent: "center",
-                              borderRadius: 8
-                            }}>
-          <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng nhập".toUpperCase()}</Text>
-        </TouchableHighlight>
+      }}>{user=== null ? <TouchableHighlight onPress={() => navigation.navigate("Login")} underlayColor="#400B96FF"
+                                             style={{
+                                               backgroundColor: theme.colors.primary,
+                                               width: 160,
+                                               height: 40,
+                                               justifyContent: "center",
+                                               borderRadius: 8
+                                             }}>
+        <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng nhập".toUpperCase()}</Text>
+      </TouchableHighlight>: <View>
+        <Text style={{fontSize: 20, fontWeight: "bold", marginBottom:20}}>Xin chào: {user.fullName}</Text>
+        <Button title={"Đăng xuất"}/>
+      </View>}
       </View>
       <TouchableOpacity onPress={() => navigation.navigate("History")}>
         <View style={styles.settingOption}>

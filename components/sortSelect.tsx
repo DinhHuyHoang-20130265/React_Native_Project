@@ -5,3 +5,12 @@ export const data = [
   { key: "3", value: "Tên A -> Z" },
   { key: "4", value: "Tên Z -> A" }
 ];
+
+export const dataUser = [
+  { key: "0", value: "Tất cả" },
+  { key: "1", value: "Tài khoản người dùng hoạt động" },
+  { key: "2", value: "Tài khoản người dùng bị khóa " },
+  { key: "3", value: "Tài khoản admin hoạt động" },
+  { key: "4", value: "Tài khoản admin bị khóa" }
+];
+

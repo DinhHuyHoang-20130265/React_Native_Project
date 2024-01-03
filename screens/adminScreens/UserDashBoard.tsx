@@ -4,7 +4,7 @@ import {
   ScrollView, StyleSheet, Text, FlatList
 } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
-import { data } from "../../components/sortSelect";
+import { dataUser } from "../../components/sortSelect";
 import { ListNewsCardItem } from "../../components/elements/ListNewsCardItem";
 import { UserCardItem } from "../../components/elements/UserCardItem";
 import { useRoute } from "@react-navigation/native";
@@ -17,55 +17,55 @@ const UserDashBoard: React.FC = (props: any) => {
 
   const [listUser, setListUser] = useState<any[]>([]);
   // @ts-ignore
-  const [selected, setSelected] = useState<any>(data.at(0).key);
+  const [selected, setSelected] = useState<any>(dataUser.at(0).key);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const userData = await allUsers({ username: "456@gmail.com", password: "fun123" });
-        /*userData.sort((a: any, b: any) => {
+        setListUser(userData.filter((item: any) => {
           switch (selected) {
             case "1": {
-              return new Date(b.createdDate).valueOf() - new Date(a.createdDate).valueOf();
+              return item.status && !item.admin;
             }
             case "2": {
-              return new Date(a.createdDate).valueOf() - new Date(b.createdDate).valueOf();
+              return !item.status && !item.admin;
             }
             case "3": {
-              return a.title.localeCompare(b.title);
+              return item.status && item.admin;
             }
             case "4": {
-              return b.title.localeCompare(a.title);
+              return !item.status && item.admin;
             }
             case "0": {
-              return new Date(b.createdDate).valueOf() - new Date(a.createdDate).valueOf();
+              return item;
             }
           }
-        });*/
-        setListUser(userData);
+        }));
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
-
-    fetchData();
-  }, [props, selected]);
+    if (props)
+      fetchData();
+  }, [props, selected, listUser]);
 
   return (
     <View style={styles.container}>
-      <View style={{ marginBottom: 60 }}>
+      <View style={{ marginBottom: 130 }}>
         <SelectList
           setSelected={setSelected}
-          data={data}
+          data={dataUser}
           inputStyles={{ color: "black" }}
           boxStyles={{ marginTop: 10, marginBottom: 5, marginHorizontal: 10, backgroundColor: "white" }}
           dropdownStyles={{ marginVertical: 5, marginHorizontal: 10, backgroundColor: "white" }}
           notFoundText={""}
           dropdownTextStyles={{ color: "black" }}
           searchPlaceholder={""}
-          defaultOption={data.at(0)}
+          defaultOption={dataUser.at(0)}
         />
         <FlatList
-          data={listUser ? listUser : []}
+          data={listUser}
           keyExtractor={(item, index) => index.toString()}
           horizontal={false}
           renderItem={({ item, index }) => {

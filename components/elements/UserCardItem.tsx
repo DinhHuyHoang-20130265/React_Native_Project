@@ -6,44 +6,49 @@ import {
   TouchableNativeFeedback, Alert
 } from "react-native";
 import Animated from "react-native-reanimated";
-import { useDispatch } from "react-redux";
-import { removeItem } from "../../ReduxStore/Action";
+import { useDispatch, useSelector } from "react-redux";
+import { lockUser, removeItem } from "../../ReduxStore/Action";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 export function UserCardItem(props: any) {
   const dispatch = useDispatch();
-  // const showAlert = () => {
-  //   Alert.alert(
-  //     "Xoá bài viết",
-  //     "Xoá bài viết này ?",
-  //     [{
-  //       text: "Huỷ",
-  //       style: "cancel"
-  //     }, {
-  //       text: "Xoá",
-  //       onPress: () => {
-  //         dispatch(removeItem(props.itemNews));
-  //       },
-  //       style: "default"
-  //     }]
-  //   );
-  // };
+  const showAlert = () => {
+    Alert.alert(
+      "Tuỳ chọn",
+      "Chọn thao tác",
+      [{
+        text: "Huỷ",
+        style: "cancel"
+      }, {
+        text: props.user.status ? "Khóa tài khoản" : "Mở tài khoản",
+        onPress: () => {
+          dispatch(lockUser(props.user.id));
+        },
+        style: "default"
+      }, {
+        text: "Sửa",
+        onPress: () => {
+        },
+        style: "default"
+      }]
+    );
+  };
 
 
   return (
     <TouchableNativeFeedback
-      // onPress={() => props.navigation.navigate("Details", { item: props.itemNews, screen: props.screen })}
-      // onLongPress={() => {
-      //   if (props.screen === "History")
-      //     return showAlert();
-      // }}
-      // delayLongPress={650}
+      onPress={() => props.navigation.navigate("Details", { item: props.itemNews, screen: props.screen })}
+      onLongPress={() => {
+        if (props.screen === "UserDashBoard" || props.screen === "History")
+          return showAlert();
+      }}
+      delayLongPress={650}
     >
 
       {props.user ? <Animated.View style={styles.root}>
         <View style={styles.container}>
           <View style={styles.right}>
-            <Icon name={"user"} style={[styles.image, {fontSize: 40}]} />
+            <Icon name={"user"} style={[styles.image, { fontSize: 40 }]} />
           </View>
 
           <View style={styles.left}>
@@ -54,7 +59,7 @@ export function UserCardItem(props: any) {
               <Text style={styles.desc}>
                 Họ tên: {props.user.fullName}
               </Text>
-              <Text style={[styles.desc, {color: props.user.status? "green": "red"}]}>
+              <Text style={[styles.desc, { color: props.user.status ? "green" : "red" }]}>
                 Trạng thái: {props.user.status ? "Đang Hoạt Động" : "Đã khóa"}
               </Text>
               <Text style={styles.desc}>

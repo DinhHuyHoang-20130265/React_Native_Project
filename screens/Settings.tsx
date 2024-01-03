@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useState } from "react";
 import { View, Text, Switch, StyleSheet, TouchableOpacity, Button, TouchableHighlight } from "react-native";
 import { theme } from "../components/elements/theme";
@@ -14,7 +13,7 @@ const Settings: React.FC = ({ navigation }: any) => {
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 16
-      }}>{user=== null ? <TouchableHighlight onPress={() => navigation.navigate("Login")} underlayColor="#400B96FF"
+      }}>{user === null ? <TouchableHighlight onPress={() => navigation.navigate("Login")} underlayColor="#400B96FF"
                                              style={{
                                                backgroundColor: theme.colors.primary,
                                                width: 160,

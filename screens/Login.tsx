@@ -8,12 +8,13 @@ import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
 import { theme } from "../components/elements/theme";
 import { ImagesAssets } from "../assets/img/ImagesAssets";
+import { loginUser } from "../apiCalls/loginUser";
 
 export default function Login({ navigation }: any) {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
-  const onLoginPressed = () => {
+  const onLoginPressed = async () => {
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
     if (emailError || passwordError) {
@@ -21,10 +22,15 @@ export default function Login({ navigation }: any) {
       setPassword({ ...password, error: passwordError });
       return;
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "home" }]
-    });
+    try {
+      await loginUser(email.value, password.value);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "home" }],
+        });
+    } catch (error) {
+      console.error("Đã xảy ra lỗi:", error);
+    }
   };
 
   return (

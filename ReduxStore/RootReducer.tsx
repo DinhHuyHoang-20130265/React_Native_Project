@@ -16,7 +16,7 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
         bookmarks: action.payload.bookmarks
       };
     }
-    case "user/login": {
+    case "user/loginUser": {
       AsyncStorage.setItem("userObj", JSON.stringify(action.payload))
         .then(() => {
           console.log("Successfully saved userObj");

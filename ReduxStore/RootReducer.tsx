@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { lockUser } from "../apiCalls/lockUser";
 
 const initState: any = {
   userObj: null,
@@ -93,6 +94,16 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
       return {
         ...state,
         bookmarks: []
+      };
+    }
+    case "user/lock": {
+      lockUser({
+        id: action.payload,
+        username: state.userObj.email,
+        password: state.userObj.password
+      });
+      return {
+        ...state
       };
     }
     default:

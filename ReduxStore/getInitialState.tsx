@@ -7,7 +7,12 @@ export const getInitialState = async () => {
 
   try {
     const userString = await AsyncStorage.getItem("userObj");
-    userObj = userString !== null ? JSON.parse(userString) : { isAdmin: 1 };
+    userObj = userString !== null ? JSON.parse(userString) : {
+      email: "456@gmail.com",
+      password: "fun123",
+      fullName: "Hikkkkne",
+      admin: true
+    };
 
     const viewedString = await AsyncStorage.getItem("viewed");
     viewedlist = viewedString !== null ? JSON.parse(viewedString) : [];

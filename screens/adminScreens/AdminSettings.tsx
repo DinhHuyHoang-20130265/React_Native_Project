@@ -1,11 +1,21 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from "react";
-import { View, Text, Switch, StyleSheet, TouchableOpacity, Button, TouchableHighlight } from "react-native";
-import { theme } from "../../components/elements/theme";
-import Icon from "react-native-vector-icons/FontAwesome";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import { logout } from "../../ReduxStore/Action";
 
 const AdminSettings: React.FC = ({ navigation }: any) => {
+  const [currentUser, setCurrentUser] = useState<any>(null);
+  const user = useSelector((state: any) => state.userObj);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    setCurrentUser(user);
+  }, [user, navigation]);
+
+  const logOut = () => {
+    dispatch(logout());
+  };
   return (
     <View style={styles.container}>
       <View style={{
@@ -14,7 +24,19 @@ const AdminSettings: React.FC = ({ navigation }: any) => {
         marginBottom: 16
       }}>
       </View>
-      <Text>Admin setting</Text>
+      {currentUser ? <View>
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 20 }}>Xin chào: {currentUser.fullName}</Text>
+        <TouchableHighlight onPress={() => logOut()} underlayColor="#400B96FF"
+                            style={{
+                              backgroundColor: "green",
+                              width: 160,
+                              height: 40,
+                              justifyContent: "center",
+                              borderRadius: 8
+                            }}>
+          <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng xuất".toUpperCase()}</Text>
+        </TouchableHighlight>
+      </View> : <View></View>}
       <View style={styles.settingOption}>
         <Text style={{ color: "black" }}>Dark Mode</Text>
       </View>

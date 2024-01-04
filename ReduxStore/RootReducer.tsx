@@ -18,6 +18,8 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
       };
     }
     case "user/loginUser": {
+      const loged = action.payload
+      console.log(loged);
       AsyncStorage.setItem("userObj", JSON.stringify(action.payload))
         .then(() => {
           console.log("Successfully saved userObj");
@@ -27,7 +29,7 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
         });
       return {
         ...state,
-        userObj: action.payload
+        userObj: loged
       };
     }
     case "user/logout": {

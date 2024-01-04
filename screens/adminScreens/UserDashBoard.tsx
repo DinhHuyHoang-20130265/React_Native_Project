@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  ScrollView, StyleSheet, Text, FlatList, TouchableOpacity
+  StyleSheet, Text, FlatList, TouchableOpacity
 } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { dataUser } from "../../components/sortSelect";
@@ -22,27 +22,30 @@ const UserDashBoard: React.FC = (props: any) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userData = await allUsers({ username: admin.email, password: admin.password });
-        setListUser(userData.filter((item: any) => item.id !== admin.id).filter((item: any) => {
-          switch (selected) {
-            case "1": {
-              return item.status && !item.admin;
+        if (admin) {
+          const userData = await allUsers({ username: admin.email, password: admin.password });
+          setListUser(userData.filter((item: any) => item.id !== admin.id).filter((item: any) => {
+            switch (selected) {
+              case "1": {
+                return item.status && !item.admin;
+              }
+              case "2": {
+                return !item.status && !item.admin;
+              }
+              case "3": {
+                return item.status && item.admin;
+              }
+              case "4": {
+                return !item.status && item.admin;
+              }
+              case "0": {
+                return item;
+              }
             }
-            case "2": {
-              return !item.status && !item.admin;
-            }
-            case "3": {
-              return item.status && item.admin;
-            }
-            case "4": {
-              return !item.status && item.admin;
-            }
-            case "0": {
-              return item;
-            }
-          }
-        }));
-      } catch (error) {
+          }));
+        }
+      } catch
+        (error) {
         console.error("Error fetching users: hihi", error);
       }
     };
@@ -113,12 +116,12 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: "#007bff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   addButtonText: {
     fontSize: 30,
-    color: "white",
-  },
+    color: "white"
+  }
 });
 
 export default UserDashBoard;

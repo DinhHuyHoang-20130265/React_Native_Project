@@ -1,135 +1,151 @@
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableNativeFeedback, Alert
-} from "react-native";
-import Animated from "react-native-reanimated";
-import { useDispatch, useSelector } from "react-redux";
-import { lockUser, removeItem } from "../../ReduxStore/Action";
+import React, { useState } from "react";
+import { View, Text, TextInput, Switch, StyleSheet, Button, Alert, Image } from "react-native";
+import { RadioButton } from "react-native-paper";
+import { black } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export function UserCardItem(props: any) {
-  const dispatch = useDispatch();
-  const showAlert = () => {
-    Alert.alert(
-      "Tuỳ chọn",
-      "Chọn thao tác",
-      [{
-        text: "Huỷ",
-        style: "cancel"
-      }, {
-        text: props.user.status ? "Khóa tài khoản" : "Mở tài khoản",
-        onPress: () => {
-          dispatch(lockUser(props.user.id));
-        },
-        style: "default"
-      }, {
-        text: "Sửa",
-        onPress: () => {
-        },
-        style: "default"
-      }]
-    );
-  };
-
-
-  return (
-    <TouchableNativeFeedback
-      onPress={() => {}}
-      onLongPress={() => {
-        if (props.screen === "UserDashBoard" || props.screen === "History")
-          return showAlert();
-      }}
-      delayLongPress={650}
-    >
-
-      {props.user ? <Animated.View style={styles.root}>
-        <View style={styles.container}>
-          <View style={styles.right}>
-            <Icon name={"user"} style={[styles.image, { fontSize: 40 }]} />
-          </View>
-
-          <View style={styles.left}>
-            <View style={{ height: "90%", justifyContent: "center" }}>
-              <Text style={styles.title}>
-                Username: {props.user.email}
-              </Text>
-              <Text style={styles.desc}>
-                Họ tên: {props.user.fullName}
-              </Text>
-              <Text style={[styles.desc, { color: props.user.status ? "green" : "red" }]}>
-                Trạng thái: {props.user.status ? "Đang Hoạt Động" : "Đã khóa"}
-              </Text>
-              <Text style={styles.desc}>
-                Loại tài khoản: {props.user.admin ? "Admin" : "Người dùng"}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </Animated.View> : ""}
-    </TouchableNativeFeedback>
-  );
+interface UserModifyProps {
+  // Định nghĩa các props nếu cần
 }
 
-const styles = StyleSheet.create({
-  root: {
-    marginHorizontal: 10,
-    height: 100,
-    marginBottom: 5
-  },
-  left: {
-    width: "70%"
-  },
-  image: {
-    borderRadius: 15
-  },
-  right: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: "30%",
-    flexDirection: "column",
-    height: "100%"
-  },
-  container: {
-    flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    width: "100%",
-    alignItems: "flex-start",
-    marginVertical: 7,
-    borderRadius: 15,
-    backgroundColor: "rgb(255,255,255)",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 4,
-      height: 4
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
+const UserModify: React.FC<UserModifyProps> = () => {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [role, setRole] = useState<string>("user");
+  const [status, setStatus] = useState<boolean>(false);
 
-    elevation: 4
-  },
-  desc: {
-    color: "rgba(0, 0, 0, 1)",
-    fontFamily: "Inter",
-    fontSize: 12,
-    fontStyle: "normal",
-    fontWeight: "400"
-  },
-  title: {
-    color: "rgba(0, 0, 0, 1)",
-    fontFamily: "Inter",
-    fontSize: 13,
-    fontStyle: "normal",
-    fontWeight: "800"
-  },
-  date: {
-    color: "rgba(0, 0, 0, 1)",
-    fontFamily: "Inter",
-    fontSize: 11,
-    fontStyle: "italic",
-    fontWeight: "bold"
+  const handleSave = () => {
+    // Xử lý lưu thông tin người dùng tại đây
+    console.log("Name:", name);
+    console.log("Email:", email);
+    console.log("Role:", role);
+    console.log("Status:", status);
+    // Thêm logic lưu vào cơ sở dữ liệu hoặc gửi request API nếu cần
+  };
+
+  const handleDelete = () => {
+    // Xử lý xóa tài khoản người dùng tại đây
+    Alert.alert('Xác nhận xóa', 'Bạn có chắc chắn muốn xóa tài khoản không?', [
+      { text: 'Hủy', style: 'cancel' },
+      { text: 'Xóa', style: 'destructive', onPress: () => console.log('Xóa tài khoản') },
+    ]);
+    // Thêm logic xóa tài khoản tại đây khi triển khai
   }
+
+  const handleChangePassword = () => {
+    // Xử lý khi người dùng nhấn nút "Đổi mật khẩu"
+    Alert.alert("Thông báo", "Chức năng đổi mật khẩu sẽ được triển khai trong tương lai.");
+    // Thêm logic đổi mật khẩu tại đây khi triển khai
+  };
+
+  return (
+    <View style={styles.container}>
+      <Icon name={"user"}  style={styles.avatar} />
+
+      <Text style={styles.label}>Họ tên:</Text>
+      <TextInput
+        style={styles.input}
+        value={name}
+        onChangeText={setName}
+        placeholder="Nhập tên người dùng"
+      />
+
+      <Text style={styles.label}>Email:</Text>
+      <TextInput
+        style={styles.input}
+        value={email}
+        onChangeText={setEmail}
+        placeholder="Nhập địa chỉ email"
+        keyboardType="email-address"
+      />
+
+      <Text style={styles.label}>Vai trò:</Text>
+      <View style={styles.roleContainer}>
+        <RadioButton.Group onValueChange={(value) => setRole(value)} value={role}>
+          <View style={styles.radioButtonContainer}>
+            <RadioButton.Android value="user" />
+            <Text style={styles.radioButtonLabel}>Người dùng</Text>
+          </View>
+          <View style={styles.radioButtonContainer}>
+            <RadioButton.Android value="admin" />
+            <Text style={styles.radioButtonLabel}>Admin</Text>
+          </View>
+        </RadioButton.Group>
+      </View>
+
+      <View style={styles.switchContainer}>
+        <Text style={styles.label}>Trạng thái:</Text>
+        <Switch value={status} onValueChange={setStatus} />
+      </View>
+
+      <Button title="Cập nhật mật khẩu mới" onPress={handleChangePassword} style={styles.button} />
+      <Text style={{ marginBottom: 10 }} />
+      <Button title="Lưu" onPress={handleSave} style={styles.button} />
+      <Text style={{ marginBottom: 10 }} />
+      <Button title="Xóa tài khoản" onPress={handleDelete} style={[styles.button, styles.deleteButton]} />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+
+  },
+  avatar: {
+    alignSelf: "center",
+    fontSize: 80,
+    borderRadius: 40, // Đặt bo tròn hình ảnh (nửa chiều rộng)
+    marginBottom: 16
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 8,
+    marginLeft: 2,
+    color: "black"
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 4,
+    padding: 8,
+    marginBottom: 16,
+    fontSize: 16
+  },
+  roleContainer: {
+    marginBottom: 16
+  },
+  radioButtonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8
+  },
+  radioButtonLabel: {
+    fontSize: 16,
+    marginLeft: 8
+  },
+  switchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 16
+  },
+  button: {
+    backgroundColor: '#007bff', // Màu nền của nút
+    padding: 10, // Kích thước padding
+    borderRadius: 8, // Bo tròn góc
+    alignItems: 'center', // Canh giữa theo chiều ngang
+    justifyContent: 'center', // Canh giữa theo chiều dọc
+    marginTop: 10, // Khoảng cách từ phía trên
+  },
+  deleteButton: {
+    backgroundColor: 'red', // Đặt màu đỏ cho nút xóa
+  },
+  buttonText: {
+    color: '#ffffff', // Màu chữ của nút
+    fontSize: 16, // Kích thước chữ
+  },
 });
+
+export default UserModify;

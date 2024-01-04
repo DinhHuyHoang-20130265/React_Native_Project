@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  ScrollView, StyleSheet, Text, FlatList
+  ScrollView, StyleSheet, Text, FlatList, TouchableOpacity
 } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { dataUser } from "../../components/sortSelect";
@@ -78,6 +78,10 @@ const UserDashBoard: React.FC = (props: any) => {
 
         />
       </View>
+      {/* Nút dấu cộng ở góc dưới bên phải */}
+      <TouchableOpacity style={styles.addButton} onPress={() => props.navigation.navigate("AddUser")}>
+        <Text style={styles.addButtonText}>+</Text>
+      </TouchableOpacity>
     </View>
   )
     ;
@@ -99,7 +103,22 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16
-  }
+  },
+  addButton: {
+    position: "absolute",
+    bottom: 150,
+    right: 14,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "#007bff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  addButtonText: {
+    fontSize: 30,
+    color: "white",
+  },
 });
 
 export default UserDashBoard;

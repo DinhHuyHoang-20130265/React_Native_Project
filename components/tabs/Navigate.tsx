@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getInitialState } from "../../ReduxStore/getInitialState";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { init } from "../../ReduxStore/Action";
 import NavigateUser from "./NavigateUser";
 import NavigateAdmin from "./NavigateAdmin";
@@ -12,6 +12,7 @@ import NavigateAdmin from "./NavigateAdmin";
 export default function Navigate() {
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.userObj);
+  const [currentUser, setCurrentUser] = useState<any>(null);
   useEffect(() => {
     const initState = async () => {
       try {
@@ -24,11 +25,14 @@ export default function Navigate() {
       }
     };
 
-    initState();
-  }, [user, dispatch]);
-  console.log(user)
+    if (JSON.stringify(user) !== JSON.stringify(currentUser)) {
+      initState().then(() => setCurrentUser(user));
+    }
+  }, [user, currentUser, dispatch]);
+  console.log(currentUser);
+
   return (<NavigationContainer>
-    {user === null || !user.admin ? <NavigateUser /> : <NavigateAdmin />}
+    {currentUser === null || !currentUser.admin ? <NavigateUser /> : <NavigateAdmin />}
   </NavigationContainer>);
 }
 

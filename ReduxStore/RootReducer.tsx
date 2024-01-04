@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lockUser } from "../apiCalls/lockUser";
+import { hideCategory } from "../apiCalls/hideCategory";
 
 const initState: any = {
   userObj: null,
@@ -16,7 +17,9 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
         bookmarks: action.payload.bookmarks
       };
     }
-    case "user/login": {
+    case "user/loginUser": {
+      const loged = action.payload
+      console.log(loged);
       AsyncStorage.setItem("userObj", JSON.stringify(action.payload))
         .then(() => {
           console.log("Successfully saved userObj");
@@ -26,10 +29,11 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
         });
       return {
         ...state,
-        userObj: action.payload
+        userObj: loged
       };
     }
     case "user/logout": {
+      const newUser = null;
       AsyncStorage.removeItem("userObj")
         .then(() => {
           console.log("Successfully removed userObj");
@@ -39,7 +43,7 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
         });
       return {
         ...state,
-        userObj: null
+        userObj: newUser
       };
     }
     case "viewed/add": {
@@ -98,6 +102,16 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
     }
     case "user/lock": {
       lockUser({
+        id: action.payload,
+        username: state.userObj.email,
+        password: state.userObj.password
+      });
+      return {
+        ...state
+      };
+    }
+    case "cate/hidden": {
+      hideCategory({
         id: action.payload,
         username: state.userObj.email,
         password: state.userObj.password

@@ -9,13 +9,14 @@ import Background from "../components/elements/Background";
 import TextInput from "../components/elements/TextInput";
 import Button from "../components/elements/Button";
 import { ImagesAssets } from "../assets/img/ImagesAssets";
+import { signUp } from "../apiCalls/signUp";
 
 export default function SignUp({ navigation }: any) {
   const [name, setName] = useState({ value: "", error: "" });
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
-  const onSignUpPressed = () => {
+  const onSignUpPressed = async () => {
     const nameError = nameValidator(name.value);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
@@ -25,10 +26,15 @@ export default function SignUp({ navigation }: any) {
       setPassword({ ...password, error: passwordError });
       return;
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Dashboard" }]
-    });
+    try {
+      await signUp(name.value, email.value, password.value);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "SignIn" }]
+      });
+    } catch (error) {
+      console.error("Đã xảy ra lỗi:", error);
+    }
   };
 
   return (
@@ -36,7 +42,7 @@ export default function SignUp({ navigation }: any) {
       <Image source={ImagesAssets.logo} style={{ width: 100, height: 100, borderRadius: 8, marginBottom: 10 }} />
       <Text style={{
         fontSize: 21,
-        color: theme.colors.primary,
+        color: "green",
         fontWeight: "bold",
         paddingVertical: 1
       }}>Nông Lâm News</Text>
@@ -93,6 +99,6 @@ const styles = StyleSheet.create({
   },
   link: {
     fontWeight: "bold",
-    color: theme.colors.primary
+    color: "green"
   }
 });

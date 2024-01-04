@@ -76,7 +76,7 @@ const AddUser: React.FC<AddUserProps> = () => {
 
 
 
-      <Button title="Tạo tài khoản" onPress={handleSave} style={styles.button} />
+      <Button title="Tạo tài khoản" onPress={handleSave} />
     </View>
   );
 };
@@ -125,19 +125,7 @@ const styles = StyleSheet.create({
     height: 140,
     borderRadius: 40, // Đặt bo tròn hình ảnh (nửa chiều rộng)
     marginBottom: 16
-  },
-  button: {
-    backgroundColor: '#007bff',
-    padding: 10,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-  },
-  buttonText: {
-    color: '#ffffff',
-    fontSize: 16,
-  },
+  }
 });
 
 export default AddUser;

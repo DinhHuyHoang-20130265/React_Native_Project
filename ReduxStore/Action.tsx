@@ -1,6 +1,6 @@
 export const login = (data: any) => {
   return {
-    type: "user/login",
+    type: "user/loginUser",
     payload: data
   };
 };
@@ -10,10 +10,9 @@ export const init = (data: any) => {
     payload: data
   };
 };
-export const logout = (data: any) => {
+export const logout = () => {
   return {
-    type: "user/logout",
-    payload: data
+    type: "user/logout"
   };
 };
 export const saveViewed = (data: any) => {
@@ -39,6 +38,12 @@ export const removeItem = (data: any) => {
 export const lockUser= (data: any) => {
   return {
     type: "user/lock",
+    payload: data
+  };
+}
+export const hideCategory = (data: any) => {
+  return {
+    type: "cate/hidden",
     payload: data
   };
 }

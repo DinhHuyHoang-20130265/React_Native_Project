@@ -12,17 +12,18 @@ const AddUser: React.FC<AddUserProps> = () => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [role, setRole] = useState<string>('user');
-  const [status, setStatus] = useState<boolean>(false);
+  const [status, setStatus] = useState<boolean>(true);
   const [password, setPassword] = useState<string>('');
 
   const handleSave = () => {
-    // Xử lý lưu thông tin người dùng tại đây
-    console.log('Họ tên:', name);
-    console.log('Email:', email);
-    console.log('Vai trò:', role);
-    console.log('Trạng thái:', status);
-    console.log('Mật khẩu:', password);
-    // Thêm logic lưu vào cơ sở dữ liệu hoặc gửi request API nếu cần
+    const userObject = {
+      fullName: name,
+      email: email,
+      password: password,
+      status: status,
+      isAdmin: role === "admin" ? true : false,
+    };
+    console.log("userObject", userObject);
   };
 
   return (

@@ -22,7 +22,7 @@ const UserDashBoard: React.FC = (props: any) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userData = await allUsers({ username: "456@gmail.com", password: "fun123" });
+        const userData = await allUsers({ username: admin.email, password: admin.password });
         setListUser(userData.filter((item: any) => item.id !== admin.id).filter((item: any) => {
           switch (selected) {
             case "1": {
@@ -43,7 +43,7 @@ const UserDashBoard: React.FC = (props: any) => {
           }
         }));
       } catch (error) {
-        console.error("Error fetching users:", error);
+        console.error("Error fetching users: hihi", error);
       }
     };
     if (props)

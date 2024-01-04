@@ -41,6 +41,12 @@ export const lockUser= (data: any) => {
     payload: data
   };
 }
+export const updateUser= (data: any) => {
+  return {
+    type: "user/update",
+    payload: data
+  };
+}
 export const hideCategory = (data: any) => {
   return {
     type: "cate/hidden",

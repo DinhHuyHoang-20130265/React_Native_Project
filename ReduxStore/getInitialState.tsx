@@ -10,7 +10,7 @@ export const getInitialState = async () => {
     userObj = userString !== null ? JSON.parse(userString) : null;
 
     const viewedString = await AsyncStorage.getItem("viewed");
-    viewedlist = viewedString !== null ? JSON.parse(viewedString) : [1];
+    viewedlist = viewedString !== null ? JSON.parse(viewedString) : [];
 
   } catch (error) {
     console.error("Error fetching initial state:", error);

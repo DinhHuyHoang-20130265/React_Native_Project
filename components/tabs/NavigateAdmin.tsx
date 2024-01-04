@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { StyleSheet } from "react-native";
 import BottomNavigationAdmin from "./BottomNavigationAdmin";
 import AdminSettings from "../../screens/adminScreens/AdminSettings";
+import CategoryModify from "../../screens/adminScreens/CategoryModify";
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,27 @@ export default function NavigateAdmin() {
       />
       <Stack.Screen name="AdminSetting" component={AdminSettings} options={({ navigation }) => ({
         title: "Cài đặt".toUpperCase(), headerTitleStyle: styles.headerTitle,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
+        },
+        cardStyleInterpolator: ({ current, layouts }: any) => {
+          return {
+            cardStyle: {
+              transform: [
+                {
+                  translateX: current.progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [layouts.screen.width, 0]
+                  })
+                }
+              ]
+            }
+          };
+        }
+      })} />
+      <Stack.Screen name="CategoryModify" component={CategoryModify} options={({ navigation }) => ({
+        title: "Sửa danh mục".toUpperCase(), headerTitleStyle: styles.headerTitle,
         headerStyle: {
           elevation: 100,
           borderBottomWidth: 0.5

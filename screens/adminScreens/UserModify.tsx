@@ -37,7 +37,7 @@ export function UserCardItem(props: any) {
 
   return (
     <TouchableNativeFeedback
-      onPress={() => props.navigation.navigate("UserModify", { user: props.user })}
+      onPress={() => {}}
       onLongPress={() => {
         if (props.screen === "UserDashBoard" || props.screen === "History")
           return showAlert();
@@ -48,7 +48,7 @@ export function UserCardItem(props: any) {
       {props.user ? <Animated.View style={styles.root}>
         <View style={styles.container}>
           <View style={styles.right}>
-            <Image source={{uri:"./assets/img/user.png"}} style={[styles.image, { width: 40, height:40}]} />
+            <Icon name={"user"} style={[styles.image, { fontSize: 40 }]} />
           </View>
 
           <View style={styles.left}>

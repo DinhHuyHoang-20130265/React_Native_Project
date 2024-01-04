@@ -5,11 +5,10 @@ import {
 } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { dataUser } from "../../components/sortSelect";
-import { ListNewsCardItem } from "../../components/elements/ListNewsCardItem";
 import { UserCardItem } from "../../components/elements/UserCardItem";
 import { useRoute } from "@react-navigation/native";
-import { listNews } from "../../apiCalls/listNews";
 import { allUsers } from "../../apiCalls/allUsers";
+import { useSelector } from "react-redux";
 
 
 const UserDashBoard: React.FC = (props: any) => {
@@ -18,12 +17,13 @@ const UserDashBoard: React.FC = (props: any) => {
   const [listUser, setListUser] = useState<any[]>([]);
   // @ts-ignore
   const [selected, setSelected] = useState<any>(dataUser.at(0).key);
+  const admin = useSelector((state: any) => state.userObj);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const userData = await allUsers({ username: "456@gmail.com", password: "fun123" });
-        setListUser(userData.filter((item: any) => {
+        setListUser(userData.filter((item: any) => item.id !== admin.id).filter((item: any) => {
           switch (selected) {
             case "1": {
               return item.status && !item.admin;

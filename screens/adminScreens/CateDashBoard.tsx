@@ -4,48 +4,41 @@ import {
   ScrollView, StyleSheet, Text, FlatList
 } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
-import { data } from "../../components/sortSelect";
+import { data, dataCate } from "../../components/sortSelect";
 import { useRoute } from "@react-navigation/native";
 import { CateCardItem } from "../../components/elements/CateCardItem";
-import { listCate } from "../../apiCalls/listCate";
+import { allCates } from "../../apiCalls/allCates";
 
 
-const UserDashBoard: React.FC = (props: any) => {
+const CateDashBoard: React.FC = (props: any) => {
   const route = useRoute();
 
   const [listCateg, setListCate] = useState<any[]>([]);
   // @ts-ignore
-  const [selected, setSelected] = useState<any>(data.at(0).key);
+  const [selected, setSelected] = useState<any>(dataCate.at(0).key);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const cateData = await listCate();
-        /*userData.sort((a: any, b: any) => {
+        const cateData = await allCates();
+        setListCate(cateData.filter((item: any) => {
           switch (selected) {
             case "1": {
-              return new Date(b.createdDate).valueOf() - new Date(a.createdDate).valueOf();
+              return item.isDelete;
             }
             case "2": {
-              return new Date(a.createdDate).valueOf() - new Date(b.createdDate).valueOf();
-            }
-            case "3": {
-              return a.title.localeCompare(b.title);
-            }
-            case "4": {
-              return b.title.localeCompare(a.title);
+              return !item.isDelete;
             }
             case "0": {
-              return new Date(b.createdDate).valueOf() - new Date(a.createdDate).valueOf();
+              return item;
             }
           }
-        });*/
-        setListCate(cateData);
+        }));
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
-
-    fetchData();
+    if (props)
+      fetchData();
   }, [props, selected, listCateg]);
 
   return (
@@ -53,17 +46,17 @@ const UserDashBoard: React.FC = (props: any) => {
       <View style={{ marginBottom: 60 }}>
         <SelectList
           setSelected={setSelected}
-          data={data}
+          data={dataCate}
           inputStyles={{ color: "black" }}
           boxStyles={{ marginTop: 10, marginBottom: 5, marginHorizontal: 10, backgroundColor: "white" }}
           dropdownStyles={{ marginVertical: 5, marginHorizontal: 10, backgroundColor: "white" }}
           notFoundText={""}
           dropdownTextStyles={{ color: "black" }}
           searchPlaceholder={""}
-          defaultOption={data.at(0)}
+          defaultOption={dataCate.at(0)}
         />
         <FlatList
-          data={listCateg ? listCateg : []}
+          data={listCateg}
           keyExtractor={(item, index) => index.toString()}
           horizontal={false}
           renderItem={({ item, index }) => {
@@ -100,4 +93,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default UserDashBoard;
+export default CateDashBoard;

@@ -11,7 +11,7 @@ export const getInitialState = async () => {
       email: "456@gmail.com",
       password: "fun123",
       fullName: "Hikkkkne",
-      admin: true
+      admin: true,
     };
 
     const viewedString = await AsyncStorage.getItem("viewed");

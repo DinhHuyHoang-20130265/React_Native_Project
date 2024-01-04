@@ -3,6 +3,7 @@ import { View, Text, TextInput, Switch, StyleSheet, Button, Alert, Image } from 
 import { RadioButton } from "react-native-paper";
 import { black } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { ImagesAssets } from "../../assets/img/ImagesAssets";
 
 interface UserModifyProps {
   // Định nghĩa các props nếu cần
@@ -25,12 +26,12 @@ const UserModify: React.FC<UserModifyProps> = () => {
 
   const handleDelete = () => {
     // Xử lý xóa tài khoản người dùng tại đây
-    Alert.alert('Xác nhận xóa', 'Bạn có chắc chắn muốn xóa tài khoản không?', [
-      { text: 'Hủy', style: 'cancel' },
-      { text: 'Xóa', style: 'destructive', onPress: () => console.log('Xóa tài khoản') },
+    Alert.alert("Xác nhận xóa", "Bạn có chắc chắn muốn xóa tài khoản không?", [
+      { text: "Hủy", style: "cancel" },
+      { text: "Xóa", style: "destructive", onPress: () => console.log("Xóa tài khoản") }
     ]);
     // Thêm logic xóa tài khoản tại đây khi triển khai
-  }
+  };
 
   const handleChangePassword = () => {
     // Xử lý khi người dùng nhấn nút "Đổi mật khẩu"
@@ -40,7 +41,7 @@ const UserModify: React.FC<UserModifyProps> = () => {
 
   return (
     <View style={styles.container}>
-      <Icon name={"user"}  style={styles.avatar} />
+      <Image source={ImagesAssets.user} style={styles.avatar} />
 
       <Text style={styles.label}>Họ tên:</Text>
       <TextInput
@@ -78,23 +79,24 @@ const UserModify: React.FC<UserModifyProps> = () => {
         <Switch value={status} onValueChange={setStatus} />
       </View>
 
-      <Button title="Cập nhật mật khẩu mới" onPress={handleChangePassword} style={styles.button} />
+      <Button title="Cập nhật mật khẩu mới" onPress={handleChangePassword} />
       <Text style={{ marginBottom: 10 }} />
-      <Button title="Lưu" onPress={handleSave} style={styles.button} />
+      <Button title="Lưu" onPress={handleSave}  />
       <Text style={{ marginBottom: 10 }} />
-      <Button title="Xóa tài khoản" onPress={handleDelete} style={[styles.button, styles.deleteButton]} />
+      <Button title="Xóa tài khoản" onPress={handleDelete} color={"red"} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    padding: 16
 
   },
   avatar: {
     alignSelf: "center",
-    fontSize: 80,
+    width: 140,
+    height: 140,
     borderRadius: 40, // Đặt bo tròn hình ảnh (nửa chiều rộng)
     marginBottom: 16
   },
@@ -130,22 +132,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 16
-  },
-  button: {
-    backgroundColor: '#007bff', // Màu nền của nút
-    padding: 10, // Kích thước padding
-    borderRadius: 8, // Bo tròn góc
-    alignItems: 'center', // Canh giữa theo chiều ngang
-    justifyContent: 'center', // Canh giữa theo chiều dọc
-    marginTop: 10, // Khoảng cách từ phía trên
-  },
-  deleteButton: {
-    backgroundColor: 'red', // Đặt màu đỏ cho nút xóa
-  },
-  buttonText: {
-    color: '#ffffff', // Màu chữ của nút
-    fontSize: 16, // Kích thước chữ
-  },
+  }
 });
 
 export default UserModify;

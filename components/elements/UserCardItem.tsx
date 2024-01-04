@@ -9,6 +9,8 @@ import Animated from "react-native-reanimated";
 import { useDispatch, useSelector } from "react-redux";
 import { lockUser, removeItem } from "../../ReduxStore/Action";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { ImagesAssets } from "../../assets/img/ImagesAssets";
+import React from "react";
 
 export function UserCardItem(props: any) {
   const dispatch = useDispatch();
@@ -48,7 +50,7 @@ export function UserCardItem(props: any) {
       {props.user ? <Animated.View style={styles.root}>
         <View style={styles.container}>
           <View style={styles.right}>
-            <Image source={{uri:"./assets/img/user.png"}} style={[styles.image, { width: 40, height:40}]} />
+            <Image source={ImagesAssets.user} style={{ width: 70, height: 70}} />
           </View>
 
           <View style={styles.left}>

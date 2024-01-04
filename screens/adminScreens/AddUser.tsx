@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Switch, StyleSheet, Button, Image } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import Icon from "react-native-vector-icons/FontAwesome";
+import { ImagesAssets } from "../../assets/img/ImagesAssets";
 
 interface AddUserProps {
   // Định nghĩa các props nếu cần
@@ -26,8 +27,7 @@ const AddUser: React.FC<AddUserProps> = () => {
 
   return (
     <View style={styles.container}>
-      <Icon name={"user"}  style={styles.avatar} />
-
+      <Image source={ImagesAssets.user} style={styles.avatar} />
 
       <Text style={styles.label}>Họ tên:</Text>
       <TextInput
@@ -121,7 +121,8 @@ const styles = StyleSheet.create({
   },
   avatar: {
     alignSelf: "center",
-    fontSize: 80,
+    width: 140,
+    height: 140,
     borderRadius: 40, // Đặt bo tròn hình ảnh (nửa chiều rộng)
     marginBottom: 16
   },

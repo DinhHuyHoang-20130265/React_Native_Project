@@ -14,3 +14,8 @@ export const dataUser = [
   { key: "4", value: "Tài khoản admin bị khóa" }
 ];
 
+export const dataCate = [
+  { key: "0", value: "Tất cả" },
+  { key: "1", value: "Danh mục đã bị ẩn" },
+  { key: "2", value: "Danh mục đang hoạt động" }
+];

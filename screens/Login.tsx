@@ -6,13 +6,17 @@ import Button from "../components//elements/Button";
 import TextInput from "../components/elements/TextInput";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
-import { theme } from "../components/elements/theme";
 import { ImagesAssets } from "../assets/img/ImagesAssets";
 import { loginUser } from "../apiCalls/loginUser";
+import { useDispatch } from "react-redux";
+import { login } from "../ReduxStore/Action";
 
 export default function Login({ navigation }: any) {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
+  const [error, setError] = useState<any>("");
+  const dispatch = useDispatch();
+
 
   const onLoginPressed = async () => {
     const emailError = emailValidator(email.value);
@@ -23,12 +27,16 @@ export default function Login({ navigation }: any) {
       return;
     }
     try {
-      await loginUser(email.value, password.value);
+      const response = await loginUser(email.value, password.value);
+      if (response.status === 200) {
+        dispatch(login(response.data.body));
         navigation.reset({
           index: 0,
-          routes: [{ name: "Home" }],
+          routes: [{ name: "Home" }]
         });
-      // navigation.navigate('Home');
+      } else {
+        setError(response.status);
+      }
     } catch (error) {
       console.error("Đã xảy ra lỗi:", error);
     }

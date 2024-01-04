@@ -13,7 +13,7 @@ import { listCate } from "../../apiCalls/listCate";
 const UserDashBoard: React.FC = (props: any) => {
   const route = useRoute();
 
-  const [listUser, setListUser] = useState<any[]>([]);
+  const [listCateg, setListCate] = useState<any[]>([]);
   // @ts-ignore
   const [selected, setSelected] = useState<any>(data.at(0).key);
   useEffect(() => {
@@ -39,14 +39,14 @@ const UserDashBoard: React.FC = (props: any) => {
             }
           }
         });*/
-        setListUser(cateData);
+        setListCate(cateData);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
 
     fetchData();
-  }, [props, selected]);
+  }, [props, selected, listCateg]);
 
   return (
     <View style={styles.container}>
@@ -63,12 +63,12 @@ const UserDashBoard: React.FC = (props: any) => {
           defaultOption={data.at(0)}
         />
         <FlatList
-          data={listUser ? listUser : []}
+          data={listCateg ? listCateg : []}
           keyExtractor={(item, index) => index.toString()}
           horizontal={false}
           renderItem={({ item, index }) => {
             return (
-              <CateCardItem cate={item} screen={"UserDashBoard"}
+              <CateCardItem cate={item} screen={"CateDashBoard"}
                             navigation={props.navigation} />
             );
           }}

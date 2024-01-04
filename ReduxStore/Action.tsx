@@ -41,3 +41,9 @@ export const lockUser= (data: any) => {
     payload: data
   };
 }
+export const hideCategory = (data: any) => {
+  return {
+    type: "cate/hidden",
+    payload: data
+  };
+}

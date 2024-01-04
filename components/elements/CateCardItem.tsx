@@ -6,37 +6,44 @@ import {
 } from "react-native";
 import Animated from "react-native-reanimated";
 import { useDispatch } from "react-redux";
-import { removeItem } from "../../ReduxStore/Action";
+import { hideCategory, lockUser, removeItem } from "../../ReduxStore/Action";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 export function CateCardItem(props: any) {
   const dispatch = useDispatch();
-  // const showAlert = () => {
-  //   Alert.alert(
-  //     "Xoá bài viết",
-  //     "Xoá bài viết này ?",
-  //     [{
-  //       text: "Huỷ",
-  //       style: "cancel"
-  //     }, {
-  //       text: "Xoá",
-  //       onPress: () => {
-  //         dispatch(removeItem(props.itemNews));
-  //       },
-  //       style: "default"
-  //     }]
-  //   );
-  // };
+  const showAlert = () => {
+    Alert.alert(
+      "Tuỳ chọn",
+      "Chọn thao tác",
+      [{
+        text: "Huỷ",
+        style: "cancel"
+      },
+        {
+        text: props.cate.isDelete ? "Mở danh mục" : "Ẩn danh mục",
+        onPress: () => {
+          dispatch(hideCategory(props.cate.id));
+        },
+        style: "default"
+      },
+        {
+        text: "Sửa",
+        onPress: () => {
+        },
+        style: "default"
+      }]
+    );
+  };
 
 
   return (
     <TouchableNativeFeedback
-      // onPress={() => props.navigation.navigate("Details", { item: props.itemNews, screen: props.screen })}
-      // onLongPress={() => {
-      //   if (props.screen === "History")
-      //     return showAlert();
-      // }}
-      // delayLongPress={650}
+      onPress={() => props.navigation.navigate("Details", { item: props.itemNews, screen: props.screen })}
+      onLongPress={() => {
+        if (props.screen === "CateDashBoard" || props.screen === "History")
+          return showAlert();
+      }}
+      delayLongPress={650}
     >
 
       {props.cate ? <Animated.View style={styles.root}>

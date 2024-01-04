@@ -1,19 +1,19 @@
-#Wed Jan 03 20:32:17 ICT 2024
+#Thu Jan 04 09:49:58 ICT 2024
 path.4=7/classes.dex
 path.3=14/classes.dex
 path.2=0/classes.dex
 path.1=0/classes.dex
 path.5=classes2.dex
 path.0=classes.dex
-base.4=C\:\\Users\\ADMIN\\WebstormProjects\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
-base.3=C\:\\Users\\ADMIN\\WebstormProjects\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
-base.2=C\:\\Users\\ADMIN\\WebstormProjects\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.1=C\:\\Users\\ADMIN\\WebstormProjects\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
-base.0=C\:\\Users\\ADMIN\\WebstormProjects\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.4=E\:\\mobile_thuctap\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
+base.3=E\:\\mobile_thuctap\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
+base.2=E\:\\mobile_thuctap\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.1=E\:\\mobile_thuctap\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
+base.0=E\:\\mobile_thuctap\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
 renamed.5=classes6.dex
 renamed.4=classes5.dex
-base.5=C\:\\Users\\ADMIN\\WebstormProjects\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+base.5=E\:\\mobile_thuctap\\React_Native_Project\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex

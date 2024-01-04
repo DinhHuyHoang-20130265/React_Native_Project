@@ -30,7 +30,7 @@ export default function SignUp({ navigation }: any) {
       await signUp(name.value, email.value, password.value);
       navigation.reset({
         index: 0,
-        routes: [{ name: "SignUp" }]
+        routes: [{ name: "SignIn" }]
       });
     } catch (error) {
       console.error("Đã xảy ra lỗi:", error);
@@ -42,7 +42,7 @@ export default function SignUp({ navigation }: any) {
       <Image source={ImagesAssets.logo} style={{ width: 100, height: 100, borderRadius: 8, marginBottom: 10 }} />
       <Text style={{
         fontSize: 21,
-        color: theme.colors.primary,
+        color: "green",
         fontWeight: "bold",
         paddingVertical: 1
       }}>Nông Lâm News</Text>
@@ -99,6 +99,6 @@ const styles = StyleSheet.create({
   },
   link: {
     fontWeight: "bold",
-    color: theme.colors.primary
+    color: "green"
   }
 });

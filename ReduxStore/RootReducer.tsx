@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lockUser } from "../apiCalls/lockUser";
+import { hideCategory } from "../apiCalls/hideCategory";
 
 const initState: any = {
   userObj: null,
@@ -98,6 +99,16 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
     }
     case "user/lock": {
       lockUser({
+        id: action.payload,
+        username: state.userObj.email,
+        password: state.userObj.password
+      });
+      return {
+        ...state
+      };
+    }
+    case "cate/hidden": {
+      hideCategory({
         id: action.payload,
         username: state.userObj.email,
         password: state.userObj.password

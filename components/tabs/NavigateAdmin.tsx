@@ -5,7 +5,6 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { StyleSheet } from "react-native";
 import BottomNavigationAdmin from "./BottomNavigationAdmin";
 import AdminSettings from "../../screens/adminScreens/AdminSettings";
-import CategoryModify from "../../screens/adminScreens/CategoryModify";
 
 const Stack = createStackNavigator();
 
@@ -87,6 +86,22 @@ export default function NavigateAdmin() {
             }
           };
         }
+      })} />
+      <Stack.Screen name="UserModify" component={UserModify} options={({ navigation }) => ({
+        title: "Chỉnh sửa tài khoản".toUpperCase(), headerTitleStyle: styles.headerTitle,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
+        },
+
+      })} />
+      <Stack.Screen name="AddUser" component={AddUser} options={({ navigation }) => ({
+        title: "Thêm tài khoản".toUpperCase(), headerTitleStyle: styles.headerTitle,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
+        },
+
       })} />
     </Stack.Navigator>);
 }

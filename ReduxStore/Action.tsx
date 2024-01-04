@@ -10,10 +10,9 @@ export const init = (data: any) => {
     payload: data
   };
 };
-export const logout = (data: any) => {
+export const logout = () => {
   return {
-    type: "user/logout",
-    payload: data
+    type: "user/logout"
   };
 };
 export const saveViewed = (data: any) => {

@@ -6,13 +6,17 @@ import Button from "../components//elements/Button";
 import TextInput from "../components/elements/TextInput";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
-import { theme } from "../components/elements/theme";
 import { ImagesAssets } from "../assets/img/ImagesAssets";
 import { loginUser } from "../apiCalls/loginUser";
+import { useDispatch } from "react-redux";
+import { login } from "../ReduxStore/Action";
 
 export default function Login({ navigation }: any) {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
+  const [error, setError] = useState<any>("");
+  const dispatch = useDispatch();
+
 
   const onLoginPressed = async () => {
     const emailError = emailValidator(email.value);
@@ -23,11 +27,16 @@ export default function Login({ navigation }: any) {
       return;
     }
     try {
-      await loginUser(email.value, password.value);
+      const response = await loginUser(email.value, password.value);
+      if (response.status === 200) {
+        dispatch(login(response.data.body));
         navigation.reset({
           index: 0,
-          routes: [{ name: "home" }],
+          routes: [{ name: "Home" }]
         });
+      } else {
+        setError(response.status);
+      }
     } catch (error) {
       console.error("Đã xảy ra lỗi:", error);
     }
@@ -38,7 +47,7 @@ export default function Login({ navigation }: any) {
       <Image source={ImagesAssets.logo} style={{ width: 100, height: 100, borderRadius: 8, marginBottom: 10 }} />
       <Text style={{
         fontSize: 21,
-        color: theme.colors.primary,
+        color: "green",
         fontWeight: "bold",
         paddingVertical: 1
       }}>Nông Lâm News</Text>
@@ -95,10 +104,10 @@ const styles = StyleSheet.create({
   },
   forgot: {
     fontSize: 13,
-    color: theme.colors.secondary
+    color: "green"
   },
   link: {
     fontWeight: "bold",
-    color: theme.colors.primary
+    color: "green"
   }
 });

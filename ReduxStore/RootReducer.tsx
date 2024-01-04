@@ -31,6 +31,7 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
       };
     }
     case "user/logout": {
+      const newUser = null;
       AsyncStorage.removeItem("userObj")
         .then(() => {
           console.log("Successfully removed userObj");
@@ -40,7 +41,7 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
         });
       return {
         ...state,
-        userObj: null
+        userObj: newUser
       };
     }
     case "viewed/add": {

@@ -1,5 +1,4 @@
 import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { globalUrl } from "./globalUrl";
 
 export const loginUser = async (username: string, password: string) => {
@@ -10,14 +9,7 @@ export const loginUser = async (username: string, password: string) => {
   };
 
   try {
-    const response = await axios.post(url, requestBody);
-
-    if (response.status === 200) {
-      await AsyncStorage.setItem("userObj", JSON.stringify(response.data.body));
-      console.log("Login successful!");
-    } else {
-      console.error("Login failed. Status code:", response.status);
-    }
+    return await axios.post(url, requestBody);
   } catch (error) {
     console.error("Error during loginUser:", error);
     throw error;

@@ -58,7 +58,7 @@ export function CateCardItem(props: any) {
 
   return (
     <TouchableNativeFeedback
-      onPress={() => props.navigation.navigate("Details", { item: props.itemNews, screen: props.screen })}
+      onPress={() => props.navigation.navigate("CategoryModify", { item: props.itemNews, screen: props.screen })}
       onLongPress={() => {
         if (props.screen === "CateDashBoard" || props.screen === "History")
           return showAlert();

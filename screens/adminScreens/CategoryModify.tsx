@@ -23,6 +23,7 @@ const CategoryModify: React.FC = (props: any) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.label}>Tên danh mục:</Text>
       <TextInput
         style={styles.input}
         value={categoryName}

@@ -24,6 +24,7 @@ export function UserCardItem(props: any) {
       }, {
         text: props.user.status ? "Khóa tài khoản" : "Mở tài khoản",
         onPress: () => {
+          props.handleEvent(!props.event);
           dispatch(lockUser(props.user.id));
         },
         style: "default"
@@ -50,7 +51,7 @@ export function UserCardItem(props: any) {
       {props.user ? <Animated.View style={styles.root}>
         <View style={styles.container}>
           <View style={styles.right}>
-            <Image source={ImagesAssets.user} style={{ width: 70, height: 70}} />
+            <Image source={ImagesAssets.user} style={{ width: 70, height: 70 }} />
           </View>
 
           <View style={styles.left}>

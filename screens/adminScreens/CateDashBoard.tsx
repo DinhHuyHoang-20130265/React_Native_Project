@@ -4,11 +4,11 @@ import {
   ScrollView, StyleSheet, Text, FlatList
 } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
-import { data, dataCate } from "../../components/sortSelect";
+import { dataCate } from "../../components/sortSelect";
 import { useRoute } from "@react-navigation/native";
 import { CateCardItem } from "../../components/elements/CateCardItem";
 import { allCates } from "../../apiCalls/allCates";
-
+import { useSelector } from "react-redux";
 
 const CateDashBoard: React.FC = (props: any) => {
   const route = useRoute();
@@ -16,30 +16,35 @@ const CateDashBoard: React.FC = (props: any) => {
   const [listCateg, setListCate] = useState<any[]>([]);
   // @ts-ignore
   const [selected, setSelected] = useState<any>(dataCate.at(0).key);
+  const admin = useSelector((state: any) => state.userObj);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const cateData = await allCates();
-        setListCate(cateData.filter((item: any) => {
-          switch (selected) {
-            case "1": {
-              return item.isDelete;
+        if (admin) {
+          const cateData = await allCates();
+          setListCate(cateData.filter((item: any) => {
+            switch (selected) {
+              case "1": {
+                return item.isDelete;
+              }
+              case "2": {
+                return !item.isDelete;
+              }
+              case "0": {
+                return item;
+              }
             }
-            case "2": {
-              return !item.isDelete;
-            }
-            case "0": {
-              return item;
-            }
-          }
-        }));
+          }));
+        }
       } catch (error) {
-        console.error("Error fetching users:", error);
+        console.error("Error fetching cate dashboard:", error);
       }
     };
-    if (props)
-      fetchData();
-  }, [props, selected, listCateg]);
+    fetchData();
+  }, [props, selected, admin]);
+
+  console.log(admin);
 
   return (
     <View style={styles.container}>

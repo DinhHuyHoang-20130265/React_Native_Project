@@ -18,8 +18,7 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
       };
     }
     case "user/loginUser": {
-      const loged = action.payload
-      console.log(loged);
+      const loged = action.payload;
       AsyncStorage.setItem("userObj", JSON.stringify(action.payload))
         .then(() => {
           console.log("Successfully saved userObj");
@@ -105,7 +104,26 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
         id: action.payload,
         username: state.userObj.email,
         password: state.userObj.password
+      }).then(r => {
       });
+      return {
+        ...state
+      };
+    }
+    case "user/update": {
+
+      return {
+        ...state
+      };
+    }
+    case "user/add": {
+
+      return {
+        ...state
+      };
+    }
+    case "user/delete": {
+
       return {
         ...state
       };
@@ -115,6 +133,7 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
         id: action.payload,
         username: state.userObj.email,
         password: state.userObj.password
+      }).then(r => {
       });
       return {
         ...state

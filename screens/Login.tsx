@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { TouchableOpacity, StyleSheet, View, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { TouchableOpacity, StyleSheet, View, Image, ToastAndroid, ActivityIndicator, Dimensions } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/elements/Background";
 import Button from "../components//elements/Button";
@@ -11,12 +11,15 @@ import { loginUser } from "../apiCalls/loginUser";
 import { useDispatch } from "react-redux";
 import { login } from "../ReduxStore/Action";
 
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+
 export default function Login({ navigation }: any) {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
-  const [error, setError] = useState<any>("");
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-
 
   const onLoginPressed = async () => {
     const emailError = emailValidator(email.value);
@@ -27,23 +30,61 @@ export default function Login({ navigation }: any) {
       return;
     }
     try {
+      setIsLoading(true);
       const response = await loginUser(email.value, password.value);
-      if (response.status === 200) {
+      if (response.data.statusCodeValue === 200) {
+        setIsLoading(false);
         dispatch(login(response.data.body));
+        ToastAndroid.showWithGravity(
+          "Đăng nhập thành công",
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
         navigation.reset({
           index: 0,
           routes: [{ name: "Home" }]
         });
       } else {
-        setError(response.status);
+        switch (response.data.body) {
+          case "Password incorrect": {
+            setPassword({ ...password, error: "Sai mật khẩu" });
+            break;
+          }
+          case "Email not found": {
+            setEmail({ ...email, error: "Không tìm thấy email" });
+            break;
+          }
+          case "Account is locked": {
+            setEmail({ ...email, error: "Tài khoản này đã bị khoá" });
+            break;
+          }
+          default: {
+            setEmail({ ...email, error: "Đã có lỗi trong quá trình kiểm tra" });
+            break;
+          }
+        }
+        setIsLoading(false);
       }
     } catch (error) {
       console.error("Đã xảy ra lỗi:", error);
+      setIsLoading(false);
     }
   };
 
   return (
     <Background>
+      {isLoading &&
+        <View style={{
+          position: "absolute",
+          justifyContent: "center",
+          alignItems: "center",
+          height: windowHeight,
+          width: windowWidth,
+          zIndex: 1000,
+          backgroundColor: "rgba(148,148,148,0.3)"
+        }}>
+          <ActivityIndicator size="large" color="#00ff00" />
+        </View>}
       <Image source={ImagesAssets.logo} style={{ width: 100, height: 100, borderRadius: 8, marginBottom: 10 }} />
       <Text style={{
         fontSize: 21,
@@ -79,8 +120,9 @@ export default function Login({ navigation }: any) {
           <Text style={styles.forgot}>Quên mật khẩu?</Text>
         </TouchableOpacity>
       </View>
+
       <Button mode="contained" onPress={onLoginPressed} style={undefined}>
-        Login
+        Đăng nhập
       </Button>
       <View style={styles.row}>
         <Text>Bạn chưa có tài khoản? </Text>

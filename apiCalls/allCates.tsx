@@ -7,7 +7,7 @@ export const allCates = async () => {
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
-    console.error("Error fetching cate:", error);
+    console.error("Error fetching cate dashboard:", error);
     throw error;
   }
 };

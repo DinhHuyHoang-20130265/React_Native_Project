@@ -31,7 +31,7 @@ export function CateCardItem(props: any) {
         text: "Sửa",
           onPress: () => {
             // @ts-ignore
-            navigation.navigate("CategoryModify", { category: props.cate });
+            navigation.navigate(CategoryModify, { category: props.cate });
           },
         style: "default"
       }]
@@ -41,7 +41,7 @@ export function CateCardItem(props: any) {
 
   return (
     <TouchableNativeFeedback
-      onPress={() => props.navigation.navigate("CategoryModify", { item: props.cate, screen: props.screen })}
+      onPress={() => props.navigation.navigate(CategoryModify, { item: props.cate, screen: props.screen })}
       onLongPress={() => {
         if (props.screen === "CateDashBoard" || props.screen === "History")
           return showAlert();

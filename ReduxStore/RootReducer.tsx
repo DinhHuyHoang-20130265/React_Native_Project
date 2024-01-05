@@ -99,46 +99,6 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
         bookmarks: []
       };
     }
-    case "user/lock": {
-      lockUser({
-        id: action.payload,
-        username: state.userObj.email,
-        password: state.userObj.password
-      }).then(r => {
-      });
-      return {
-        ...state
-      };
-    }
-    case "user/update": {
-
-      return {
-        ...state
-      };
-    }
-    case "user/add": {
-
-      return {
-        ...state
-      };
-    }
-    case "user/delete": {
-
-      return {
-        ...state
-      };
-    }
-    case "cate/hidden": {
-      hideCategory({
-        id: action.payload,
-        username: state.userObj.email,
-        password: state.userObj.password
-      }).then(r => {
-      });
-      return {
-        ...state
-      };
-    }
     default:
       return state;
   }

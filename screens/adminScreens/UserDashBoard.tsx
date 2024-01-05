@@ -53,8 +53,6 @@ const UserDashBoard: React.FC = (props: any) => {
     fetchData();
   }, [props, selected, admin, event]);
 
-  console.log(event);
-
   return (
     <View style={styles.container}>
       <View style={{ marginBottom: 130 }}>
@@ -75,7 +73,7 @@ const UserDashBoard: React.FC = (props: any) => {
           horizontal={false}
           renderItem={({ item, index }) => {
             return (
-              <UserCardItem user={item} screen={"UserDashBoard"}
+              <UserCardItem user={item} screen={"UserDashBoard"} admin={admin}
                             navigation={props.navigation} handleEvent={setEvent} event={event} />
             );
           }}

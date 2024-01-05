@@ -58,6 +58,10 @@ export function ListNewsCardItem(props: any) {
         else if (props.screen === "NewsDashBoard")
           return showAlertAdminNews();
       }}
+      onPress={() => {
+        if (props.screen !== "NewsDashBoard")
+          props.navigation.navigate("Details", {item: props.itemNews})
+      }}
       delayLongPress={650}
     >
 

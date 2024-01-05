@@ -35,12 +35,6 @@ export const removeItem = (data: any) => {
   };
 };
 
-export const lockUser = (data: any) => {
-  return {
-    type: "user/lock",
-    payload: data
-  };
-};
 export const updateUser = (data: any) => {
   return {
     type: "user/update",
@@ -56,12 +50,6 @@ export const addUser = (data: any) => {
 export const deleteUser = (data: any) => {
   return {
     type: "user/delete",
-    payload: data
-  };
-};
-export const hideCategory = (data: any) => {
-  return {
-    type: "cate/hidden",
     payload: data
   };
 };

@@ -17,7 +17,7 @@ const CateDashBoard: React.FC = (props: any) => {
   // @ts-ignore
   const [selected, setSelected] = useState<any>(dataCate.at(0).key);
   const admin = useSelector((state: any) => state.userObj);
-
+  const [event, setEvent] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,7 +42,7 @@ const CateDashBoard: React.FC = (props: any) => {
       }
     };
     fetchData();
-  }, [props, selected, admin]);
+  }, [props, selected, admin, event]);
 
   console.log(admin);
 
@@ -66,7 +66,7 @@ const CateDashBoard: React.FC = (props: any) => {
           horizontal={false}
           renderItem={({ item, index }) => {
             return (
-              <CateCardItem cate={item} screen={"CateDashBoard"}
+              <CateCardItem cate={item} screen={"CateDashBoard"} admin={admin} handleEvent={setEvent} event={event}
                             navigation={props.navigation} />
             );
           }}

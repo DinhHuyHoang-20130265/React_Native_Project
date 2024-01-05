@@ -2,16 +2,15 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableNativeFeedback, Alert
+  TouchableNativeFeedback, Alert, ToastAndroid
 } from "react-native";
 import Animated from "react-native-reanimated";
 import { useDispatch } from "react-redux";
-import { hideCategory } from "../../ReduxStore/Action";
-import { useNavigation } from '@react-navigation/native';
-import CategoryModify from "../../screens/adminScreens/CategoryModify";
+import { lockUser } from "../../apiCalls/lockUser";
+import { hideCategory } from "../../apiCalls/hideCategory";
+
 export function CateCardItem(props: any) {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
   const showAlert = () => {
     Alert.alert(
       "Tuỳ chọn",
@@ -21,27 +20,45 @@ export function CateCardItem(props: any) {
         style: "cancel"
       },
         {
-        text: props.cate.isDelete ? "Mở danh mục" : "Ẩn danh mục",
-        onPress: () => {
-          dispatch(hideCategory(props.cate.id));
-        },
-        style: "default"
-      },
-        {
-        text: "Sửa",
-          onPress: () => {
-            // @ts-ignore
-            navigation.navigate(CategoryModify, { category: props.cate });
+          text: props.cate.isDelete ? "Mở danh mục" : "Ẩn danh mục",
+          onPress: async () => {
+            await hideCategory({
+              id: props.cate.id,
+              username: props.admin.email,
+              password: props.admin.password
+            }).then(r => {
+              if (r.status === 200 || r.status === 204) {
+                ToastAndroid.showWithGravity(
+                  "Cập nhật trạng thái thành công",
+                  ToastAndroid.LONG,
+                  ToastAndroid.CENTER
+                );
+                props.handleEvent(!props.event);
+
+              } else {
+                ToastAndroid.showWithGravity(
+                  "Có lỗi trong qúa trình xử lý",
+                  ToastAndroid.LONG,
+                  ToastAndroid.CENTER
+                );
+              }
+            });
           },
-        style: "default"
-      }]
+          style: "default"
+        },
+        {
+          text: "Sửa",
+          onPress: () => {
+          },
+          style: "default"
+        }]
     );
   };
 
 
   return (
     <TouchableNativeFeedback
-      onPress={() => props.navigation.navigate(CategoryModify, { item: props.cate, screen: props.screen })}
+      onPress={() => props.navigation.navigate("Details", { item: props.itemNews, screen: props.screen })}
       onLongPress={() => {
         if (props.screen === "CateDashBoard" || props.screen === "History")
           return showAlert();
@@ -56,7 +73,7 @@ export function CateCardItem(props: any) {
               <Text style={styles.title}>
                 Tên danh mục: {props.cate.name}
               </Text>
-              <Text style={[styles.desc, {color: props.cate.isDelete? "red": "green"}]}>
+              <Text style={[styles.desc, { color: props.cate.isDelete ? "red" : "green" }]}>
                 Trạng thái: {props.cate.isDelete ? "Đã ẩn" : "Đang Hoạt Động"}
               </Text>
               <Text style={styles.desc}>

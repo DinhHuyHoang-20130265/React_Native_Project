@@ -74,6 +74,7 @@ const UserModify: React.FC<UserModifyProps> = () => {
           onChangeText={setEmail}
           placeholder="Nhập địa chỉ email"
           keyboardType="email-address"
+          editable={false}
         />
 
         <Text style={styles.label}>Vai trò:</Text>

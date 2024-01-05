@@ -8,7 +8,7 @@ import { dataUser } from "../../components/sortSelect";
 import { UserCardItem } from "../../components/elements/UserCardItem";
 import { useRoute } from "@react-navigation/native";
 import { allUsers } from "../../apiCalls/allUsers";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 
 const UserDashBoard: React.FC = (props: any) => {
@@ -17,6 +17,7 @@ const UserDashBoard: React.FC = (props: any) => {
   const [listUser, setListUser] = useState<any[]>([]);
   // @ts-ignore
   const [selected, setSelected] = useState<any>(dataUser.at(0).key);
+  const [event, setEvent] = useState(false);
   const admin = useSelector((state: any) => state.userObj);
 
   useEffect(() => {
@@ -49,9 +50,10 @@ const UserDashBoard: React.FC = (props: any) => {
         console.error("Error fetching users: hihi", error);
       }
     };
-    if (props)
-      fetchData();
-  }, [props, selected, listUser]);
+    fetchData();
+  }, [props, selected, admin, event]);
+
+  console.log(event);
 
   return (
     <View style={styles.container}>
@@ -74,7 +76,7 @@ const UserDashBoard: React.FC = (props: any) => {
           renderItem={({ item, index }) => {
             return (
               <UserCardItem user={item} screen={"UserDashBoard"}
-                            navigation={props.navigation} />
+                            navigation={props.navigation} handleEvent={setEvent} event={event} />
             );
           }}
           contentContainerStyle={{ alignItems: "center", justifyContent: "center" }}

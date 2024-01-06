@@ -71,7 +71,7 @@ const Settings: React.FC = ({ navigation }: any) => {
           </View>
         </View>}
       </View>
-      {currentUser === null ? "" : <TouchableOpacity onPress={() => navigation.navigate("History")}>
+      {currentUser === null ? "" : <TouchableOpacity onPress={() => navigation.navigate("BookMarks")}>
         <View style={styles.settingOption}>
           <Icon color="blue"
                 name={"save"}
@@ -87,7 +87,6 @@ const Settings: React.FC = ({ navigation }: any) => {
           <Text style={{ color: "black" }}>Đã đọc gần đây</Text>
         </View>
       </TouchableOpacity>
-      {/* Add more setting options as needed */}
     </View>
   );
 };

@@ -53,7 +53,7 @@ const NewsDashBoard: React.FC = (props: any) => {
     };
 
       fetchData();
-  }, [props, selected]);
+  }, [props,event, selected]);
 
   return (
     <View style={styles.container}>

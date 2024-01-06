@@ -1,2 +1,2 @@
 
-export const globalUrl = "172.16.1.131";
+export const globalUrl = "172.20.23.84";

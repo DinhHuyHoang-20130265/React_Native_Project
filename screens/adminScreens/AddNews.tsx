@@ -9,6 +9,7 @@ import {
   StyleSheet,
   SafeAreaView,
   Image,
+  Modal,
   ScrollView, ToastAndroid
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
@@ -16,6 +17,7 @@ import { launchImageLibrary } from "react-native-image-picker";
 import QuillEditor, { QuillToolbar } from "react-native-cn-quill";
 import { uploadImageToImgBB } from "../../apiCalls/imgUploadServer";
 import { useSelector } from "react-redux";
+import CheckboxList from 'rn-checkbox-list';
 
 const AddNews: React.FC = (props: any) => {
   const Router = useRoute();
@@ -26,6 +28,26 @@ const AddNews: React.FC = (props: any) => {
   const [selectedImg, setSelectedImg] = useState<any>({ uri: null, base64: null });
   const [isLoading, setIsLoading] = useState(false);
   const admin = useSelector((state: any) => state.userObj);
+
+
+
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const [checkedItems, setCheckedItems] = useState([]);
+
+    const data = [
+      { label: 'Option 1', value: 'option1' },
+      { label: 'Option 2', value: 'option2' },
+      { label: 'Option 3', value: 'option3' },
+      // Add more options as needed
+    ];
+
+    const handleSave1 = () => {
+      console.log('Checked items:', checkedItems);
+      // Do something with the checked items
+      setModalVisible(false);
+    };
+
 
   const imagePicker = () => {
     launchImageLibrary({
@@ -138,13 +160,36 @@ const AddNews: React.FC = (props: any) => {
                  source={{ uri: selectedImg.uri }} />
         </View>}
         <Button title={selectedImg.uri ? "Chọn lại hình ảnh" : "Chọn hình ảnh"} onPress={imagePicker} />
+
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={modalVisible}
+            onRequestClose={() => {
+              setModalVisible(false);
+            }}
+          >
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ backgroundColor: 'white', padding: 100, borderColor: '#26292E', borderWidth: 1 }}>
+                <Text>Select Options</Text>
+                <CheckboxList
+                 listItems={data}
+
+                />
+
+                <Button title="Save" onPress={handleSave1} />
+                <Button title="Close" onPress={() => setModalVisible(false)} />
+              </View>
+            </View>
+          </Modal>
+          <Button title="Open Modal" onPress={() => setModalVisible(true)} />
+
         <View style={styles.switchContainer}>
           <Text style={styles.label}>Trạng thái:</Text>
           <Switch value={isActive} onValueChange={setIsActive} />
         </View>
         <Button title="Lưu" onPress={handleSave} />
         <Text style={{ marginTop: -5 }} />
-        <Button title="Xóa danh mục" onPress={handleDelete} color={"red"} />
       </ScrollView>
     </View>
   );

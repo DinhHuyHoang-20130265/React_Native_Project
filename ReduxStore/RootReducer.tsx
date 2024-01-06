@@ -1,21 +1,17 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { lockUser } from "../apiCalls/lockUser";
-import { hideCategory } from "../apiCalls/hideCategory";
-import { deleteBookMark } from "../apiCalls/deleteBookMark";
 
 const initState: any = {
   userObj: null,
   viewedlist: [],
-  bookmarks: []
+  reloadBookmark: false
 };
-const root = async (state = initState, action: { type: any; payload: any; }) => {
+const root = (state = initState, action: { type: any; payload: any; }) => {
   switch (action.type) {
     case "init": {
       return {
         ...state,
         userObj: action.payload.userObj,
-        viewedlist: action.payload.viewedlist,
-        bookmarks: action.payload.bookmarks
+        viewedlist: action.payload.viewedlist
       };
     }
     case "user/loginUser": {
@@ -94,30 +90,11 @@ const root = async (state = initState, action: { type: any; payload: any; }) => 
         viewedlist: deleted
       };
     }
-    case "bookmarks/add": {
+    case "saved/removeAll": {
       return {
         ...state,
-        bookmarks: []
+        reloadBookmark: action.payload
       };
-    }
-    case "bookmark/removeItem": {
-      const deleted: never[] = state.viewedlist.filter((item: any) => item.id !== action.payload.id);
-      const response = await deleteBookMark({
-        userId: action.payload.userId,
-        newId: action.payload.newId,
-        username: action.payload.username,
-        password: action.payload.password
-      });
-      if (response.status === 200 || response.status === 201) {
-        return {
-          ...state,
-          viewedlist: deleted
-        }
-      } else {
-        return {
-          ...state
-        }
-      }
     }
     default:
       return state;

@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import Animated from "react-native-reanimated";
 import { useDispatch, useSelector } from "react-redux";
-import { removeBookmarkItem, removeItem } from "../../ReduxStore/Action";
+import { removeItem } from "../../ReduxStore/Action";
 import React, { useState } from "react";
 import { deleteBookMark } from "../../apiCalls/deleteBookMark";
 
@@ -35,8 +35,6 @@ export function ListNewsCardItem(props: any) {
     );
   };
   const showAlertSave = () => {
-    console.log(props.itemNews.id);
-    console.log(user);
     Alert.alert(
       "Tùy chọn",
       "Chọn thao tác:",
@@ -49,7 +47,28 @@ export function ListNewsCardItem(props: any) {
           setIsLoading(true);
           if (user) {
             try {
-              dispatch(removeBookmarkItem({userId: props.user.id, newId: props.itemNews.id, username: props.user.email, password: props.user.password}));
+              const response = await deleteBookMark({
+                userId: user.id,
+                newId: props.itemNews.id,
+                username: user.email,
+                password: user.password
+              });
+              if (response.status === 200 || response.status === 201) {
+                setIsLoading(false);
+                ToastAndroid.showWithGravity(
+                  "Xoá thành công",
+                  ToastAndroid.LONG,
+                  ToastAndroid.CENTER
+                );
+                props.handleEvent(!props.event);
+              } else {
+                setIsLoading(false);
+                ToastAndroid.showWithGravity(
+                  "Có lỗi trong quá trình xoá",
+                  ToastAndroid.LONG,
+                  ToastAndroid.CENTER
+                );
+              }
             } catch (e) {
               setIsLoading(false);
               console.log(e);
@@ -61,27 +80,6 @@ export function ListNewsCardItem(props: any) {
       }]
     );
   };
-  const showAlertAdminNews = () => {
-    Alert.alert(
-      "Tùy chọn",
-      "Thực hiện tùy chọn",
-      [{
-        text: "Huỷ",
-        style: "cancel"
-      }, {
-        text: "Xoá",
-        onPress: () => {
-        },
-        style: "default"
-      },
-        {
-          text: "Thêm",
-          onPress: () => {
-          },
-          style: "default"
-        }]
-    );
-  };
 
 
   return (
@@ -89,14 +87,11 @@ export function ListNewsCardItem(props: any) {
       onLongPress={() => {
         if (props.screen === "History")
           return showAlert();
-        else if (props.screen === "NewsDashBoard")
-          return showAlertAdminNews();
         else if (props.screen === "BookMarks")
           return showAlertSave();
       }}
       onPress={() => {
-        if (props.screen !== "NewsDashBoard")
-          props.navigation.navigate("Details", { item: props.itemNews });
+        props.navigation.navigate("Details", { item: props.itemNews });
       }}
       delayLongPress={650}
     >

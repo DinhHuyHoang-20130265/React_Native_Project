@@ -27,6 +27,12 @@ export const removeAllViewed = () => {
     payload: null
   };
 };
+export const removeAllSaved = (data: any) => {
+  return {
+    type: "saved/removeAll",
+    payload: data
+  };
+};
 
 export const removeItem = (data: any) => {
   return {
@@ -53,9 +59,5 @@ export const deleteUser = (data: any) => {
     payload: data
   };
 };
-export const removeBookmarkItem = (data:any) => {
-  return {
-    type: "bookmark/removeItem",
-    payload: data
-  };
-};
+
+

@@ -15,7 +15,6 @@ const CateDashBoard: React.FC = (props: any) => {
   const [selected, setSelected] = useState<any>(dataCate.at(0).key);
   const admin = useSelector((state: any) => state.userObj);
   const [event, setEvent] = useState(false);
-  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {

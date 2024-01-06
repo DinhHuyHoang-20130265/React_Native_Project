@@ -32,7 +32,7 @@ const UserProfile: React.FC = ({ navigation }: any) => {
     const [oldPass, setOldPass] = useState<string>("");
     const [newPass, setNewPass] = useState<string>("");
     const [repeatPass, setRepeatPass] = useState<string>("");
-    const [nextStepCode, setNextStepCode] = useState(false);
+    const [isChangePass, SetIsChangePass] = useState(false);
     useEffect(() => {
       setCurrentUser(user);
       setEmail(user.email);
@@ -85,7 +85,7 @@ const UserProfile: React.FC = ({ navigation }: any) => {
           password: user.password,
           account: userObject
         });
-        switch (response.data.body){
+        switch (response.data.body) {
           case "Old password incorrect" : {
             setIsLoading(false);
             ToastAndroid.showWithGravity(
@@ -107,6 +107,9 @@ const UserProfile: React.FC = ({ navigation }: any) => {
         setIsLoading(false);
         console.log(e);
       }
+    };
+    const handleChangeAction = () => {
+      SetIsChangePass(!isChangePass);
     };
     const handleSave = async () => {
       const nameError = nameValidator(name);
@@ -151,64 +154,69 @@ const UserProfile: React.FC = ({ navigation }: any) => {
       }
     };
     return (
-  <View style={styles.container}>
-    {isLoading &&
-      <View style={{
-        position: "absolute",
-        justifyContent: "center",
-        alignItems: "center",
-        height: windowHeight,
-        width: windowWidth,
-        zIndex: 1000,
-        backgroundColor: "rgba(148,148,148,0.3)"
-      }}>
-        <ActivityIndicator size="large" color="#00ff00" />
-      </View>}
+      <View style={styles.container}>
+        {isLoading &&
+          <View style={{
+            position: "absolute",
+            justifyContent: "center",
+            alignItems: "center",
+            height: windowHeight,
+            width: windowWidth,
+            zIndex: 1000,
+            backgroundColor: "rgba(148,148,148,0.3)"
+          }}>
+            <ActivityIndicator size="large" color="#00ff00" />
+          </View>}
         <Image source={ImagesAssets.user} style={styles.avatar} />
+        {!isChangePass && <>
+          <Text style={styles.label}>Email:</Text>
+          <TextInput
+            style={styles.input}
+            value={email}
+            onChangeText={setEmail}
+            placeholder="Nhập địa chỉ email"
+            keyboardType="email-address"
+            editable={false}
+          />
+          <Text style={styles.label}>Họ tên:</Text>
+          <TextInput
+            style={styles.input}
+            value={name}
+            onChangeText={setName}
+            placeholder="Nhập tên người dùng"
+          />
+          <Text style={{ marginBottom: 10 }} />
+          <Button title="Lưu thông tin" onPress={handleSave} />
+        </>}
 
-        <Text style={styles.label}>Email:</Text>
-        <TextInput
-          style={styles.input}
-          value={email}
-          onChangeText={setEmail}
-          placeholder="Nhập địa chỉ email"
-          keyboardType="email-address"
-          editable={false}
-        />
-        <Text style={styles.label}>Họ tên:</Text>
-        <TextInput
-          style={styles.input}
-          value={name}
-          onChangeText={setName}
-          placeholder="Nhập tên người dùng"
-        />
+        {isChangePass && <>
+          <Text style={styles.label}>Mật khẩu cũ:</Text>
+          <TextInput
+            style={styles.input}
+            value={oldPass}
+            onChangeText={setOldPass}
+            placeholder="Nhập mật khẩu cũ"
+          />
+          <Text style={styles.label}>Mật khẩu mới:</Text>
+          <TextInput
+            style={styles.input}
+            value={newPass}
+            onChangeText={setNewPass}
+            placeholder="Nhập mật khẩu mới"
+          />
+          <Text style={styles.label}>Nhập lại mật khẩu mới:</Text>
+          <TextInput
+            style={styles.input}
+            value={repeatPass}
+            onChangeText={setRepeatPass}
+            placeholder="Nhập lại mật khẩu mới"
+          />
 
-        <Text style={styles.label}>Mật khẩu cũ:</Text>
-        <TextInput
-          style={styles.input}
-          value={oldPass}
-          onChangeText={setOldPass}
-          placeholder="Nhập mật khẩu cũ"
-        />
-        <Text style={styles.label}>Mật khẩu mới:</Text>
-        <TextInput
-          style={styles.input}
-          value={newPass}
-          onChangeText={setNewPass}
-          placeholder="Nhập mật khẩu mới"
-        />
-        <Text style={styles.label}>Nhập lại mật khẩu mới:</Text>
-        <TextInput
-          style={styles.input}
-          value={repeatPass}
-          onChangeText={setRepeatPass}
-          placeholder="Nhập lại mật khẩu mới"
-        />
-
+          <Text style={{ marginBottom: 10 }} />
+          <Button title="Đổi mật khẩu" onPress={handleChangePassword} />
+        </>}
         <Text style={{ marginBottom: 10 }} />
-        <Button title="Đổi mật khẩu" onPress={handleChangePassword} />
-        <Text style={{ marginBottom: 10 }} />
-        <Button title="Lưu thông tin" onPress={handleSave}/>
+        <Button title={!isChangePass ? "Chuyển sang Đổi mật khẩu" : "Quay lại"} onPress={handleChangeAction} />
       </View>
     );
   }

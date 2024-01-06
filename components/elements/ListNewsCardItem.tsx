@@ -3,14 +3,21 @@ import {
   Text,
   Image,
   StyleSheet,
-  TouchableNativeFeedback, Alert
+  TouchableNativeFeedback, Alert, ToastAndroid, ActivityIndicator, Dimensions
 } from "react-native";
 import Animated from "react-native-reanimated";
-import { useDispatch } from "react-redux";
-import { removeItem } from "../../ReduxStore/Action";
+import { useDispatch, useSelector } from "react-redux";
+import { removeBookmarkItem, removeItem } from "../../ReduxStore/Action";
+import React, { useState } from "react";
+import { deleteBookMark } from "../../apiCalls/deleteBookMark";
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 export function ListNewsCardItem(props: any) {
   const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.userObj);
+  const [isLoading, setIsLoading] = useState(false);
   const showAlert = () => {
     Alert.alert(
       "Tùy chọn",
@@ -22,6 +29,33 @@ export function ListNewsCardItem(props: any) {
         text: "Xoá",
         onPress: () => {
           dispatch(removeItem(props.itemNews));
+        },
+        style: "default"
+      }]
+    );
+  };
+  const showAlertSave = () => {
+    console.log(props.itemNews.id);
+    console.log(user);
+    Alert.alert(
+      "Tùy chọn",
+      "Chọn thao tác:",
+      [{
+        text: "Huỷ",
+        style: "cancel"
+      }, {
+        text: "Xoá",
+        onPress: async () => {
+          setIsLoading(true);
+          if (user) {
+            try {
+              dispatch(removeBookmarkItem({userId: props.user.id, newId: props.itemNews.id, username: props.user.email, password: props.user.password}));
+            } catch (e) {
+              setIsLoading(false);
+              console.log(e);
+              console.log("Error in delete Bookmarks:", e);
+            }
+          }
         },
         style: "default"
       }]
@@ -41,10 +75,10 @@ export function ListNewsCardItem(props: any) {
         style: "default"
       },
         {
-          text:"Thêm",
+          text: "Thêm",
           onPress: () => {
           },
-          style:"default"
+          style: "default"
         }]
     );
   };
@@ -57,16 +91,30 @@ export function ListNewsCardItem(props: any) {
           return showAlert();
         else if (props.screen === "NewsDashBoard")
           return showAlertAdminNews();
+        else if (props.screen === "BookMarks")
+          return showAlertSave();
       }}
       onPress={() => {
         if (props.screen !== "NewsDashBoard")
-          props.navigation.navigate("Details", {item: props.itemNews})
+          props.navigation.navigate("Details", { item: props.itemNews });
       }}
       delayLongPress={650}
     >
 
       {props.itemNews ? <Animated.View style={styles.root}>
         <View style={styles.container}>
+          {isLoading &&
+            <View style={{
+              position: "absolute",
+              justifyContent: "center",
+              alignItems: "center",
+              height: windowHeight,
+              width: windowWidth,
+              zIndex: 1000,
+              backgroundColor: "rgba(148,148,148,0.3)"
+            }}>
+              <ActivityIndicator size="large" color="#00ff00" />
+            </View>}
           <View style={styles.right}>
             <Image source={{ uri: props.itemNews.image }} style={styles.image} />
           </View>

@@ -53,3 +53,9 @@ export const deleteUser = (data: any) => {
     payload: data
   };
 };
+export const removeBookmarkItem = (data:any) => {
+  return {
+    type: "bookmark/removeItem",
+    payload: data
+  };
+};

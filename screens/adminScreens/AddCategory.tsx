@@ -55,7 +55,7 @@ const AddCategory: React.FC = (props: any) => {
             ToastAndroid.LONG,
             ToastAndroid.CENTER
           );
-          props.navigation.replace("CateDashBoard");
+          props.navigation.navigate("UserDashBoard", { screen: "CateDashBoard" });
         } else {
           setIsLoading(false);
           ToastAndroid.showWithGravity(

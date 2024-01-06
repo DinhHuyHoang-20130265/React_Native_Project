@@ -3,7 +3,7 @@ import { emailValidator } from "../helpers/emailValidator";
 import Background from "../components/elements/Background";
 import TextInput from "../components/elements/TextInput";
 import Button from "../components/elements/Button";
-import { Image, View, ToastAndroid, ActivityIndicator, Dimensions } from "react-native";
+import { Image, View, ToastAndroid, ActivityIndicator, Dimensions, TouchableHighlight } from "react-native";
 import { ImagesAssets } from "../assets/img/ImagesAssets";
 import { theme } from "../components/elements/theme";
 import { Text } from "react-native-paper";
@@ -113,7 +113,7 @@ export default function ForgotPassword({ navigation }: any) {
       <Image source={ImagesAssets.logo} style={{ width: 100, height: 100, borderRadius: 8, marginBottom: 10 }} />
       <Text style={{
         fontSize: 21,
-        color: theme.colors.primary,
+        color: "green",
         fontWeight: "bold",
         paddingVertical: 1
       }}>Nông Lâm News</Text>
@@ -130,13 +130,24 @@ export default function ForgotPassword({ navigation }: any) {
         keyboardType="email-address"
         description="Bạn sẽ nhận được mã code 6 số để xác minh"
       />}
-      {!nextStepCode && <Button
-        mode="contained"
-        onPress={sendResetPasswordEmail}
-        style={{ marginTop: 16 }}
-      >
-        Gửi mã xác nhận
-      </Button>}
+      {!nextStepCode &&
+        <View style={{
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 16
+      }}>
+        <TouchableHighlight onPress={sendResetPasswordEmail} underlayColor="#400B96FF"
+        style={{
+        backgroundColor: "green",
+        width: 300,
+        height: 45,
+        justifyContent: "center",
+          borderRadius: 17,
+          marginTop: 16
+      }}>
+        <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng nhập".toUpperCase()}</Text>
+        </TouchableHighlight>
+        </View>}
       {nextStepCode && <TextInput
         label="Mật khẩu mới"
         returnKeyType="done"
@@ -164,13 +175,24 @@ export default function ForgotPassword({ navigation }: any) {
         errorText={validateCode.error}
         autoCapitalize="none"
       />}
-      {nextStepCode && <Button
-        mode="contained"
-        onPress={comfirmPassword}
-        style={{ marginTop: 16 }}
-      >
-        Xác nhận
-      </Button>}
+      {nextStepCode &&
+        <View style={{
+          justifyContent: "center",
+          alignItems: "center",
+          marginBottom: 16
+        }}>
+          <TouchableHighlight onPress={comfirmPassword} underlayColor="#400B96FF"
+                              style={{
+                                backgroundColor: "green",
+                                width: 300,
+                                height: 45,
+                                justifyContent: "center",
+                                borderRadius: 17,
+                                marginTop: 16
+                              }}>
+            <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Xác nhận".toUpperCase()}</Text>
+          </TouchableHighlight>
+        </View>}
     </Background>
   );
 }

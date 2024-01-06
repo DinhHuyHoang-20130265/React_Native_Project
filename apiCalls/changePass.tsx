@@ -1,21 +1,19 @@
 import axios from "axios";
 import { globalUrl } from "./globalUrl";
 
-export const updateUser = async (props: any) => {
-  const url = `http://${globalUrl}:8080/api/users/${props.id}`;
+export const changePass = async (props: any) => {
+  console.log(props);
+  const url = `http://${globalUrl}:8080/api/auth/change-password`;
+
   const authHeader = { Authorization: `Basic ${Buffer.from(`${props.username}:${props.password}`).toString("base64")}` };
-  const body = {
-    fullName: props.fullName,
-    email: props.email,
-    status: props.status,
-    isAdmin: props.isAdmin
-  };
   try {
-    const response = await axios.put(url, body, {
+    return await axios.post(url, {
+      email: props.account.email,
+      password: props.account.password,
+      newPassword: props.account.newPassword
+    }, {
       headers: authHeader
     });
-
-    return response.data;
   } catch (error) {
     console.error("Error fetching users:", error);
     throw error;

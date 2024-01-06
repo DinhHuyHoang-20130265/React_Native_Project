@@ -15,6 +15,7 @@ import Details from "../../screens/Details";
 import { useDispatch } from "react-redux";
 import { removeAllViewed } from "../../ReduxStore/Action";
 import History from "../../screens/History";
+import UserProfile from "../../screens/UserProfile";
 
 const Stack = createStackNavigator();
 
@@ -130,6 +131,15 @@ export default function NavigateUser() {
         }
       })} />
       <Stack.Screen name="Details" component={Details} options={({ navigation, route }: any) => ({
+        headerTitle: "",
+        headerTitleStyle: styles.headerTitle,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
+        }
+      })} />
+      <Stack.Screen name="UserProfile" component={UserProfile} options={({ navigation, route }: any) => ({
         headerTitle: "",
         headerTitleStyle: styles.headerTitle,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

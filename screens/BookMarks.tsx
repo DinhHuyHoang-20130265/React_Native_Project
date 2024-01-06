@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  View, FlatList, Text
+  View, FlatList, Text, TouchableNativeFeedback
 } from "react-native";
 import { ListNewsCardItem } from "../components/elements/ListNewsCardItem";
 import { SelectList } from "react-native-dropdown-select-list/index";
@@ -58,7 +58,9 @@ const BookMarks: React.FC = (props: any) => {
 
 
   return (
+
     <View style={{ marginBottom: 60 }}>
+
       <SelectList
         setSelected={setSelected}
         data={data}

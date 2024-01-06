@@ -4,7 +4,7 @@ import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import React from "react";
 import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/stack";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Image, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, Alert, ToastAndroid } from "react-native";
 import { ImagesAssets } from "../../assets/img/ImagesAssets";
 import AboutUs from "../../screens/AboutUs";
 import Login from "../../screens/Login";
@@ -17,14 +17,13 @@ import { removeAllViewed, removeItem } from "../../ReduxStore/Action";
 import History from "../../screens/History";
 import BookMarks from "../../screens/BookMarks";
 import UserProfile from "../../screens/UserProfile";
+import { deleteCate } from "../../apiCalls/deleteCate";
+import { deleteAllBookMarks } from "../../apiCalls/deleteAllBookMarks";
 
 const Stack = createStackNavigator();
 
 function getHeaderTitle(route: any) {
   const routeName = getFocusedRouteNameFromRoute(route) ?? "home";
-  const handleRemoveAllSave = () => {
-
-  }
   switch (routeName) {
     case "home":
       return "Trang chủ".toUpperCase();
@@ -38,6 +37,34 @@ function getHeaderTitle(route: any) {
 export default function NavigateUser() {
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.userObj);
+
+  async function handleRemoveAllSave(props: any) {
+    try {
+      // Gọi hàm xóa danh mục từ API
+      const response = await deleteAllBookMarks({
+        userId: user.id,
+        username: user.email,
+        password: user.password
+      });
+      if (response.status === 200) {
+        ToastAndroid.showWithGravity(
+          "Xóa tất cả tin tức đã lưu thành công",
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
+        props.replace("BookMarks");
+      } else {
+        ToastAndroid.showWithGravity(
+          "Có lỗi trong quá trình xóa danh mục",
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
+      }
+    } catch (error) {
+      console.log("Error in handleDelete:", error);
+    }
+  }
+
   return (
     <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
       <Stack.Screen
@@ -204,7 +231,7 @@ export default function NavigateUser() {
                 style: "cancel"
               }, {
                 text: "Xoá",
-                // onPress: handleRemoveAllSave,
+                onPress: () => handleRemoveAllSave(navigation),
                 style: "default"
               }]
             );

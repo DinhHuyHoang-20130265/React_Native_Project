@@ -6,7 +6,7 @@ import {
 //@ts-ignore
 import CircleButton from "react-native-circle-floatmenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { addDeleteBookmarks } from "../../apiCalls/addDeleteBookmarks";
+import { addBookmark } from "../../apiCalls/addBookmark";
 
 const Speech = (props: any) => {
   // @ts-ignore
@@ -31,30 +31,45 @@ const Speech = (props: any) => {
     Tts.stop();
   };
   const handleSave = async () => {
-    try {
-      const response = await addDeleteBookmarks({
-        userId: props.user.id,
-        newId: props.item.id,
-        username: props.user.email,
-        password: props.user.password
-      });
-      if (response.status === 200) {
-        ToastAndroid.showWithGravity(
-          "Thêm vào tin tức đã lưu thành công",
-          ToastAndroid.LONG,
-          ToastAndroid.CENTER
-        );
-      } else {
-        ToastAndroid.showWithGravity(
-          "Có lỗi trong quá trình cập nhật",
-          ToastAndroid.LONG,
-          ToastAndroid.CENTER
-        );
+      try {
+        const response = await addBookmark({
+          userId: props.user.id,
+          newId: props.item.id,
+          username: props.user.email,
+          password: props.user.password
+        });
+        switch (response.data) {
+          case "Add bookmark success": {
+            ToastAndroid.showWithGravity(
+              "Thêm vào tin tức đã lưu thành công",
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER
+            );
+            break;
+          }
+          case "News already bookmark": {
+            ToastAndroid.showWithGravity(
+              "Tin tức đã được lưu trước đó",
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER
+            );
+            break;
+          }
+          default: {
+            ToastAndroid.showWithGravity(
+              "Có lỗi trong quá trình xử lý",
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER
+            );
+            break;
+          }
+
+        }
+      } catch (error){
+        console.error("Error while saving news:", error);
       }
-    } catch (error) {
-      console.error("Error while saving news:", error);
     }
-  };
+  ;
 
   return (
     <View style={styles.btn_container}>

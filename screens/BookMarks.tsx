@@ -10,7 +10,7 @@ import { allCates } from "../apiCalls/allCates";
 import { listBookmarks } from "../apiCalls/listBookmarks";
 
 const BookMarks: React.FC = (props: any) => {
-
+  const [event, setEvent] = useState(false);
   const [saveList, setSaveList] = useState<any[]>([]);
   // @ts-ignore
   const [selected, setSelected] = useState<any>(data.at(0).key);
@@ -54,7 +54,7 @@ const BookMarks: React.FC = (props: any) => {
       }
     };
     getList();
-  }, [saveList, selected]);
+  }, [saveList, selected, event]);
 
 
   return (
@@ -79,7 +79,7 @@ const BookMarks: React.FC = (props: any) => {
         renderItem={({ item, index }) => {
           return (
             <ListNewsCardItem itemNews={item} screen={"BookMarks"}
-                              navigation={props.navigation} />
+                              navigation={props.navigation} handleEvent={setEvent} event={event} />
           );
         }}
         contentContainerStyle={{ alignItems: "center", justifyContent: "center" }}

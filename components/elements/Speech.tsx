@@ -7,6 +7,7 @@ import {
 import CircleButton from "react-native-circle-floatmenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { addBookmark } from "../../apiCalls/addBookmark";
+import { deleteBookMark } from "../../apiCalls/deleteBookMark";
 
 const Speech = (props: any) => {
   // @ts-ignore
@@ -48,8 +49,14 @@ const Speech = (props: any) => {
             break;
           }
           case "News already bookmark": {
+            const response = await deleteBookMark({
+              userId: props.user.id,
+              newId: props.item.id,
+              username: props.user.email,
+              password: props.user.password
+            });
             ToastAndroid.showWithGravity(
-              "Tin tức đã được lưu trước đó",
+              "Tin tức đã được hủy lưu",
               ToastAndroid.LONG,
               ToastAndroid.CENTER
             );

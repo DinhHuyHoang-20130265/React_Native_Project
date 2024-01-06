@@ -81,7 +81,7 @@ export function CateCardItem(props: any) {
                 Người tạo: {props.cate.createdBy}
               </Text>
               <Text style={[styles.desc]}>
-                Ngày tạo: {props.cate.createdDate}
+                Ngày tạo: {props.cate.createdDate.substring(0, props.cate.createdDate.indexOf("T"))}
               </Text>
             </View>
           </View>

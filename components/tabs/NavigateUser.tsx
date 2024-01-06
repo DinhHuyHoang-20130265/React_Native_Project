@@ -12,15 +12,18 @@ import SignUp from "../../screens/SignUp";
 import ForgotPassword from "../../screens/ForgotPassword";
 import ListNews from "../../screens/ListNews";
 import Details from "../../screens/Details";
-import { useDispatch } from "react-redux";
-import { removeAllViewed } from "../../ReduxStore/Action";
+import { useDispatch, useSelector } from "react-redux";
+import { removeAllViewed, removeItem } from "../../ReduxStore/Action";
 import History from "../../screens/History";
+import BookMarks from "../../screens/BookMarks";
 
 const Stack = createStackNavigator();
 
 function getHeaderTitle(route: any) {
   const routeName = getFocusedRouteNameFromRoute(route) ?? "home";
+  const handleRemoveAllSave = () => {
 
+  }
   switch (routeName) {
     case "home":
       return "Trang chủ".toUpperCase();
@@ -33,6 +36,7 @@ function getHeaderTitle(route: any) {
 
 export default function NavigateUser() {
   const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.userObj);
   return (
     <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
       <Stack.Screen
@@ -138,6 +142,7 @@ export default function NavigateUser() {
           borderBottomWidth: 0.5
         }
       })} />
+
       <Stack.Screen name="History" component={History} options={({ navigation, route }: any) => ({
         headerTitle: "Lịch sử",
         headerTitleStyle: styles.headerTitle,
@@ -159,6 +164,38 @@ export default function NavigateUser() {
                 onPress: () => {
                   dispatch(removeAllViewed());
                 },
+                style: "default"
+              }]
+            );
+          };
+          return (
+            <Icon
+              onPress={showAlert}
+              color="black"
+              name={"trash"}
+              style={{ fontSize: 23, marginRight: 10 }} />
+          );
+        }
+      })} />
+      <Stack.Screen name="BookMarks" component={BookMarks} options={({ navigation, route }: any) => ({
+        headerTitle: "Tin tức đã lưu",
+        headerTitleStyle: styles.headerTitle,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
+        },
+        headerRight: () => {
+          const showAlert = () => {
+            Alert.alert(
+              "Xoá các bài viết",
+              "Xoá tất cả các bài viết ?",
+              [{
+                text: "Huỷ",
+                style: "cancel"
+              }, {
+                text: "Xoá",
+                // onPress: handleRemoveAllSave,
                 style: "default"
               }]
             );

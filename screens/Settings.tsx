@@ -59,6 +59,14 @@ const Settings: React.FC = ({ navigation }: any) => {
           <Text style={{ color: "black" }}>Đã đọc gần đây</Text>
         </View>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("BookMarks")}>
+        <View style={styles.settingOption}>
+          <Icon color="green"
+                name={"bookmark"}
+                style={{ fontSize: 22, marginRight: 10 }} />
+          <Text style={{ color: "black" }}>Tin tức đã lưu</Text>
+        </View>
+      </TouchableOpacity>
       <View style={styles.settingOption}>
         <Text style={{ color: "black" }}>Dark Mode</Text>
       </View>

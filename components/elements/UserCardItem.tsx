@@ -3,18 +3,15 @@ import {
   Text,
   Image,
   StyleSheet,
-  TouchableNativeFeedback, Alert
+  TouchableNativeFeedback, Alert, ToastAndroid
 } from "react-native";
 import Animated from "react-native-reanimated";
-import { useDispatch, useSelector } from "react-redux";
-import { lockUser, removeItem } from "../../ReduxStore/Action";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { ImagesAssets } from "../../assets/img/ImagesAssets";
 import React from "react";
 import { color } from "react-native-elements/dist/helpers";
+import { lockUser } from "../../apiCalls/lockUser";
 
 export function UserCardItem(props: any) {
-  const dispatch = useDispatch();
   const showAlert = () => {
     Alert.alert(
       "Tuỳ chọn",
@@ -24,8 +21,28 @@ export function UserCardItem(props: any) {
         style: "cancel"
       }, {
         text: props.user.status ? "Khóa tài khoản" : "Mở tài khoản",
-        onPress: () => {
-          dispatch(lockUser(props.user.id));
+        onPress: async () => {
+          await lockUser({
+            id: props.user.id,
+            username: props.admin.email,
+            password: props.admin.password
+          }).then(r => {
+            if (r.status === 200) {
+              ToastAndroid.showWithGravity(
+                "Cập nhật trạng thái thành công",
+                ToastAndroid.LONG,
+                ToastAndroid.CENTER
+              );
+              props.handleEvent(!props.event);
+
+            } else {
+              ToastAndroid.showWithGravity(
+                "Có lỗi trong qúa trình xử lý",
+                ToastAndroid.LONG,
+                ToastAndroid.CENTER
+              );
+            }
+          });
         },
         style: "default"
       }, {
@@ -51,7 +68,7 @@ export function UserCardItem(props: any) {
       {props.user ? <Animated.View style={styles.root}>
         <View style={styles.container}>
           <View style={styles.right}>
-            <Image source={ImagesAssets.user} style={{ width: 70, height: 70}} />
+            <Image source={ImagesAssets.user} style={{ width: 70, height: 70 }} />
           </View>
 
           <View style={styles.left}>

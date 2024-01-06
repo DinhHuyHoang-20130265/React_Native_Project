@@ -8,7 +8,7 @@ export const allNews = async () => {
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
-    console.error("Error fetching news:", error);
+    console.error("Error fetching news dashboard:", error);
     throw error;
   }
 };

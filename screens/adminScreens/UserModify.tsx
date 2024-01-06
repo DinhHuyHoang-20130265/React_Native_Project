@@ -1,27 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Switch, StyleSheet, Button, Alert, Image } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Switch,
+  StyleSheet,
+  Button,
+  Alert,
+  Image,
+  ToastAndroid,
+  ActivityIndicator,
+  Dimensions
+} from "react-native";
 import { RadioButton } from "react-native-paper";
-import { black } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { ImagesAssets } from "../../assets/img/ImagesAssets";
 import { useRoute } from "@react-navigation/native";
-import { lockUser } from "../../ReduxStore/Action";
+import { nameValidator } from "../../helpers/nameValidator";
+import { emailValidator } from "../../helpers/emailValidator";
+import { updateAccount } from "../../apiCalls/updateAccount";
+import { useSelector } from "react-redux";
 
-interface UserModifyProps {
-  // Định nghĩa các props nếu cần
-}
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
-
-const UserModify: React.FC<UserModifyProps> = () => {
+const UserModify: React.FC = (props: any) => {
     const Router = useRoute();
     const { user } = Router.params as { user: any };
-
-
+    const [isLoading, setIsLoading] = useState(false);
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [role, setRole] = useState<string>("user");
     const [status, setStatus] = useState<boolean>(false);
-
+    const admin = useSelector((state: any) => state.userObj);
     useEffect(() => {
       if (user) {
         setName(user.fullName);
@@ -30,33 +40,86 @@ const UserModify: React.FC<UserModifyProps> = () => {
         setStatus(user.status);
       }
     }, [user]);
-    const handleSave = () => {
+    const handleSave = async () => {
+      const nameError = nameValidator(name);
+      const emailError = emailValidator(email);
+      if (nameError) {
+        ToastAndroid.showWithGravity(
+          nameError,
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
+        return;
+      } else if (emailError) {
+        ToastAndroid.showWithGravity(
+          emailError,
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
+        return;
+      }
       const userObject = {
         fullName: name,
         email: email,
         status: status,
-        isAdmin: role === "admin" ? true : false,
+        isAdmin: role === "admin"
       };
-      console.log("userObject", userObject);
-
+      setIsLoading(true);
+      if (admin) {
+        try {
+          const response = await updateAccount({
+            accountId: user.id,
+            username: admin.email,
+            password: admin.password,
+            account: userObject
+          });
+          if (response.status === 200) {
+            setIsLoading(false);
+            ToastAndroid.showWithGravity(
+              "Cập nhật thành công",
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER
+            );
+            props.navigation.replace("UserDashBoard");
+          } else {
+            setIsLoading(false);
+            ToastAndroid.showWithGravity(
+              "Có lỗi trong quá trình cập nhật",
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER
+            );
+          }
+        } catch (e) {
+          setIsLoading(false);
+          console.log(e);
+        }
+      }
     };
     const handleDelete = () => {
-      // Xử lý xóa tài khoản người dùng tại đây
       Alert.alert("Xác nhận xóa", "Bạn có chắc chắn muốn xóa tài khoản không?", [
         { text: "Hủy", style: "cancel" },
-        { text: "Xóa", style: "destructive", onPress: () => console.log("Xóa tài khoản") }
+        { text: "Xóa", style: "destructive" }
       ]);
-      // Thêm logic xóa tài khoản tại đây khi triển khai
     };
 
     const handleChangePassword = () => {
-      // Xử lý khi người dùng nhấn nút "Đổi mật khẩu"
       Alert.alert("Thông báo", "Chức năng đổi mật khẩu sẽ được triển khai trong tương lai.");
-      // Thêm logic đổi mật khẩu tại đây khi triển khai
     };
 
     return (
       <View style={styles.container}>
+        {isLoading &&
+          <View style={{
+            position: "absolute",
+            justifyContent: "center",
+            alignItems: "center",
+            height: windowHeight,
+            width: windowWidth,
+            zIndex: 1000,
+            backgroundColor: "rgba(148,148,148,0.3)"
+          }}>
+            <ActivityIndicator size="large" color="#00ff00" />
+          </View>}
         <Image source={ImagesAssets.user} style={styles.avatar} />
 
         <Text style={styles.label}>Họ tên:</Text>
@@ -95,12 +158,11 @@ const UserModify: React.FC<UserModifyProps> = () => {
           <Text style={styles.label}>Trạng thái:</Text>
           <Switch value={status} onValueChange={setStatus} />
         </View>
-
-        <Button title="Cập nhật mật khẩu mới" onPress={handleChangePassword} />
+        {user && <Button title="Cập nhật mật khẩu mới" onPress={handleChangePassword} />}
         <Text style={{ marginBottom: 10 }} />
         <Button title="Lưu" onPress={handleSave} />
         <Text style={{ marginBottom: 10 }} />
-        <Button title="Xóa tài khoản" onPress={handleDelete} color={"red"} />
+        {user && <Button title="Xóa tài khoản" onPress={handleDelete} color={"red"} />}
       </View>
     );
   }

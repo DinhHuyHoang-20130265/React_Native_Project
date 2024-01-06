@@ -18,8 +18,7 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
       };
     }
     case "user/loginUser": {
-      const loged = action.payload
-      console.log(loged);
+      const loged = action.payload;
       AsyncStorage.setItem("userObj", JSON.stringify(action.payload))
         .then(() => {
           console.log("Successfully saved userObj");
@@ -98,26 +97,6 @@ const root = (state = initState, action: { type: any; payload: any; }) => {
       return {
         ...state,
         bookmarks: []
-      };
-    }
-    case "user/lock": {
-      lockUser({
-        id: action.payload,
-        username: state.userObj.email,
-        password: state.userObj.password
-      });
-      return {
-        ...state
-      };
-    }
-    case "cate/hidden": {
-      hideCategory({
-        id: action.payload,
-        username: state.userObj.email,
-        password: state.userObj.password
-      });
-      return {
-        ...state
       };
     }
     default:

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  ScrollView, StyleSheet, Text, FlatList
+  ScrollView, StyleSheet, Text, FlatList, TouchableOpacity
 } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
-import { data, dataCate } from "../../components/sortSelect";
+import { dataCate } from "../../components/sortSelect";
 import { useRoute } from "@react-navigation/native";
 import { CateCardItem } from "../../components/elements/CateCardItem";
 import { allCates } from "../../apiCalls/allCates";
-
+import { useSelector } from "react-redux";
 
 const CateDashBoard: React.FC = (props: any) => {
   const route = useRoute();
@@ -16,30 +16,35 @@ const CateDashBoard: React.FC = (props: any) => {
   const [listCateg, setListCate] = useState<any[]>([]);
   // @ts-ignore
   const [selected, setSelected] = useState<any>(dataCate.at(0).key);
+  const admin = useSelector((state: any) => state.userObj);
+  const [event, setEvent] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const cateData = await allCates();
-        setListCate(cateData.filter((item: any) => {
-          switch (selected) {
-            case "1": {
-              return item.isDelete;
+        if (admin) {
+          const cateData = await allCates();
+          setListCate(cateData.filter((item: any) => {
+            switch (selected) {
+              case "1": {
+                return item.isDelete;
+              }
+              case "2": {
+                return !item.isDelete;
+              }
+              case "0": {
+                return item;
+              }
             }
-            case "2": {
-              return !item.isDelete;
-            }
-            case "0": {
-              return item;
-            }
-          }
-        }));
+          }));
+        }
       } catch (error) {
-        console.error("Error fetching users:", error);
+        console.error("Error fetching cate dashboard:", error);
       }
     };
-    if (props)
-      fetchData();
-  }, [props, selected, listCateg]);
+    fetchData();
+  }, [props, selected, admin, event]);
+
+  console.log(admin);
 
   return (
     <View style={styles.container}>
@@ -61,7 +66,7 @@ const CateDashBoard: React.FC = (props: any) => {
           horizontal={false}
           renderItem={({ item, index }) => {
             return (
-              <CateCardItem cate={item} screen={"CateDashBoard"}
+              <CateCardItem cate={item} screen={"CateDashBoard"} admin={admin} handleEvent={setEvent} event={event}
                             navigation={props.navigation} />
             );
           }}
@@ -69,6 +74,9 @@ const CateDashBoard: React.FC = (props: any) => {
 
         />
       </View>
+      <TouchableOpacity style={styles.addButton} onPress={() => props.navigation.navigate("AddCategory")}>
+        <Text style={styles.addButtonText}>+</Text>
+      </TouchableOpacity>
     </View>
   )
     ;
@@ -90,6 +98,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16
+  },
+  addButton: {
+    position: "absolute",
+    bottom: 150,
+    right: 14,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "#007bff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  addButtonText: {
+    fontSize: 30,
+    color: "white",
   }
 });
 

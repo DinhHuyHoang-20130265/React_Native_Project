@@ -15,14 +15,14 @@ const Speech = (props: any) => {
 
   const androidConfig = {
     KEY_PARAM_PAN: 0,
-    KEY_PARAM_VOLUME: 1, // 0 means silence
+    KEY_PARAM_VOLUME: 1,
     KEY_PARAM_STREAM: "STREAM_MUSIC"
   };
 
   const handlePlay = () => {
-    Tts.requestInstallEngine();
+    console.log(result);
     Tts.getInitStatus().then(() => {
-      Tts.setDefaultLanguage("vi-VN");
+      Tts.setDefaultLanguage("vi-VN").then(r => console.log("sucess"));
       // @ts-ignore
       Tts.speak(result, androidConfig);
     });

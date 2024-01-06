@@ -44,7 +44,7 @@ const NewsDashBoard: React.FC = (props: any) => {
         });
         setListData(newsData);
       } catch (error) {
-        console.error("Error fetching news:", error);
+        console.error("Error fetching news dashboard:", error);
       }
     };
 

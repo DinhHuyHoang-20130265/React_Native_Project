@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  ScrollView, StyleSheet, Text, FlatList, TouchableOpacity
-} from "react-native";
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { dataCate } from "../../components/sortSelect";
 import { useRoute } from "@react-navigation/native";
@@ -18,6 +15,8 @@ const CateDashBoard: React.FC = (props: any) => {
   const [selected, setSelected] = useState<any>(dataCate.at(0).key);
   const admin = useSelector((state: any) => state.userObj);
   const [event, setEvent] = useState(false);
+  const [update, setUpdate] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,13 +41,15 @@ const CateDashBoard: React.FC = (props: any) => {
       }
     };
     fetchData();
+    return props.navigation.addListener("focus", () => {
+      fetchData();
+    });
   }, [props, selected, admin, event]);
 
-  console.log(admin);
 
   return (
     <View style={styles.container}>
-      <View style={{ marginBottom: 60 }}>
+      <View style={{ marginBottom: 120 }}>
         <SelectList
           setSelected={setSelected}
           data={dataCate}
@@ -108,11 +109,11 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: "#007bff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   addButtonText: {
     fontSize: 30,
-    color: "white",
+    color: "white"
   }
 });
 

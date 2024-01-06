@@ -9,6 +9,7 @@ import UserModify from "../../screens/adminScreens/UserModify";
 import AddUser from "../../screens/adminScreens/AddUser";
 import AddCategory from "../../screens/adminScreens/AddCategory";
 import CategoryModify from "../../screens/adminScreens/CategoryModify";
+import CateDashBoard from "../../screens/adminScreens/CateDashBoard";
 
 const Stack = createStackNavigator();
 

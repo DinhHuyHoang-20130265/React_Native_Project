@@ -1,14 +1,14 @@
 import Tts from "react-native-tts";
 import {
   View,
-  StyleSheet
+  StyleSheet, ToastAndroid
 } from "react-native";
 //@ts-ignore
 import CircleButton from "react-native-circle-floatmenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { addDeleteBookmarks } from "../../apiCalls/addDeleteBookmarks";
 
 const Speech = (props: any) => {
-
   // @ts-ignore
   const resultArray = props.context.map(item => item.p).filter(value => value !== undefined && value !== null);
   const result = resultArray.join(", ");
@@ -30,13 +30,38 @@ const Speech = (props: any) => {
   const handleStop = () => {
     Tts.stop();
   };
+  const handleSave = async () => {
+    try {
+      const response = await addDeleteBookmarks({
+        userId: props.user.id,
+        newId: props.item.id,
+        username: props.user.email,
+        password: props.user.password
+      });
+      if (response.status === 200) {
+        ToastAndroid.showWithGravity(
+          "Thêm vào tin tức đã lưu thành công",
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
+      } else {
+        ToastAndroid.showWithGravity(
+          "Có lỗi trong quá trình cập nhật",
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
+      }
+    } catch (error) {
+      console.error("Error while saving news:", error);
+    }
+  };
 
   return (
     <View style={styles.btn_container}>
       <CircleButton buttonColor="rgba(96, 220, 43, 0.9)" position={"right"}>
         <CircleButton.Item
           position="absolute"
-          buttonColor="rgba(96, 220, 43, 0.8)"
+          buttonColor="rgba(96, 220, 43, 1)"
           title="Play"
           onPress={handlePlay}
         >
@@ -57,7 +82,13 @@ const Speech = (props: any) => {
           position="absolute"
           buttonColor="rgba(96, 220, 43, 0.8)"
           title="Bookmark"
-          onPress={() => console.log("BtnPress")}
+          onPress={props.user ? handleSave : () => {
+            ToastAndroid.showWithGravity(
+              "Bạn cần đăng nhập để thực hiện chức năng này",
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER
+            );
+          }}
         >
           <Icon
             name="bookmark"

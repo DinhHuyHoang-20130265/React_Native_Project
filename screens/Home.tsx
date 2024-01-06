@@ -8,6 +8,7 @@ import {
 import CateHome from "../components/elements/CateHome";
 import CarouselParallax from "../components/elements/CarouselParallax";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
+import { WebView } from "react-native-webview";
 
 const newsCategories = [
   { id: 1, title: "Thời sự" },

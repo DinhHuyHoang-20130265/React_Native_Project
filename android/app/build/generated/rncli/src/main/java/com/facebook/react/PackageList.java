@@ -31,6 +31,8 @@ import net.no_mad.tts.TextToSpeechPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 // react-native-video
 import com.brentvatne.react.ReactVideoPackage;
+// react-native-webview
+import com.reactnativecommunity.webview.RNCWebViewPackage;
 
 public class PackageList {
   private Application application;
@@ -85,7 +87,8 @@ public class PackageList {
       new RNScreensPackage(),
       new TextToSpeechPackage(),
       new VectorIconsPackage(),
-      new ReactVideoPackage()
+      new ReactVideoPackage(),
+      new RNCWebViewPackage()
     ));
   }
 }

@@ -6865,5 +6865,6 @@ int styleable ViewStubCompat_android_layout 1
 int styleable ViewStubCompat_android_inflatedId 2
 int[] styleable scaleStyle { 0x7f03037c }
 int styleable scaleStyle_scalableType 0
-int xml imagepicker_provider_paths 0x7f120000
-int xml rn_dev_preferences 0x7f120001
+int xml file_provider_paths 0x7f120000
+int xml imagepicker_provider_paths 0x7f120001
+int xml rn_dev_preferences 0x7f120002

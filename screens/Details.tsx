@@ -14,6 +14,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Speech from "../components/elements/Speech";
 import { useDispatch } from "react-redux";
 import { saveViewed } from "../ReduxStore/Action";
+import { useSelector } from "react-redux";
 // @ts-ignore
 import VideoPlayer from "react-native-video-player";
 
@@ -57,7 +58,7 @@ const Details: React.FC = (props: any) => {
   const [details, setDetails] = useState<any>({});
   const [paragraphContent, setParagraphContent] = useState("");
   const dispatch = useDispatch();
-
+  const user = useSelector((state: any) => state.userObj);
   useEffect(() => {
     if (item) {
       setDetails(item);
@@ -66,7 +67,7 @@ const Details: React.FC = (props: any) => {
       if (props.screen !== "History")
         dispatch(saveViewed(item));
     }
-  }, [dispatch, item, props.screen]);
+  }, [dispatch, item, props.screen, user]);
 
 
   return (
@@ -151,7 +152,7 @@ const Details: React.FC = (props: any) => {
           </View>
         </ScrollView>
         <View style={{ position: "absolute", right: 0, bottom: 0, width: "100%", height: "100%" }}>
-          <Speech context={paragraphContent} item={item} />
+          <Speech context={paragraphContent} item={item} user={user} />
         </View>
       </View>
       : <View></View>

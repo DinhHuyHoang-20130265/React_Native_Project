@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  ScrollView, StyleSheet, Text, FlatList
+  ScrollView, StyleSheet, Text, FlatList, TouchableOpacity
 } from "react-native";
 import { listCate } from "../../apiCalls/listCate";
 import { CateCard } from "../../components/elements/CateCard";
@@ -11,6 +11,8 @@ import { listNews } from "../../apiCalls/listNews";
 import { allNews } from "../../apiCalls/allNews";
 import { SelectList } from "react-native-dropdown-select-list";
 import { ListNewsCardItem } from "../../components/elements/ListNewsCardItem";
+import { useSelector } from "react-redux";
+import { NewsCardItem } from "../../components/elements/NewsCardItem";
 
 
 
@@ -19,6 +21,8 @@ const NewsDashBoard: React.FC = (props: any) => {
   const [listData, setListData] = useState<any[]>([]);
   // @ts-ignore
   const [selected, setSelected] = useState<any>(data.at(0).key);
+  const admin = useSelector((state: any) => state.userObj);
+  const [event, setEvent] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,6 +56,7 @@ const NewsDashBoard: React.FC = (props: any) => {
   }, [props, selected]);
 
   return (
+    <View style={styles.container}>
     <View style={{ marginBottom: 60 }}>
       <SelectList
         setSelected={setSelected}
@@ -70,27 +75,40 @@ const NewsDashBoard: React.FC = (props: any) => {
         horizontal={false}
         renderItem={({ item, index }) => {
           return (
-            <ListNewsCardItem itemNews={item} screen={"NewsDashBoard"}
+            <NewsCardItem itemNews={item} screen={"NewsDashBoard"} admin={admin} handleEvent={setEvent} event={event}
                               navigation={props.navigation} />
           );
         }}
         contentContainerStyle={{ alignItems: "center", justifyContent: "center" }}
-
       />
     </View>
-    // <View style={styles.container}>
-    //   <ScrollView contentContainerStyle={styles.scrollViewContent}>
-    //     {/*<View style={styles.gridContainer}>*/}
-    //     {/*  <Text>NewsDashBoard</Text>*/}
-    //     {/*</View>*/}
-    //     <View style={styles.gridContainer}>
-    //
-    //     </View>
-    //   </ScrollView>
-    // </View>
+      <TouchableOpacity style={styles.addButton} onPress={() => props.navigation.navigate("AddNews")}>
+        <Text style={styles.addButtonText}>+</Text>
+      </TouchableOpacity>
+    </View>
+
   )
     ;
 };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     minHeight: "100%",
+//     paddingBottom: 80,
+//     top: 20
+//   },
+//   scrollViewContent: {
+//     alignItems: "center"
+//   },
+//   gridContainer: {
+//     flex: 1,
+//     flexDirection: "row",
+//     flexWrap: "wrap",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     paddingHorizontal: 16
+//   }
+// });
 
 const styles = StyleSheet.create({
   container: {
@@ -108,6 +126,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16
+  },
+  addButton: {
+    position: "absolute",
+    bottom: 150,
+    right: 14,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "#007bff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  addButtonText: {
+    fontSize: 30,
+    color: "white",
   }
 });
 

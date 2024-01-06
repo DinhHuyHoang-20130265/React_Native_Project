@@ -42,9 +42,10 @@ com.react_native_project.app-main-40 C:\Users\Admin\Documents\ReactNative\React_
 com.react_native_project.app-packaged_res-41 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\@react-native-async-storage\async-storage\android\build\intermediates\packaged_res\debug
 com.react_native_project.app-packaged_res-42 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\@react-native-community\masked-view\android\build\intermediates\packaged_res\debug
 com.react_native_project.app-packaged_res-43 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-gesture-handler\android\build\intermediates\packaged_res\debug
-com.react_native_project.app-packaged_res-44 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-reanimated\android\build\intermediates\packaged_res\debug
-com.react_native_project.app-packaged_res-45 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-safe-area-context\android\build\intermediates\packaged_res\debug
-com.react_native_project.app-packaged_res-46 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-screens\android\build\intermediates\packaged_res\debug
-com.react_native_project.app-packaged_res-47 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-tts\android\build\intermediates\packaged_res\debug
-com.react_native_project.app-packaged_res-48 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-vector-icons\android\build\intermediates\packaged_res\debug
-com.react_native_project.app-packaged_res-49 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-video\android\build\intermediates\packaged_res\debug
+com.react_native_project.app-packaged_res-44 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\packaged_res\debug
+com.react_native_project.app-packaged_res-45 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-reanimated\android\build\intermediates\packaged_res\debug
+com.react_native_project.app-packaged_res-46 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-safe-area-context\android\build\intermediates\packaged_res\debug
+com.react_native_project.app-packaged_res-47 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-screens\android\build\intermediates\packaged_res\debug
+com.react_native_project.app-packaged_res-48 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-tts\android\build\intermediates\packaged_res\debug
+com.react_native_project.app-packaged_res-49 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-vector-icons\android\build\intermediates\packaged_res\debug
+com.react_native_project.app-packaged_res-50 C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-video\android\build\intermediates\packaged_res\debug

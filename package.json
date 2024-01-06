@@ -29,6 +29,7 @@
     "react-native-asset": "^2.1.1",
     "react-native-cheerio": "^1.0.0-rc.4",
     "react-native-circle-floatmenu": "^0.1.1",
+    "react-native-cn-quill": "^0.7.18",
     "react-native-dropdown-select-list": "^2.0.5",
     "react-native-elements": "^3.4.3",
     "react-native-gesture-handler": "^2.12.1",

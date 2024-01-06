@@ -70,7 +70,6 @@ const ListNews: React.FC = (props: any) => {
         keyExtractor={(item, index) => index.toString()}
         horizontal={false}
         renderItem={({ item, index }) => {
-          console.log(item.id);
           return (
             <ListNewsCardItem itemNews={item} screen={"ListNews"}
                               navigation={props.navigation} />

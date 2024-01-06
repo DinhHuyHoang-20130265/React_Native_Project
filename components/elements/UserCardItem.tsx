@@ -68,7 +68,7 @@ export function UserCardItem(props: any) {
       {props.user ? <Animated.View style={styles.root}>
         <View style={styles.container}>
           <View style={styles.right}>
-            <Image source={ImagesAssets.user} style={{ width: 70, height: 70 }} />
+            <Image source={props.user.admin ? ImagesAssets.userAdmin : ImagesAssets.user} style={{ width: 70, height: 70 }} />
           </View>
 
           <View style={styles.left}>

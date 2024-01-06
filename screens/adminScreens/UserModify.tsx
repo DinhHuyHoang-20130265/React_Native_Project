@@ -19,6 +19,8 @@ import { nameValidator } from "../../helpers/nameValidator";
 import { emailValidator } from "../../helpers/emailValidator";
 import { updateAccount } from "../../apiCalls/updateAccount";
 import { useSelector } from "react-redux";
+import { updatePassword } from "../../apiCalls/updatePassword";
+import { deleteUser } from "../../apiCalls/deleteUser";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -98,12 +100,70 @@ const UserModify: React.FC = (props: any) => {
     const handleDelete = () => {
       Alert.alert("Xác nhận xóa", "Bạn có chắc chắn muốn xóa tài khoản không?", [
         { text: "Hủy", style: "cancel" },
-        { text: "Xóa", style: "destructive" }
+        { text: "Xóa", style: "destructive",
+          onPress: async () => {
+            try {
+              setIsLoading(true);
+              // Gọi hàm xóa danh mục từ API
+              const response = await deleteUser({
+                accountId: user.id,
+                username: admin.email,
+                password: admin.password
+              });
+              if (response.status === 204) {
+                setIsLoading(false);
+                ToastAndroid.showWithGravity(
+                  "Xóa danh mục thành công",
+                  ToastAndroid.LONG,
+                  ToastAndroid.CENTER
+                );
+                props.navigation.replace("UserDashBoard");
+              } else {
+                setIsLoading(false);
+                ToastAndroid.showWithGravity(
+                  "Có lỗi trong quá trình xóa tài khoản",
+                  ToastAndroid.LONG,
+                  ToastAndroid.CENTER
+                );
+              }
+            } catch (error) {
+              setIsLoading(false);
+              console.log("Error in handleDelete:", error);
+            }
+          }
+        }
       ]);
     };
 
-    const handleChangePassword = () => {
-      Alert.alert("Thông báo", "Chức năng đổi mật khẩu sẽ được triển khai trong tương lai.");
+    const handleChangePassword = async () => {
+      setIsLoading(true);
+      if (admin) {
+        try {
+          const response = await updatePassword({
+            id: user.id,
+            username: admin.email,
+            password: admin.password
+          });
+          if (response.status === 200) {
+            setIsLoading(false);
+            ToastAndroid.showWithGravity(
+              "Cập nhật mật khẩu thành công",
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER
+            );
+          } else {
+            setIsLoading(false);
+            ToastAndroid.showWithGravity(
+              "Có lỗi trong quá trình cập nhật",
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER
+            );
+          }
+        } catch (e) {
+          setIsLoading(false);
+          console.log(e);
+        }
+      }
     };
 
     return (
@@ -120,7 +180,7 @@ const UserModify: React.FC = (props: any) => {
           }}>
             <ActivityIndicator size="large" color="#00ff00" />
           </View>}
-        <Image source={ImagesAssets.user} style={styles.avatar} />
+        <Image source={user.admin ? ImagesAssets.userAdmin : ImagesAssets.user} style={styles.avatar} />
 
         <Text style={styles.label}>Họ tên:</Text>
         <TextInput

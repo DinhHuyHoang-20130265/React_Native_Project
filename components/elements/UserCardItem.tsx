@@ -8,6 +8,7 @@ import {
 import Animated from "react-native-reanimated";
 import { ImagesAssets } from "../../assets/img/ImagesAssets";
 import React from "react";
+import { color } from "react-native-elements/dist/helpers";
 import { lockUser } from "../../apiCalls/lockUser";
 
 export function UserCardItem(props: any) {
@@ -67,22 +68,22 @@ export function UserCardItem(props: any) {
       {props.user ? <Animated.View style={styles.root}>
         <View style={styles.container}>
           <View style={styles.right}>
-            <Image source={ImagesAssets.user} style={{ width: 70, height: 70 }} />
+            <Image source={props.user.admin ? ImagesAssets.userAdmin : ImagesAssets.user} style={{ width: 70, height: 70 }} />
           </View>
 
           <View style={styles.left}>
             <View style={{ height: "90%", justifyContent: "center" }}>
               <Text style={styles.title}>
-                Username: {props.user.email}
+                Username: <Text style={[{fontWeight: "bold"}]}> {props.user.email} </Text>
               </Text>
               <Text style={styles.desc}>
-                Họ tên: {props.user.fullName}
+                Họ tên: <Text style={[styles.content]}> {props.user.fullName} </Text>
               </Text>
-              <Text style={[styles.desc, { color: props.user.status ? "green" : "red" }]}>
-                Trạng thái: {props.user.status ? "Đang Hoạt Động" : "Đã khóa"}
+              <Text style={[styles.desc, ]}>
+                Trạng thái: <Text style={[styles.content,{ color: props.user.status ? "green" : "red" }]}> {props.user.status ? "Đang Hoạt Động" : "Đã khóa"} </Text>
               </Text>
               <Text style={styles.desc}>
-                Loại tài khoản: {props.user.admin ? "Admin" : "Người dùng"}
+                Vai trò: <Text style={[styles.content,{ color: props.user.admin ? "red" : "blue" }]}> {props.user.admin ? "Admin" : "Người dùng"} </Text>
               </Text>
             </View>
           </View>
@@ -133,16 +134,19 @@ const styles = StyleSheet.create({
   desc: {
     color: "rgba(0, 0, 0, 1)",
     fontFamily: "Inter",
-    fontSize: 12,
+    fontSize: 14,
     fontStyle: "normal",
-    fontWeight: "400"
+    fontWeight: "bold"
   },
   title: {
     color: "rgba(0, 0, 0, 1)",
     fontFamily: "Inter",
-    fontSize: 13,
+    fontSize: 14,
     fontStyle: "normal",
     fontWeight: "800"
+  },
+  content: {
+    fontWeight: "normal",
   },
   date: {
     color: "rgba(0, 0, 0, 1)",

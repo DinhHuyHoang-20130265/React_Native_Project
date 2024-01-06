@@ -9,6 +9,8 @@ import UserModify from "../../screens/adminScreens/UserModify";
 import AddUser from "../../screens/adminScreens/AddUser";
 import AddCategory from "../../screens/adminScreens/AddCategory";
 import CategoryModify from "../../screens/adminScreens/CategoryModify";
+import NewsModify from "../../screens/adminScreens/NewsModify";
+import AddNews from "../../screens/adminScreens/AddNews";
 
 const Stack = createStackNavigator();
 
@@ -91,8 +93,50 @@ export default function NavigateAdmin() {
           };
         }
       })} />
+      <Stack.Screen name="NewsModify" component={NewsModify} options={({ navigation }) => ({
+        title: "Sửa bài báo".toUpperCase(), headerTitleStyle: styles.headerTitle,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
+        },
+        cardStyleInterpolator: ({ current, layouts }: any) => {
+          return {
+            cardStyle: {
+              transform: [
+                {
+                  translateX: current.progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [layouts.screen.width, 0]
+                  })
+                }
+              ]
+            }
+          };
+        }
+      })} />
       <Stack.Screen name="AddCategory" component={AddCategory} options={({ navigation }) => ({
         title: "Thêm danh mục".toUpperCase(), headerTitleStyle: styles.headerTitle,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
+        },
+        cardStyleInterpolator: ({ current, layouts }: any) => {
+          return {
+            cardStyle: {
+              transform: [
+                {
+                  translateX: current.progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [layouts.screen.width, 0]
+                  })
+                }
+              ]
+            }
+          };
+        }
+      })} />
+      <Stack.Screen name="AddNews" component={AddNews} options={({ navigation }) => ({
+        title: "Thêm bài báo".toUpperCase(), headerTitleStyle: styles.headerTitle,
         headerStyle: {
           elevation: 100,
           borderBottomWidth: 0.5

@@ -3,7 +3,7 @@
 import React from "react";
 import {
   View,
-  ScrollView
+  ScrollView, Image, Button
 } from "react-native";
 import CateHome from "../components/elements/CateHome";
 import CarouselParallax from "../components/elements/CarouselParallax";
@@ -16,7 +16,6 @@ const newsCategories = [
 ];
 
 const Home: React.FC = () => {
-
   return (
     <View style={{ minHeight: "100%" }}>
       <ScrollView>

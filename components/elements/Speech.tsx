@@ -76,7 +76,7 @@ const Speech = (props: any) => {
       <CircleButton buttonColor="rgba(96, 220, 43, 0.9)" position={"right"}>
         <CircleButton.Item
           position="absolute"
-          buttonColor="rgba(96, 220, 43, 0.8)"
+          buttonColor="rgba(96, 220, 43, 1)"
           title="Play"
           onPress={handlePlay}
         >

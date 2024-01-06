@@ -1,4 +1,5 @@
 import Tts from "react-native-tts";
+import { useState, useEffect } from "react";
 import {
   View,
   StyleSheet, ToastAndroid
@@ -8,12 +9,13 @@ import CircleButton from "react-native-circle-floatmenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { addBookmark } from "../../apiCalls/addBookmark";
 import { deleteBookMark } from "../../apiCalls/deleteBookMark";
+import { listBookmarks } from "../../apiCalls/listBookmarks";
 
 const Speech = (props: any) => {
   // @ts-ignore
   const resultArray = props.context.map(item => item.p).filter(value => value !== undefined && value !== null);
   const result = resultArray.join(", ");
-
+  const [saveCheck, setSaveCheck] = useState(false);
   const androidConfig = {
     KEY_PARAM_PAN: 0,
     KEY_PARAM_VOLUME: 1,
@@ -31,6 +33,23 @@ const Speech = (props: any) => {
   const handleStop = () => {
     Tts.stop();
   };
+  useEffect(() => {
+    const getList = async () => {
+      try {
+        if (props.user) {
+          const saveList = await listBookmarks({
+            id: props.user.id,
+            username: props.user.email,
+            password: props.user.password
+          });
+          setSaveCheck(saveList.find((item: any) => item.id === props.item.id));
+        }
+      } catch (error) {
+        console.error("Error :", error);
+      }
+    };
+    getList();
+  }, [props]);
   const handleSave = async () => {
       try {
         const response = await addBookmark({
@@ -46,6 +65,7 @@ const Speech = (props: any) => {
               ToastAndroid.LONG,
               ToastAndroid.CENTER
             );
+            setSaveCheck(!saveCheck);
             break;
           }
           case "News already bookmark": {
@@ -60,6 +80,7 @@ const Speech = (props: any) => {
               ToastAndroid.LONG,
               ToastAndroid.CENTER
             );
+            setSaveCheck(!saveCheck);
             break;
           }
           default: {
@@ -72,7 +93,7 @@ const Speech = (props: any) => {
           }
 
         }
-      } catch (error){
+      } catch (error) {
         console.error("Error while saving news:", error);
       }
     }
@@ -102,7 +123,7 @@ const Speech = (props: any) => {
         </CircleButton.Item>
         <CircleButton.Item
           position="absolute"
-          buttonColor="rgba(96, 220, 43, 0.8)"
+          buttonColor={!saveCheck ? "rgba(96, 220, 43, 0.8)" : "rgba(255,218,0,0.8)"}
           title="Bookmark"
           onPress={props.user ? handleSave : () => {
             ToastAndroid.showWithGravity(

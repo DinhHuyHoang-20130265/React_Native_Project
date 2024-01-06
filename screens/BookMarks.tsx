@@ -5,8 +5,7 @@ import {
 import { ListNewsCardItem } from "../components/elements/ListNewsCardItem";
 import { SelectList } from "react-native-dropdown-select-list/index";
 import { data } from "../components/sortSelect";
-import { useDispatch, useSelector } from "react-redux";
-import { allCates } from "../apiCalls/allCates";
+import { useSelector } from "react-redux";
 import { listBookmarks } from "../apiCalls/listBookmarks";
 
 const BookMarks: React.FC = (props: any) => {
@@ -15,18 +14,17 @@ const BookMarks: React.FC = (props: any) => {
   // @ts-ignore
   const [selected, setSelected] = useState<any>(data.at(0).key);
   const user = useSelector((state: any) => state.userObj);
+  const reload = useSelector((state: any) => state.reloadBookmark);
 
   useEffect(() => {
-    const getList = async  () => {
-      console.log(user);
+    const getList = async () => {
       try {
-        if (saveList === undefined || saveList.length === 0) {
+        if (user) {
           const saveList = await listBookmarks({
             id: user.id,
             username: user.email,
             password: user.password
           });
-          console.log(saveList);
           saveList.sort((a: any, b: any) => {
               switch (selected) {
                 case "1": {
@@ -54,7 +52,10 @@ const BookMarks: React.FC = (props: any) => {
       }
     };
     getList();
-  }, [saveList, selected, event]);
+    return props.navigation.addListener("focus", () => {
+      getList();
+    });
+  }, [user, props, selected, event, reload]);
 
 
   return (

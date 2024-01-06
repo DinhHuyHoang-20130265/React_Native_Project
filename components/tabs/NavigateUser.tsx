@@ -13,7 +13,7 @@ import ForgotPassword from "../../screens/ForgotPassword";
 import ListNews from "../../screens/ListNews";
 import Details from "../../screens/Details";
 import { useDispatch, useSelector } from "react-redux";
-import { removeAllViewed, removeItem } from "../../ReduxStore/Action";
+import { removeAllSaved, removeAllViewed, removeItem } from "../../ReduxStore/Action";
 import History from "../../screens/History";
 import BookMarks from "../../screens/BookMarks";
 import UserProfile from "../../screens/UserProfile";
@@ -37,34 +37,7 @@ function getHeaderTitle(route: any) {
 export default function NavigateUser() {
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.userObj);
-
-  async function handleRemoveAllSave(props: any) {
-    try {
-      // Gọi hàm xóa danh mục từ API
-      const response = await deleteAllBookMarks({
-        userId: user.id,
-        username: user.email,
-        password: user.password
-      });
-      if (response.status === 200) {
-        ToastAndroid.showWithGravity(
-          "Xóa tất cả tin tức đã lưu thành công",
-          ToastAndroid.LONG,
-          ToastAndroid.CENTER
-        );
-        props.replace("BookMarks");
-      } else {
-        ToastAndroid.showWithGravity(
-          "Có lỗi trong quá trình xóa danh mục",
-          ToastAndroid.LONG,
-          ToastAndroid.CENTER
-        );
-      }
-    } catch (error) {
-      console.log("Error in handleDelete:", error);
-    }
-  }
-
+  const reload = useSelector((state: any) => state.reloadBookmark);
   return (
     <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
       <Stack.Screen
@@ -231,7 +204,35 @@ export default function NavigateUser() {
                 style: "cancel"
               }, {
                 text: "Xoá",
-                onPress: () => handleRemoveAllSave(navigation),
+                onPress: () => {
+                  async function handleRemoveAllSave() {
+                    try {
+                      const response = await deleteAllBookMarks({
+                        userId: user.id,
+                        username: user.email,
+                        password: user.password
+                      });
+                      if (response.status === 200) {
+                        ToastAndroid.showWithGravity(
+                          "Xóa tất cả tin tức đã lưu thành công",
+                          ToastAndroid.LONG,
+                          ToastAndroid.CENTER
+                        );
+                        dispatch(removeAllSaved(!reload));
+                      } else {
+                        ToastAndroid.showWithGravity(
+                          "Có lỗi trong quá trình xóa danh mục",
+                          ToastAndroid.LONG,
+                          ToastAndroid.CENTER
+                        );
+                      }
+                    } catch (error) {
+                      console.log("Error in handleDelete:", error);
+                    }
+                  }
+
+                  handleRemoveAllSave();
+                },
                 style: "default"
               }]
             );

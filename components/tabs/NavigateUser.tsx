@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeAllViewed, removeItem } from "../../ReduxStore/Action";
 import History from "../../screens/History";
 import BookMarks from "../../screens/BookMarks";
+import UserProfile from "../../screens/UserProfile";
 
 const Stack = createStackNavigator();
 
@@ -142,7 +143,15 @@ export default function NavigateUser() {
           borderBottomWidth: 0.5
         }
       })} />
-
+      <Stack.Screen name="UserProfile" component={UserProfile} options={({ navigation, route }: any) => ({
+        headerTitle: "",
+        headerTitleStyle: styles.headerTitle,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
+        }
+      })} />
       <Stack.Screen name="History" component={History} options={({ navigation, route }: any) => ({
         headerTitle: "Lịch sử",
         headerTitleStyle: styles.headerTitle,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity, Image, ToastAndroid, ActivityIndicator, Dimensions } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Image, ToastAndroid, ActivityIndicator, Dimensions, TouchableHighlight } from "react-native";
 import { Text } from "react-native-paper";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
@@ -150,13 +150,31 @@ export default function SignUp({ navigation }: any) {
         errorText={password.error}
         secureTextEntry
       />}
-      {!nextStepCode && <Button
-        mode="contained"
-        onPress={onSignUpPressed}
-        style={{ marginTop: 24 }}
-      >
-        Đăng ký
-      </Button>}
+      {!nextStepCode &&
+      //   <Button
+      //   mode="contained"
+      //   onPress={onSignUpPressed}
+      //   style={{ marginTop: 24 }}
+      // >
+      //   Đăng ký
+      // </Button>}
+      <View style={{
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 16
+      }}>
+        <TouchableHighlight onPress={onSignUpPressed} underlayColor="#400B96FF"
+                            style={{
+                              backgroundColor: "green",
+                              width: 300,
+                              height: 45,
+                              justifyContent: "center",
+                              borderRadius: 17,
+                              marginTop: 24
+                            }}>
+          <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng ký".toUpperCase()}</Text>
+        </TouchableHighlight>
+      </View>}
       {nextStepCode && <TextInput
         label="Nhập mã xác nhận"
         returnKeyType="next"

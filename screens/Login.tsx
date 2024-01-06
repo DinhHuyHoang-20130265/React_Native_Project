@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity, StyleSheet, View, Image, ToastAndroid, ActivityIndicator, Dimensions } from "react-native";
+import { TouchableOpacity, StyleSheet, View, Image, ToastAndroid, ActivityIndicator, Dimensions, TouchableHighlight } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/elements/Background";
 import Button from "../components//elements/Button";
@@ -120,10 +120,22 @@ export default function Login({ navigation }: any) {
           <Text style={styles.forgot}>Quên mật khẩu?</Text>
         </TouchableOpacity>
       </View>
-
-      <Button mode="contained" onPress={onLoginPressed} style={undefined}>
-        Đăng nhập
-      </Button>
+      <View style={{
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 16
+      }}>
+      <TouchableHighlight onPress={onLoginPressed} underlayColor="#400B96FF"
+                          style={{
+                            backgroundColor: "green",
+                            width: 300,
+                            height: 45,
+                            justifyContent: "center",
+                            borderRadius: 17
+                          }}>
+        <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng nhập".toUpperCase()}</Text>
+      </TouchableHighlight>
+      </View>
       <View style={styles.row}>
         <Text>Bạn chưa có tài khoản? </Text>
         <TouchableOpacity onPress={() => navigation.replace("SignUp")}>

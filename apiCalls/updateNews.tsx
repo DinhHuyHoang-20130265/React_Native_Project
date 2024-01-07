@@ -10,7 +10,7 @@ export const updateNews = async (props: any) => {
       description: props.description,
       image: props.image,
       content: props.content,
-      createdBy: props.name,
+      createdBy: props.fullName,
       idCategories: props.idCategories
     }, {
       headers: authHeader

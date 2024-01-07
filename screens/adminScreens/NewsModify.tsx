@@ -38,6 +38,7 @@ const NewsModify: React.FC = (props: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [listCate, setListCate] = useState<any>(null);
   const [listCateSelected, setListCateSelected] = useState<any>([]);
+  const [listCateSelectedOriginal, setListCateSelectedOriginal] = useState<any>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,8 +53,11 @@ const NewsModify: React.FC = (props: any) => {
     const fetchCate = async () => {
       try {
         const listCate = await getCateIdByNews({ id: item.id });
-        setListCateSelected(listCate.map((item: { id: any; name: any; }) => ({ id: item.id, name: item.name }))
-        );
+        setListCateSelected(listCate.map((item: { id: any; name: any; }) => ({ id: item.id, name: item.name })));
+        setListCateSelectedOriginal(listCate.map((item: { id: any; name: any; }) => ({
+          id: item.id,
+          name: item.name
+        })));
       } catch (e) {
         console.log(e);
       }
@@ -143,6 +147,7 @@ const NewsModify: React.FC = (props: any) => {
           urlImg = response.data.url;
         }
         if (urlImg) {
+          console.log(listCateSelected === listCateSelectedOriginal);
           const result = await updateNews({
             id: item.id,
             username: admin.email,
@@ -152,7 +157,7 @@ const NewsModify: React.FC = (props: any) => {
             image: urlImg,
             content: content.toString(),
             createdBy: admin.fullName,
-            idCategories: listCateSelected
+            idCategories: JSON.stringify(listCateSelected) === JSON.stringify(listCateSelectedOriginal) ? listCateSelected.map((item: any) => item.id) : listCateSelected
           });
           if (result.status === 200) {
             setIsLoading(false);
@@ -207,7 +212,7 @@ const NewsModify: React.FC = (props: any) => {
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
           <View
             style={{ backgroundColor: "white", width: "100%", height: "100%", borderColor: "#26292E", borderWidth: 1 }}>
-            <Text style={{ textAlign: "center", fontSize: 25, fontWeight: "bold"}}>Chọn danh mục</Text>
+            <Text style={{ textAlign: "center", fontSize: 25, fontWeight: "bold" }}>Chọn danh mục</Text>
             <CheckboxList
               listItems={listCate}
               theme="blue"
@@ -223,7 +228,7 @@ const NewsModify: React.FC = (props: any) => {
             />
             <Button title="Đóng"
                     onPress={() => setModalVisible(false)}
-                    color={'red'}
+                    color={"red"}
             />
           </View>
         </View>
@@ -279,7 +284,7 @@ const NewsModify: React.FC = (props: any) => {
         </View>}
         <Button title={selectedImg.uri ? "Chọn lại hình ảnh" : "Chọn hình ảnh"} onPress={imagePicker} />
 
-        <View style={{marginBottom: 25}}>
+        <View style={{ marginBottom: 25 }}>
           <Text style={[styles.label, { marginTop: 15, marginBottom: 15 }]}>Chọn danh mục:</Text>
           <Button title="Chọn danh mục" onPress={() => setModalVisible(true)} />
         </View>
@@ -288,10 +293,10 @@ const NewsModify: React.FC = (props: any) => {
           <Text style={styles.label}>Trạng thái:</Text>
           <Switch value={isActive} onValueChange={setIsActive} />
         </View>*/}
-          <Button title="Lưu"
-                  onPress={handleSave}
-          />
-          <Text style={{ marginTop: -5 }} />
+        <Button title="Lưu"
+                onPress={handleSave}
+        />
+        <Text style={{ marginTop: -5 }} />
       </ScrollView>
     </View>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,7 +10,7 @@ import {
   SafeAreaView,
   Image,
   Modal,
-  ScrollView, ToastAndroid
+  ScrollView, ToastAndroid, ActivityIndicator, Dimensions
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { launchImageLibrary } from "react-native-image-picker";
@@ -18,9 +18,14 @@ import QuillEditor, { QuillToolbar } from "react-native-cn-quill";
 import { uploadImageToImgBB } from "../../apiCalls/imgUploadServer";
 import { useSelector } from "react-redux";
 import CheckboxList from "rn-checkbox-list";
+import { allCates } from "../../apiCalls/allCates";
+import { getCateIdByNews } from "../../apiCalls/getCateIdByNews";
+import { updateNews } from "../../apiCalls/updateNews";
+import { addNews } from "../../apiCalls/addNews";
 
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const AddNews: React.FC = (props: any) => {
-  const Router = useRoute();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [isActive, setIsActive] = useState(true);
@@ -28,21 +33,24 @@ const AddNews: React.FC = (props: any) => {
   const [selectedImg, setSelectedImg] = useState<any>({ uri: null, base64: null });
   const [isLoading, setIsLoading] = useState(false);
   const admin = useSelector((state: any) => state.userObj);
-
-
   const [modalVisible, setModalVisible] = useState(false);
-  const [checkedItems, setCheckedItems] = useState([]);
+  const [listCate, setListCate] = useState<any>(null);
+  const [listCateSelected, setListCateSelected] = useState<any>([]);
 
-  const data = [
-    { label: "Option 1", value: "option1" },
-    { label: "Option 2", value: "option2" },
-    { label: "Option 3", value: "option3" }
-    // Add more options as needed
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const listCate = await allCates();
+        setListCate(listCate.map((item: { id: any; name: any; }) => ({ id: item.id, name: item.name }))
+        );
+      } catch (e) {
+        console.log(e);
+      }
+    };
+      fetchData();
+  }, [props, admin]);
 
   const handleSave1 = () => {
-    console.log("Checked items:", checkedItems);
-    // Do something with the checked items
     setModalVisible(false);
   };
 
@@ -63,43 +71,83 @@ const AddNews: React.FC = (props: any) => {
     });
   };
   const handleSave = async () => {
-    setIsLoading(true);
-    const content: any = await getContents();
-    if (!content.trim()) {
+    const getContents = async () => {
+      if (_editor && _editor.current) {
+        return await _editor.current.getHtml();
+      }
+    };
+    if (admin) {
+      setIsLoading(true);
+      const content: any = await getContents();
+      if (!content.trim()) {
+        setIsLoading(false);
+        ToastAndroid.showWithGravity(
+          "Yêu cầu nhập nội dung tin tức",
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
+        return;
+      }
+      if (!selectedImg.uri) {
+        setIsLoading(false);
+        ToastAndroid.showWithGravity(
+          "Yêu cầu chọn một bức ảnh cho tin tức",
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
+        return;
+      }
+      if (title.length < 1 || desc.length < 1) {
+        setIsLoading(false);
+        ToastAndroid.showWithGravity(
+          "Không được bỏ trống tiêu đề hoặc mô tả",
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
+        return;
+      }
+      if (listCateSelected.length < 1) {
+        setIsLoading(false);
+        ToastAndroid.showWithGravity(
+          "Không được bỏ trống phần danh mục",
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
+        return;
+      }
+      try {
+        const response = await uploadImageToImgBB(selectedImg.base64);
+        if (response) {
+          const result = await addNews({
+            username: admin.email,
+            password: admin.password,
+            title: title,
+            description: desc,
+            image: response.data.url,
+            content: getContents(),
+            createdBy: admin.fullName,
+            idCategories: listCateSelected
+          });
+          if (result.status === 200) {
+            setIsLoading(false);
+            ToastAndroid.showWithGravity(
+              "Thêm thành công",
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER);
+            props.navigation.navigate("UserDashBoard", { screen: "NewsDashBoard" });
+          }
+        }
+      } catch (e) {
+        setIsLoading(false);
+        ToastAndroid.showWithGravity(
+          "Error when upload image, so save news is failed",
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER);
+      }
       setIsLoading(false);
-      ToastAndroid.showWithGravity(
-        "Yêu cầu nhập nội dung tin tức",
-        ToastAndroid.LONG,
-        ToastAndroid.CENTER
-      );
-      return;
     }
-    if (!selectedImg.uri) {
-      setIsLoading(false);
-      ToastAndroid.showWithGravity(
-        "Yêu cầu chọn một bức ảnh cho tin tức",
-        ToastAndroid.LONG,
-        ToastAndroid.CENTER
-      );
-      return;
-    }
-    if (title.length < 1 || desc.length < 1) {
-      setIsLoading(false);
-      ToastAndroid.showWithGravity(
-        "Không được bỏ trống tiêu đề hoặc mô tả",
-        ToastAndroid.LONG,
-        ToastAndroid.CENTER
-      );
-      return;
-    }
-    console.log("success");
-    setIsLoading(false);
   };
-  const getContents = async () => {
-    if (_editor && _editor.current) {
-      return await _editor.current.getHtml();
-    }
-  };
+
   const handleDelete = () => {
     Alert.alert("Xác nhận xóa", "Bạn có chắc chắn muốn xóa danh mục này không?", [
       { text: "Hủy", style: "cancel" },
@@ -107,8 +155,52 @@ const AddNews: React.FC = (props: any) => {
     ]);
   };
 
+  // @ts-ignore
   return (
     <View style={styles.container}>
+      {isLoading &&
+        <View style={{
+          position: "absolute",
+          justifyContent: "center",
+          alignItems: "center",
+          height: windowHeight,
+          width: windowWidth,
+          zIndex: 1000,
+          backgroundColor: "rgba(148,148,148,0.3)"
+        }}>
+          <ActivityIndicator size="large" color="#00ff00" />
+        </View>}
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false);
+        }}
+      >
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          <View
+            style={{ backgroundColor: "white", width: "100%", height: "100%", borderColor: "#26292E", borderWidth: 1 }}>
+            <Text style={{ textAlign: "center", fontSize: 25, fontWeight: "bold"}}>Chọn danh mục</Text>
+            <CheckboxList
+              listItems={listCate}
+              theme="blue"
+              listItemStyle={{ borderBottomColor: "#eee", borderBottomWidth: 1 }}
+              checkboxProp={{ boxType: "square" }}
+              //@ts-ignore
+              onChange={({ ids, items }: any) => setListCateSelected(ids)}
+            />
+
+            <Button title="Xác nhận"
+                    onPress={handleSave1}
+            />
+            <Button title="Đóng"
+                    onPress={() => setModalVisible(false)}
+                    color={'red'}
+            />
+          </View>
+        </View>
+      </Modal>
       <ScrollView contentContainerStyle={{ height: "150%" }}>
         <Text style={styles.label}>Tên bài báo:</Text>
         <TextInput
@@ -141,7 +233,8 @@ const AddNews: React.FC = (props: any) => {
               backgroundColor: "white"
             }}
             ref={_editor}
-            initialHtml="Viết nội dung tin tức của bạn"
+            //@ts-ignore
+            initialHtml={"Thêm nội dung tại đây!"}
           />
           <View style={{ width: "100%" }}>
             <QuillToolbar editor={_editor} options="full" theme="light" />
@@ -159,35 +252,18 @@ const AddNews: React.FC = (props: any) => {
         </View>}
         <Button title={selectedImg.uri ? "Chọn lại hình ảnh" : "Chọn hình ảnh"} onPress={imagePicker} />
 
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(false);
-          }}
-        >
-          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <View style={{ backgroundColor: "white", padding: 100, borderColor: "#26292E", borderWidth: 1 }}>
-              <Text>Select Options</Text>
-              <CheckboxList
-                //@ts-ignore
-                listItems={data}
+        <View style={{marginBottom: 25}}>
+          <Text style={[styles.label, { marginTop: 15, marginBottom: 15 }]}>Chọn danh mục:</Text>
+          <Button title="Chọn danh mục" onPress={() => setModalVisible(true)} />
+        </View>
 
-              />
-
-              <Button title="Save" onPress={handleSave1} />
-              <Button title="Close" onPress={() => setModalVisible(false)} />
-            </View>
-          </View>
-        </Modal>
-        <Button title="Open Modal" onPress={() => setModalVisible(true)} />
-
-        <View style={styles.switchContainer}>
+        {/*  <View style={styles.switchContainer}>
           <Text style={styles.label}>Trạng thái:</Text>
           <Switch value={isActive} onValueChange={setIsActive} />
-        </View>
-        <Button title="Lưu" onPress={handleSave} />
+        </View>*/}
+        <Button title="Thêm bài báo"
+                onPress={handleSave}
+        />
         <Text style={{ marginTop: -5 }} />
       </ScrollView>
     </View>

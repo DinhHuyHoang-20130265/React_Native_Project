@@ -9,7 +9,7 @@ export const updateAccount = async (props: any) => {
       fullName: props.account.fullName,
       email: props.account.email,
       status: props.account.status,
-      isAdmin: props.account.isAdmin
+      admin: props.account.isAdmin
     }, {
       headers: authHeader
     });

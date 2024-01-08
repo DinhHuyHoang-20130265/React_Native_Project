@@ -25,8 +25,6 @@ const Settings: React.FC = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <View style={{
-        justifyContent: "center",
-        alignItems: "center",
         marginBottom: 16
       }}>{currentUser === null ?
         <TouchableHighlight onPress={() => navigation.navigate("Login")} underlayColor="#400B96FF"
@@ -39,35 +37,53 @@ const Settings: React.FC = ({ navigation }: any) => {
                             }}>
           <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng nhập".toUpperCase()}</Text>
         </TouchableHighlight> : <View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-              Xin chào: {currentUser.fullName}
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Icon name={"user-circle-o"} style={{ fontSize: 35 }} />
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+              {currentUser.fullName}
             </Text>
             <TouchableOpacity
               onPress={() => navigation.navigate("UserProfile")}
-              style={{ flexDirection: 'row', alignItems: 'center', marginLeft:40 }}>
+              style={{ flexDirection: "row", alignItems: "center", marginLeft: 40 }}>
               <Icon name={"id-card"} size={20} color="blue" style={{ marginRight: 5 }} />
-              <Text style={{ fontSize: 18, color: 'blue', textDecorationLine: 'underline' }}>Chỉnh sửa</Text>
+              <Text style={{ fontSize: 15, color: "blue" }}>Chỉnh sửa</Text>
             </TouchableOpacity>
           </View>
-          <View style={{ marginTop: 10 }}>
-            <TouchableHighlight
-              onPress={() => logOut()}
-              underlayColor="#400B96FF"
-              style={{
-                backgroundColor: 'green',
-                width: 160,
-                height: 40,
-                justifyContent: 'center',
-                borderRadius: 8,
-                marginLeft: (screenWidth - 290) / 2,
-                marginTop: 20
-              }}
-            >
-              <Text style={{ textAlign: 'center', color: 'white', fontSize: 18 }}>
-                {'Đăng xuất'.toUpperCase()}
-              </Text>
-            </TouchableHighlight>
+          <View style={{ }}>
+            <View style={{
+              marginTop: 10,
+              backgroundColor: "green",
+              width: 160,
+              height: 40,
+              justifyContent: "center",
+              borderRadius: 8,
+            }}>
+              <TouchableHighlight
+                onPress={() => logOut()}
+                underlayColor="#400B96FF"
+              >
+                <Text style={{ textAlign: "center", color: "white", fontSize: 15 }}>
+                  {"Đăng xuất".toUpperCase()}
+                </Text>
+              </TouchableHighlight>
+            </View>
+            <View style={{
+              marginTop: 10,
+              backgroundColor: "green",
+              width: 160,
+              height: 40,
+              justifyContent: "center",
+              borderRadius: 8,
+            }}>
+              <TouchableHighlight
+                onPress={() => logOut()}
+                underlayColor="#400B96FF"
+              >
+                <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>
+                  {"Lưu QR Đăng nhập".toUpperCase()}
+                </Text>
+              </TouchableHighlight>
+            </View>
           </View>
         </View>}
       </View>

@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import CateHome from "../components/elements/CateHome";
 import CarouselParallax from "../components/elements/CarouselParallax";
+import Weather from "../components/elements/Weather";
 
 const newsCategories = [
   { id: 1, title: "Thời sự" },
@@ -21,6 +22,7 @@ const Home: React.FC = () => {
       <ScrollView>
         <View style={{ alignItems: "center", justifyContent: "center", marginBottom: 70 }}>
           <CarouselParallax />
+          <Weather />
           {
             newsCategories.map((item) => <CateHome item={item} key={item.id} />)
           }

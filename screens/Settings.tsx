@@ -36,27 +36,37 @@ const Settings: React.FC = ({ navigation }: any) => {
                               borderRadius: 8
                             }}>
           <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng nhập".toUpperCase()}</Text>
-        </TouchableHighlight> : <View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Icon name={"user-circle-o"} style={{ fontSize: 35 }} />
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-              {currentUser.fullName}
-            </Text>
+        </TouchableHighlight> :
+        <View>
+          <View style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            borderBottomWidth: 1
+          }}>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+              <Icon name={"user-circle-o"} style={{ fontSize: 30, marginRight: 5 }} />
+              <Text style={{ fontSize: 17, fontWeight: "bold" }}>
+                {currentUser.fullName}
+              </Text>
+            </View>
             <TouchableOpacity
               onPress={() => navigation.navigate("UserProfile")}
-              style={{ flexDirection: "row", alignItems: "center", marginLeft: 40 }}>
-              <Icon name={"id-card"} size={20} color="blue" style={{ marginRight: 5 }} />
-              <Text style={{ fontSize: 15, color: "blue" }}>Chỉnh sửa</Text>
+              style={{ marginBottom: 5 }}>
+              <View style={{ flexDirection: "row", alignItems: "center", padding: 5 }}>
+                <Icon name={"id-card"} size={25} color="blue" style={{ marginRight: 5 }} />
+                <Text style={{ fontSize: 15, color: "blue" }}>Chỉnh sửa</Text>
+              </View>
             </TouchableOpacity>
           </View>
-          <View style={{ }}>
+          <View style={{ flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between" }}>
             <View style={{
               marginTop: 10,
               backgroundColor: "green",
-              width: 160,
+              width: "45%",
               height: 40,
               justifyContent: "center",
-              borderRadius: 8,
+              borderRadius: 8
             }}>
               <TouchableHighlight
                 onPress={() => logOut()}
@@ -70,16 +80,16 @@ const Settings: React.FC = ({ navigation }: any) => {
             <View style={{
               marginTop: 10,
               backgroundColor: "green",
-              width: 160,
+              width: "45%",
               height: 40,
               justifyContent: "center",
-              borderRadius: 8,
+              borderRadius: 8
             }}>
               <TouchableHighlight
-                onPress={() => logOut()}
+                onPress={() => {}}
                 underlayColor="#400B96FF"
               >
-                <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>
+                <Text style={{ textAlign: "center", color: "white", fontSize: 15 }}>
                   {"Lưu QR Đăng nhập".toUpperCase()}
                 </Text>
               </TouchableHighlight>
@@ -91,16 +101,16 @@ const Settings: React.FC = ({ navigation }: any) => {
         <View style={styles.settingOption}>
           <Icon color="blue"
                 name={"save"}
-                style={{ fontSize: 22, marginRight: 10 }} />
-          <Text style={{ color: "black" }}>Bài viết đã lưu</Text>
+                style={{ fontSize: 30, marginRight: 10 }} />
+          <Text style={{ color: "black", fontSize: 15 }}>Bài viết đã lưu</Text>
         </View>
       </TouchableOpacity>}
       <TouchableOpacity onPress={() => navigation.navigate("History")}>
         <View style={styles.settingOption}>
           <Icon color="green"
                 name={"history"}
-                style={{ fontSize: 22, marginRight: 10 }} />
-          <Text style={{ color: "black" }}>Đã đọc gần đây</Text>
+                style={{ fontSize: 30, marginRight: 10 }} />
+          <Text style={{ color: "black", fontSize: 15 }}>Đã đọc gần đây</Text>
         </View>
       </TouchableOpacity>
     </View>

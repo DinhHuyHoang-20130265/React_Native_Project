@@ -3,7 +3,7 @@ import { globalUrl } from "./globalUrl";
 
 export const changePass = async (props: any) => {
   console.log(props);
-  const url = `http://${globalUrl}/api/auth/change-password`;
+  const url = `https://${globalUrl}/api/auth/change-password`;
 
   const authHeader = { Authorization: `Basic ${Buffer.from(`${props.username}:${props.password}`).toString("base64")}` };
   try {

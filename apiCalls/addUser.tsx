@@ -9,7 +9,7 @@ export const addUser = async (props: any) => {
     email: props.account.email,
     password: props.account.password,
     status: props.account.status,
-    isAdmin: props.account.isAdmin
+    admin: props.account.isAdmin
   };
   try {
     const response = await axios.post(url, body, {

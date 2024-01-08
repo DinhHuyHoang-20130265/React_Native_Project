@@ -3,24 +3,19 @@ import {
   View,
   Text,
   TextInput,
-  Switch,
   Button,
-  Alert,
   StyleSheet,
   SafeAreaView,
   Image,
   Modal,
   ScrollView, ToastAndroid, ActivityIndicator, Dimensions
 } from "react-native";
-import { useRoute } from "@react-navigation/native";
 import { launchImageLibrary } from "react-native-image-picker";
 import QuillEditor, { QuillToolbar } from "react-native-cn-quill";
 import { uploadImageToImgBB } from "../../apiCalls/imgUploadServer";
 import { useSelector } from "react-redux";
 import CheckboxList from "rn-checkbox-list";
 import { allCates } from "../../apiCalls/allCates";
-import { getCateIdByNews } from "../../apiCalls/getCateIdByNews";
-import { updateNews } from "../../apiCalls/updateNews";
 import { addNews } from "../../apiCalls/addNews";
 
 const windowWidth = Dimensions.get("window").width;
@@ -28,7 +23,6 @@ const windowHeight = Dimensions.get("window").height;
 const AddNews: React.FC = (props: any) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [isActive, setIsActive] = useState(true);
   const _editor = React.createRef<QuillEditor>();
   const [selectedImg, setSelectedImg] = useState<any>({ uri: null, base64: null });
   const [isLoading, setIsLoading] = useState(false);
@@ -48,7 +42,7 @@ const AddNews: React.FC = (props: any) => {
         console.log(e);
       }
     };
-      fetchData();
+    fetchData();
   }, [props, admin]);
 
   const imagePicker = () => {
@@ -124,7 +118,7 @@ const AddNews: React.FC = (props: any) => {
             createdBy: admin.fullName,
             idCategories: listCateSelected
           });
-          console.log(result.status);
+          console.log(result);
           if (result.status === 200 || result.status === 201) {
             setIsLoading(false);
             ToastAndroid.showWithGravity(
@@ -135,23 +129,16 @@ const AddNews: React.FC = (props: any) => {
           }
         }
       } catch (e) {
+        console.log(e);
         setIsLoading(false);
         ToastAndroid.showWithGravity(
-          "Error when upload image, so save news is failed",
+          "Error Occurred, so save news is failed",
           ToastAndroid.LONG,
           ToastAndroid.CENTER);
       }
       setIsLoading(false);
     }
   };
-
-  const handleDelete = () => {
-    Alert.alert("Xác nhận xóa", "Bạn có chắc chắn muốn xóa danh mục này không?", [
-      { text: "Hủy", style: "cancel" },
-      { text: "Xóa", style: "destructive", onPress: () => console.log("Xóa danh mục") }
-    ]);
-  };
-  console.log(listCateSelected);
 
   // @ts-ignore
   return (
@@ -179,7 +166,7 @@ const AddNews: React.FC = (props: any) => {
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
           <View
             style={{ backgroundColor: "white", width: "100%", height: "100%", borderColor: "#26292E", borderWidth: 1 }}>
-            <Text style={{ textAlign: "center", fontSize: 25, fontWeight: "bold"}}>Chọn danh mục</Text>
+            <Text style={{ textAlign: "center", fontSize: 25, fontWeight: "bold" }}>Chọn danh mục</Text>
             <CheckboxList
               listItems={listCate}
               theme="blue"
@@ -248,15 +235,10 @@ const AddNews: React.FC = (props: any) => {
         </View>}
         <Button title={selectedImg.uri ? "Chọn lại hình ảnh" : "Chọn hình ảnh"} onPress={imagePicker} />
 
-        <View style={{marginBottom: 25}}>
+        <View style={{ marginBottom: 25 }}>
           <Text style={[styles.label, { marginTop: 15, marginBottom: 15 }]}>Chọn danh mục:</Text>
           <Button title="Chọn danh mục" onPress={() => setModalVisible(true)} />
         </View>
-
-        {/*  <View style={styles.switchContainer}>
-          <Text style={styles.label}>Trạng thái:</Text>
-          <Switch value={isActive} onValueChange={setIsActive} />
-        </View>*/}
         <Button title="Thêm bài báo"
                 onPress={handleSave}
         />

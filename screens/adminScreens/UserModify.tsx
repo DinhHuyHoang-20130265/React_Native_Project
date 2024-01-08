@@ -100,7 +100,8 @@ const UserModify: React.FC = (props: any) => {
     const handleDelete = () => {
       Alert.alert("Xác nhận xóa", "Bạn có chắc chắn muốn xóa tài khoản không?", [
         { text: "Hủy", style: "cancel" },
-        { text: "Xóa", style: "destructive",
+        {
+          text: "Xóa", style: "destructive",
           onPress: async () => {
             try {
               setIsLoading(true);
@@ -113,7 +114,7 @@ const UserModify: React.FC = (props: any) => {
               if (response.status === 204) {
                 setIsLoading(false);
                 ToastAndroid.showWithGravity(
-                  "Xóa danh mục thành công",
+                  "Xóa use thành công",
                   ToastAndroid.LONG,
                   ToastAndroid.CENTER
                 );
@@ -180,7 +181,7 @@ const UserModify: React.FC = (props: any) => {
           }}>
             <ActivityIndicator size="large" color="#00ff00" />
           </View>}
-        <Image source={user.admin ? ImagesAssets.userAdmin : ImagesAssets.user} style={styles.avatar} />
+        <Image source={role === "admin" ? ImagesAssets.userAdmin : ImagesAssets.user} style={styles.avatar} />
 
         <Text style={styles.label}>Họ tên:</Text>
         <TextInput

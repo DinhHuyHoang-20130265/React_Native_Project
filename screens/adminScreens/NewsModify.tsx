@@ -21,7 +21,6 @@ import CheckboxList from "rn-checkbox-list";
 import { allCates } from "../../apiCalls/allCates";
 import { getCateIdByNews } from "../../apiCalls/getCateIdByNews";
 import { updateNews } from "../../apiCalls/updateNews";
-import { deleteCate } from "../../apiCalls/deleteCate";
 import { deleteNews } from "../../apiCalls/deleteNews";
 
 const windowWidth = Dimensions.get("window").width;
@@ -31,7 +30,7 @@ const NewsModify: React.FC = (props: any) => {
   const { item } = Router.params as { item: any };
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState<boolean>(true);
   const _editor = React.createRef<QuillEditor>();
   const [selectedImg, setSelectedImg] = useState<any>({ uri: null, base64: null });
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +40,6 @@ const NewsModify: React.FC = (props: any) => {
   const [listCate, setListCate] = useState<any>(null);
   const [listCateSelected, setListCateSelected] = useState<any>([]);
   const [listCateSelectedOriginal, setListCateSelectedOriginal] = useState<any>([]);
-  const [selectedIds, setSelectedIds] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,12 +68,11 @@ const NewsModify: React.FC = (props: any) => {
       setDesc(item.description);
       setSelectedImg({ ...setSelectedImg, uri: item.image });
       setContent(item.content.toString());
-      setIsActive(item.delete);
+      setIsActive(!item.delete);
       fetchData();
       fetchCate();
     }
   }, [props, item, admin]);
-  console.log(item.id);
 
   const imagePicker = () => {
     launchImageLibrary({
@@ -145,9 +142,7 @@ const NewsModify: React.FC = (props: any) => {
           const response = await uploadImageToImgBB(selectedImg.base64);
           urlImg = response.data.url;
         }
-        console.log(isActive);
         if (urlImg) {
-          console.log(content.toString());
           const result = await updateNews({
             id: item.id,
             username: admin.email,
@@ -172,7 +167,7 @@ const NewsModify: React.FC = (props: any) => {
       } catch (e) {
         setIsLoading(false);
         ToastAndroid.showWithGravity(
-          "Error when upload image, so save news is failed",
+          "Error Occurred, so save news is failed",
           ToastAndroid.LONG,
           ToastAndroid.CENTER);
       }
@@ -198,7 +193,6 @@ const NewsModify: React.FC = (props: any) => {
                 username: admin.email,
                 password: admin.password
               });
-
               if (response.status === 204) {
                 setIsLoading(false);
                 ToastAndroid.showWithGravity(
@@ -326,16 +320,16 @@ const NewsModify: React.FC = (props: any) => {
         </View>
 
         <View style={styles.switchContainer}>
-          <Text style={styles.label}>Ẩn trạng thái:</Text>
-          <Switch value={isActive} onValueChange={setIsActive}/>
+          <Text style={styles.label}>Trạng thái:</Text>
+          <Switch value={isActive} onValueChange={setIsActive} />
         </View>
         <Button title="Lưu"
                 onPress={handleSave}
         />
         <Text style={{ marginTop: -5 }} />
-      <View>
-      <Button title="Xóa danh mục" onPress={handleDelete} color={"red"} />
-      </View>
+        <View>
+          <Button title="Xóa tin tức" onPress={handleDelete} color={"red"} />
+        </View>
       </ScrollView>
 
     </View>

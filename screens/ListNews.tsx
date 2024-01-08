@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  View, FlatList, ViewToken
+  View, FlatList
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { listNews } from "../apiCalls/listNews";
@@ -40,7 +40,7 @@ const ListNews: React.FC = (props: any) => {
             }
           }
         });
-        setListByCate(newsData);
+        setListByCate(newsData.filter((item: any) => !item.delete));
       } catch (error) {
         console.error("Error fetching news:", error);
       }

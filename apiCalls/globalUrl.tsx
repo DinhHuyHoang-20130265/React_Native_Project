@@ -1,3 +1,3 @@
 
-export const globalUrl = "172.16.1.131";
+export const globalUrl = "deploy-api-production-a62b.up.railway.app";
 

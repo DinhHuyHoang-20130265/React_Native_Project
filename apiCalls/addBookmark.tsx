@@ -2,7 +2,7 @@ import axios from "axios";
 import { globalUrl } from "./globalUrl";
 
 export const addBookmark = async (props:any) => {
-  const url = `http://${globalUrl}:8080/api/users/bookmark/${props.userId}/${props.newId}`;
+  const url = `http://${globalUrl}/api/users/bookmark/${props.userId}/${props.newId}`;
   const authHeader = { Authorization: `Basic ${Buffer.from(`${props.username}:${props.password}`).toString("base64")}` };
   try {
    return await axios.put(url,{}, {

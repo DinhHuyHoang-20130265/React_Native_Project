@@ -2,7 +2,7 @@ import axios from "axios";
 import { globalUrl } from "./globalUrl";
 
 export const addCate = async (props: any) => {
-  const url = `http://${globalUrl}:8080/api/cate`;
+  const url = `http://${globalUrl}/api/cate`;
   const authHeader = { Authorization: `Basic ${Buffer.from(`${props.username}:${props.password}`).toString("base64")}` };
   const body = {
     name: props.cate.name,

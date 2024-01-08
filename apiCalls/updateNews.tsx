@@ -10,6 +10,7 @@ export const updateNews = async (props: any) => {
       description: props.description,
       image: props.image,
       content: props.content,
+      delete: props.delete,
       createdBy: props.createdBy,
       idCategories: props.idCategories
     });

@@ -22,7 +22,6 @@ export function NewsCardItem(props: any) {
         {
           text: props.itemNews.delete ? "Hiện bài báo" : "Ẩn bài báo",
           onPress: async () => {
-            console.log(props.itemNews.id);
             await hideNews({
               id: props.itemNews.id,
               username: props.admin.email,
@@ -50,6 +49,7 @@ export function NewsCardItem(props: any) {
         {
           text: "Sửa",
           onPress: () => {
+            props.navigation.navigate("NewsModify", { item: props.itemNews, screen: props.screen });
           },
           style: "default"
         }]

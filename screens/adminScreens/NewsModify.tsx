@@ -21,6 +21,8 @@ import CheckboxList from "rn-checkbox-list";
 import { allCates } from "../../apiCalls/allCates";
 import { getCateIdByNews } from "../../apiCalls/getCateIdByNews";
 import { updateNews } from "../../apiCalls/updateNews";
+import { deleteCate } from "../../apiCalls/deleteCate";
+import { deleteNews } from "../../apiCalls/deleteNews";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -39,6 +41,7 @@ const NewsModify: React.FC = (props: any) => {
   const [listCate, setListCate] = useState<any>(null);
   const [listCateSelected, setListCateSelected] = useState<any>([]);
   const [listCateSelectedOriginal, setListCateSelectedOriginal] = useState<any>([]);
+  const [selectedIds, setSelectedIds] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,18 +68,14 @@ const NewsModify: React.FC = (props: any) => {
     if (item) {
       setTitle(item.title);
       setDesc(item.description);
-      setIsActive(item.isDelete);
       setSelectedImg({ ...setSelectedImg, uri: item.image });
       setContent(item.content.toString());
+      setIsActive(item.delete);
       fetchData();
       fetchCate();
     }
   }, [props, item, admin]);
-
-  const handleSave1 = () => {
-    setModalVisible(false);
-  };
-
+  console.log(item.id);
 
   const imagePicker = () => {
     launchImageLibrary({
@@ -146,8 +145,9 @@ const NewsModify: React.FC = (props: any) => {
           const response = await uploadImageToImgBB(selectedImg.base64);
           urlImg = response.data.url;
         }
+        console.log(isActive);
         if (urlImg) {
-          console.log(listCateSelected === listCateSelectedOriginal);
+          console.log(content.toString());
           const result = await updateNews({
             id: item.id,
             username: admin.email,
@@ -156,6 +156,7 @@ const NewsModify: React.FC = (props: any) => {
             description: desc,
             image: urlImg,
             content: content.toString(),
+            delete: isActive,
             createdBy: admin.fullName,
             idCategories: JSON.stringify(listCateSelected) === JSON.stringify(listCateSelectedOriginal) ? listCateSelected.map((item: any) => item.id) : listCateSelected
           });
@@ -180,11 +181,50 @@ const NewsModify: React.FC = (props: any) => {
   };
 
   const handleDelete = () => {
-    Alert.alert("Xác nhận xóa", "Bạn có chắc chắn muốn xóa danh mục này không?", [
-      { text: "Hủy", style: "cancel" },
-      { text: "Xóa", style: "destructive", onPress: () => console.log("Xóa danh mục") }
-    ]);
+    Alert.alert(
+      "Xác nhận xóa",
+      "Bạn có chắc chắn muốn xóa bài báo này không?",
+      [
+        { text: "Hủy", style: "cancel" },
+        {
+          text: "Xóa",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              setIsLoading(true);
+              // Gọi hàm xóa danh mục từ API
+              const response = await deleteNews({
+                id: item.id,
+                username: admin.email,
+                password: admin.password
+              });
+
+              if (response.status === 204) {
+                setIsLoading(false);
+                ToastAndroid.showWithGravity(
+                  "Xóa bài báo thành công",
+                  ToastAndroid.LONG,
+                  ToastAndroid.CENTER
+                );
+                props.navigation.navigate("UserDashBoard", { screen: "NewsDashBoard" });
+              } else {
+                setIsLoading(false);
+                ToastAndroid.showWithGravity(
+                  "Có lỗi trong quá trình xóa bài báo mục",
+                  ToastAndroid.LONG,
+                  ToastAndroid.CENTER
+                );
+              }
+            } catch (error) {
+              setIsLoading(false);
+              console.log("Error in handleDelete:", error);
+            }
+          }
+        }
+      ]
+    );
   };
+  console.log(isActive);
 
   // @ts-ignore
   return (
@@ -217,23 +257,19 @@ const NewsModify: React.FC = (props: any) => {
               listItems={listCate}
               theme="blue"
               listItemStyle={{ borderBottomColor: "#eee", borderBottomWidth: 1 }}
-              selectedListItems={listCateSelected}
+              selectedListItems={listCateSelectedOriginal}
               checkboxProp={{ boxType: "square" }}
               //@ts-ignore
               onChange={({ ids, items }: any) => setListCateSelected(ids)}
             />
 
             <Button title="Xác nhận"
-                    onPress={handleSave1}
-            />
-            <Button title="Đóng"
                     onPress={() => setModalVisible(false)}
-                    color={"red"}
             />
           </View>
         </View>
       </Modal>
-      <ScrollView contentContainerStyle={{ height: "150%" }}>
+      <ScrollView contentContainerStyle={{ height: "160%" }}>
         <Text style={styles.label}>Tên bài báo:</Text>
         <TextInput
           style={styles.input}
@@ -285,19 +321,23 @@ const NewsModify: React.FC = (props: any) => {
         <Button title={selectedImg.uri ? "Chọn lại hình ảnh" : "Chọn hình ảnh"} onPress={imagePicker} />
 
         <View style={{ marginBottom: 25 }}>
-          <Text style={[styles.label, { marginTop: 15, marginBottom: 15 }]}>Chọn danh mục:</Text>
+          <Text style={[styles.label, { marginTop: 5 }]}>Chọn danh mục:</Text>
           <Button title="Chọn danh mục" onPress={() => setModalVisible(true)} />
         </View>
 
-        {/*  <View style={styles.switchContainer}>
-          <Text style={styles.label}>Trạng thái:</Text>
-          <Switch value={isActive} onValueChange={setIsActive} />
-        </View>*/}
+        <View style={styles.switchContainer}>
+          <Text style={styles.label}>Ẩn trạng thái:</Text>
+          <Switch value={isActive} onValueChange={setIsActive}/>
+        </View>
         <Button title="Lưu"
                 onPress={handleSave}
         />
         <Text style={{ marginTop: -5 }} />
+      <View>
+      <Button title="Xóa danh mục" onPress={handleDelete} color={"red"} />
+      </View>
       </ScrollView>
+
     </View>
   );
 };

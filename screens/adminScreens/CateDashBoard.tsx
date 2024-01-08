@@ -24,10 +24,10 @@ const CateDashBoard: React.FC = (props: any) => {
           setListCate(cateData.filter((item: any) => {
             switch (selected) {
               case "1": {
-                return item.isDelete;
+                return item.delete;
               }
               case "2": {
-                return !item.isDelete;
+                return !item.delete;
               }
               case "0": {
                 return item;

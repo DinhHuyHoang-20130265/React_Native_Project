@@ -20,7 +20,7 @@ export function CateCardItem(props: any) {
         style: "cancel"
       },
         {
-          text: props.cate.isDelete ? "Mở danh mục" : "Ẩn danh mục",
+          text: props.cate.delete ? "Mở danh mục" : "Ẩn danh mục",
           onPress: async () => {
             await hideCategory({
               id: props.cate.id,
@@ -74,8 +74,8 @@ export function CateCardItem(props: any) {
               <Text style={styles.title}>
                 Tên danh mục: {props.cate.name}
               </Text>
-              <Text style={[styles.desc, { color: props.cate.isDelete ? "red" : "green" }]}>
-                Trạng thái: {props.cate.isDelete ? "Đã ẩn" : "Đang Hoạt Động"}
+              <Text style={[styles.desc, { color: props.cate.delete ? "red" : "green" }]}>
+                Trạng thái: {props.cate.delete ? "Đã ẩn" : "Đang Hoạt Động"}
               </Text>
               <Text style={styles.desc}>
                 Người tạo: {props.cate.createdBy}

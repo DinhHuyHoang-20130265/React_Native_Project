@@ -36,6 +36,7 @@ const AddNews: React.FC = (props: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [listCate, setListCate] = useState<any>(null);
   const [listCateSelected, setListCateSelected] = useState<any>([]);
+  const [selectedIds, setSelectedIds] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,11 +50,6 @@ const AddNews: React.FC = (props: any) => {
     };
       fetchData();
   }, [props, admin]);
-
-  const handleSave1 = () => {
-    setModalVisible(false);
-  };
-
 
   const imagePicker = () => {
     launchImageLibrary({
@@ -124,11 +120,12 @@ const AddNews: React.FC = (props: any) => {
             title: title,
             description: desc,
             image: response.data.url,
-            content: getContents(),
+            content: content.toString(),
             createdBy: admin.fullName,
             idCategories: listCateSelected
           });
-          if (result.status === 200) {
+          console.log(result.status);
+          if (result.status === 200 || result.status === 201) {
             setIsLoading(false);
             ToastAndroid.showWithGravity(
               "Thêm thành công",
@@ -154,6 +151,7 @@ const AddNews: React.FC = (props: any) => {
       { text: "Xóa", style: "destructive", onPress: () => console.log("Xóa danh mục") }
     ]);
   };
+  console.log(listCateSelected);
 
   // @ts-ignore
   return (
@@ -185,18 +183,16 @@ const AddNews: React.FC = (props: any) => {
             <CheckboxList
               listItems={listCate}
               theme="blue"
+              selectedListItems={selectedIds}
               listItemStyle={{ borderBottomColor: "#eee", borderBottomWidth: 1 }}
               checkboxProp={{ boxType: "square" }}
               //@ts-ignore
               onChange={({ ids, items }: any) => setListCateSelected(ids)}
             />
 
+
             <Button title="Xác nhận"
-                    onPress={handleSave1}
-            />
-            <Button title="Đóng"
                     onPress={() => setModalVisible(false)}
-                    color={'red'}
             />
           </View>
         </View>

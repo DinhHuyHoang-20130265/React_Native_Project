@@ -2,7 +2,7 @@ import axios from "axios";
 import { globalUrl } from "./globalUrl";
 
 export const listCate = async () => {
-  const url = `http://${globalUrl}/api/cate`;
+  const url = `https://${globalUrl}/api/cate`;
   try {
     const response = await axios.get(url);
     return response.data;

@@ -2,7 +2,7 @@ import axios from "axios";
 import { globalUrl } from "./globalUrl";
 
 export const addNews = async (props: any) => {
-  const url = `http://${globalUrl}/api/news`;
+  const url = `https://${globalUrl}/api/news`;
   const authHeader = { Authorization: `Basic ${Buffer.from(`${props.username}:${props.password}`).toString("base64")}` };
   const body = {
     title: props.title,

@@ -2,7 +2,7 @@ import axios from "axios";
 import { globalUrl } from "./globalUrl";
 
 export const signUp = async (name: string, email: string, password: string) => {
-  const url = `http://${globalUrl}/api/auth/register`;
+  const url = `https://${globalUrl}/api/auth/register`;
   const requestBody = {
     fullName: name,
     password: password,

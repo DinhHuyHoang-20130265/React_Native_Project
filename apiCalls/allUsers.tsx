@@ -2,7 +2,7 @@ import axios from "axios";
 import { globalUrl } from "./globalUrl";
 
 export const allUsers = async (props: any) => {
-  const url = `http://${globalUrl}/api/users`;
+  const url = `https://${globalUrl}/api/users`;
 
   const authHeader = { Authorization: `Basic ${Buffer.from(`${props.username}:${props.password}`).toString("base64")}` };
   try {

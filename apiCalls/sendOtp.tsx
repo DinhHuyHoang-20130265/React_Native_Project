@@ -3,7 +3,7 @@ import { globalUrl } from "./globalUrl";
 
 export const sendOtp = async (props: any) => {
   console.log(props);
-  const url = `http://${globalUrl}/api/auth/validate-email`;
+  const url = `https://${globalUrl}/api/auth/validate-email`;
 
   const requestBody = {
     fullName: props.fullName,

@@ -14,9 +14,9 @@ const Categories: React.FC = ({ navigation }: any) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newsData = await listCate();
+        const newsData = await listCate()
         // @ts-ignore
-        setCateDatas(newsData.filter(item => !item.isDelete));
+        setCateDatas(newsData.filter(item => !item.delete));
       } catch (error) {
         console.error("Error fetching news:", error);
       }

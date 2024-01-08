@@ -24,12 +24,11 @@ const Search: React.FC = (props: any) => {
   }, [props]);
 
   useEffect(() => {
-    console.log(search);
     if (listFetched) {
       if (search === "")
         setList([]);
       else {
-        setList(listFetched.filter((item: any) => item.title.indexOf(search) !== -1));
+        setList(listFetched.filter((item: any) => item.title.indexOf(search) !== -1).filter((item: any) => !item.delete));
       }
     }
   }, [search]);

@@ -2,7 +2,7 @@ import axios from "axios";
 import { globalUrl } from "./globalUrl";
 
 export const deleteCate = async (props: any) => {
-  const url = `http://${globalUrl}:8080/api/cate/${props.CateId}`;
+  const url = `http://${globalUrl}/api/cate/${props.CateId}`;
   const authHeader = { Authorization: `Basic ${Buffer.from(`${props.username}:${props.password}`).toString("base64")}` };
 
   try {

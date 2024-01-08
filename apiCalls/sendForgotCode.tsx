@@ -3,7 +3,7 @@ import { globalUrl } from "./globalUrl";
 
 export const sendForgotCode = async (props: any) => {
   console.log(props);
-  const url = `http://${globalUrl}:8080/api/auth/forgot-password`;
+  const url = `http://${globalUrl}/api/auth/forgot-password`;
 
   const requestBody = {
     email: props.email

@@ -2,7 +2,7 @@ import axios from "axios";
 import { globalUrl } from "./globalUrl";
 
 export const updateUserProfile = async (props: any) => {
-  const url = `http://${globalUrl}:8080/api/users/profile/${props.accountId}`;
+  const url = `http://${globalUrl}/api/users/profile/${props.accountId}`;
   const authHeader = { Authorization: `Basic ${Buffer.from(`${props.username}:${props.password}`).toString("base64")}` };
   try {
     return await axios.put(url, {

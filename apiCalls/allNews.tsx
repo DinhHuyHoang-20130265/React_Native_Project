@@ -2,7 +2,7 @@ import axios from "axios";
 import { globalUrl } from "./globalUrl";
 
 export const allNews = async () => {
-  const url = `http://${globalUrl}:8080/api/news/all`;
+  const url = `http://${globalUrl}/api/news/all`;
 
   try {
     const response = await axios.get(url);

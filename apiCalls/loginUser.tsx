@@ -2,7 +2,7 @@ import axios from "axios";
 import { globalUrl } from "./globalUrl";
 
 export const loginUser = async (username: string, password: string) => {
-  const url = `http://${globalUrl}:8080/api/auth/login`;
+  const url = `http://${globalUrl}/api/auth/login`;
   const requestBody = {
     email: username,
     password: password

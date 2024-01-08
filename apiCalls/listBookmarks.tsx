@@ -2,7 +2,7 @@ import axios from "axios";
 import { globalUrl } from "./globalUrl";
 
 export const listBookmarks = async (props: any) => {
-  const url = `http://${globalUrl}:8080/api/users/bookmark/${props.id}`;
+  const url = `http://${globalUrl}/api/users/bookmark/${props.id}`;
   const authHeader = { Authorization: `Basic ${Buffer.from(`${props.username}:${props.password}`).toString("base64")}` };
   try {
     const response = await axios.get(url, {

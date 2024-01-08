@@ -3,7 +3,7 @@ import { globalUrl } from "./globalUrl";
 
 export const comfirmChangeForgotPass = async (props: any) => {
   console.log(props);
-  const url = `http://${globalUrl}:8080/api/auth/reset-password`;
+  const url = `http://${globalUrl}/api/auth/reset-password`;
 
   const requestBody = {
     email: props.email,

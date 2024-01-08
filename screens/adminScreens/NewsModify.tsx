@@ -67,7 +67,9 @@ const NewsModify: React.FC = (props: any) => {
       setTitle(item.title);
       setDesc(item.description);
       setSelectedImg({ ...setSelectedImg, uri: item.image });
-      setContent(item.content.toString());
+      setContent(!item.content.toString().includes("<script>") ?
+        item.content.toString() :
+        item.content.toString().substring(0, item.content.indexOf("<script>")));
       setIsActive(!item.delete);
       fetchData();
       fetchCate();

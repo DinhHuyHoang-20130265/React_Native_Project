@@ -1,6 +1,6 @@
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/stack";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { StyleSheet } from "react-native";
 import BottomNavigationAdmin from "./BottomNavigationAdmin";
@@ -11,6 +11,7 @@ import AddCategory from "../../screens/adminScreens/AddCategory";
 import CategoryModify from "../../screens/adminScreens/CategoryModify";
 import NewsModify from "../../screens/adminScreens/NewsModify";
 import AddNews from "../../screens/adminScreens/AddNews";
+import UserProfile from "../../screens/UserProfile";
 
 const Stack = createStackNavigator();
 
@@ -171,6 +172,15 @@ export default function NavigateAdmin() {
           borderBottomWidth: 0.5
         },
 
+      })} />
+      <Stack.Screen name="UserProfile" component={UserProfile} options={({ navigation, route }: any) => ({
+        headerTitle: "",
+        headerTitleStyle: styles.headerTitle,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
+        }
       })} />
     </Stack.Navigator>);
 }

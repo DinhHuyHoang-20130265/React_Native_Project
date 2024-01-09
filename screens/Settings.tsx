@@ -1,18 +1,66 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight, useWindowDimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableHighlight,
+  useWindowDimensions,
+  PermissionsAndroid,
+  Platform, ToastAndroid
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../ReduxStore/Action";
+import RNFS from "react-native-fs";
+import { captureRef } from "react-native-view-shot";
+import { CameraRoll } from "@react-native-camera-roll/camera-roll";
+import QRCode from "react-native-qrcode-svg";
+import svg from "react-native-svg";
 
 const Settings: React.FC = ({ navigation }: any) => {
   const { width: screenWidth } = useWindowDimensions();
   const [currentUser, setCurrentUser] = useState<any>(null);
   const user = useSelector((state: any) => state.userObj);
   const dispatch = useDispatch();
+  let qrCodeRef = React.createRef<QRCode>();
 
   useEffect(() => {
     setCurrentUser(user);
   }, [user, navigation]);
+
+  const saveQRImage = async () => {
+    try {
+      if (Platform.OS === "android") {
+        const uri = await captureRef(qrCodeRef, {
+          format: "png",
+          quality: 0.8
+        });
+        const path = RNFS.CachesDirectoryPath + "/QR.png";
+        await RNFS.copyFile(uri, path);
+        await CameraRoll.save(path, { type: "photo" });
+        ToastAndroid.showWithGravity(
+          "Đã lưu hình ảnh QR vào thiết bị",
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
+
+      } else {
+        const uri = await captureRef(qrCodeRef, {
+          format: "png",
+          quality: 0.8
+        });
+        await CameraRoll.save(uri, { type: "photo" });
+        ToastAndroid.showWithGravity(
+          "Đã lưu hình ảnh QR vào thiết bị",
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        );
+      }
+    } catch (error) {
+      console.error("Lỗi khi lưu hình ảnh QR: ", error);
+    }
+  };
 
   const logOut = () => {
     dispatch(logout());
@@ -27,16 +75,29 @@ const Settings: React.FC = ({ navigation }: any) => {
       <View style={{
         marginBottom: 16
       }}>{currentUser === null ?
-        <TouchableHighlight onPress={() => navigation.navigate("Login")} underlayColor="#400B96FF"
-                            style={{
-                              backgroundColor: "green",
-                              width: 160,
-                              height: 40,
-                              justifyContent: "center",
-                              borderRadius: 8
-                            }}>
-          <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng nhập".toUpperCase()}</Text>
-        </TouchableHighlight> :
+        <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+          <TouchableHighlight onPress={() => navigation.navigate("Login")} underlayColor="#400B96FF"
+                              style={{
+                                backgroundColor: "green",
+                                width: 160,
+                                height: 40,
+                                justifyContent: "center",
+                                borderRadius: 8
+                              }}>
+            <Text style={{ textAlign: "center", color: "white", fontSize: 17 }}>{"Đăng nhập".toUpperCase()}</Text>
+          </TouchableHighlight>
+          <Text style={{ fontSize: 15, color: "black" }}>Hoặc</Text>
+          <TouchableHighlight onPress={() =>{}} underlayColor="#400B96FF"
+                              style={{
+                                backgroundColor: "green",
+                                width: 160,
+                                height: 40,
+                                justifyContent: "center",
+                                borderRadius: 8
+                              }}>
+            <Text style={{ textAlign: "center", color: "white", fontSize: 17 }}>{"Quét QR".toUpperCase()}</Text>
+          </TouchableHighlight>
+        </View> :
         <View>
           <View style={{
             flexDirection: "row",
@@ -86,7 +147,7 @@ const Settings: React.FC = ({ navigation }: any) => {
               borderRadius: 8
             }}>
               <TouchableHighlight
-                onPress={() => {}}
+                onPress={saveQRImage}
                 underlayColor="#400B96FF"
               >
                 <Text style={{ textAlign: "center", color: "white", fontSize: 15 }}>
@@ -94,6 +155,22 @@ const Settings: React.FC = ({ navigation }: any) => {
                 </Text>
               </TouchableHighlight>
             </View>
+          </View>
+          <View style={{
+            position: "absolute",
+            zIndex: -1,
+            justifyContent: "center",
+            alignItems: "center",
+            paddingTop: 15,
+            opacity: 0
+          }}>
+            <QRCode
+              value={`${currentUser.email}\n${currentUser.password}`}
+              size={100}
+              getRef={(c) => {
+                qrCodeRef = c;
+              }}
+            />
           </View>
         </View>}
       </View>

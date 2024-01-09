@@ -33,7 +33,8 @@ const Settings: React.FC = ({ navigation }: any) => {
                               width: 160,
                               height: 40,
                               justifyContent: "center",
-                              borderRadius: 8
+                              borderRadius: 8,
+                              marginLeft: 110
                             }}>
           <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng nhập".toUpperCase()}</Text>
         </TouchableHighlight> :

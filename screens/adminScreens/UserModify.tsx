@@ -82,7 +82,7 @@ const UserModify: React.FC = (props: any) => {
               ToastAndroid.LONG,
               ToastAndroid.CENTER
             );
-            props.navigation.replace("UserDashBoard");
+            props.navigation.navigate("UserDashBoard", { screen: "UserDashBoard" });
           } else {
             setIsLoading(false);
             ToastAndroid.showWithGravity(

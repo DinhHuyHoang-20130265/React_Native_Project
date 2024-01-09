@@ -145,7 +145,7 @@ export default function ForgotPassword({ navigation }: any) {
           borderRadius: 17,
           marginTop: 16
       }}>
-        <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng nhập".toUpperCase()}</Text>
+        <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Xác nhận".toUpperCase()}</Text>
         </TouchableHighlight>
         </View>}
       {nextStepCode && <TextInput

@@ -13,28 +13,40 @@ import java.util.ArrayList;
 
 // @react-native-async-storage/async-storage
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+// @react-native-camera-roll/camera-roll
+import com.reactnativecommunity.cameraroll.CameraRollPackage;
 // @react-native-community/checkbox
 import com.reactnativecommunity.checkbox.ReactCheckBoxPackage;
 // @react-native-community/geolocation
 import com.reactnativecommunity.geolocation.GeolocationPackage;
 // @react-native-community/masked-view
 import org.reactnative.maskedview.RNCMaskedViewPackage;
+// react-native-camera
+import org.reactnative.camera.RNCameraPackage;
+// react-native-fs
+import com.rnfs.RNFSPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
 // react-native-image-picker
 import com.imagepicker.ImagePickerPackage;
+// react-native-permissions
+import com.zoontek.rnpermissions.RNPermissionsPackage;
 // react-native-reanimated
 import com.swmansion.reanimated.ReanimatedPackage;
 // react-native-safe-area-context
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 // react-native-screens
 import com.swmansion.rnscreens.RNScreensPackage;
+// react-native-svg
+import com.horcrux.svg.SvgPackage;
 // react-native-tts
 import net.no_mad.tts.TextToSpeechPackage;
 // react-native-vector-icons
 import com.oblador.vectoricons.VectorIconsPackage;
 // react-native-video
 import com.brentvatne.react.ReactVideoPackage;
+// react-native-view-shot
+import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 // react-native-webview
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 
@@ -83,17 +95,23 @@ public class PackageList {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
       new AsyncStoragePackage(),
+      new CameraRollPackage(),
       new ReactCheckBoxPackage(),
       new GeolocationPackage(),
       new RNCMaskedViewPackage(),
+      new RNCameraPackage(),
+      new RNFSPackage(),
       new RNGestureHandlerPackage(),
       new ImagePickerPackage(),
+      new RNPermissionsPackage(),
       new ReanimatedPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),
+      new SvgPackage(),
       new TextToSpeechPackage(),
       new VectorIconsPackage(),
       new ReactVideoPackage(),
+      new RNViewShotPackage(),
       new RNCWebViewPackage()
     ));
   }

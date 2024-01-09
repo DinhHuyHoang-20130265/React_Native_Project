@@ -8,6 +8,7 @@ import {
   Image,
   ToastAndroid,
   ActivityIndicator,
+  TouchableOpacity,
   Dimensions
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
@@ -18,6 +19,10 @@ import { passwordValidator } from "../helpers/passwordValidator";
 import { equaPassAndRepeatPass } from "../helpers/equalPassAndRepeatPass";
 import { updateUserProfile } from "../apiCalls/updateUserProfile";
 import { changePass } from "../apiCalls/changePass";
+import { loginUser } from "../apiCalls/loginUser";
+import { login } from "../ReduxStore/Action";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { useDispatch } from "react-redux";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -33,6 +38,28 @@ const UserProfile: React.FC = ({ navigation }: any) => {
     const [newPass, setNewPass] = useState<string>("");
     const [repeatPass, setRepeatPass] = useState<string>("");
     const [isChangePass, SetIsChangePass] = useState(false);
+
+    const [oldShowPassword, setOldShowPassword] = useState(false);
+    const [newShowPassword, setNewShowPassword] = useState(false);
+    const [repeatShowPassword, setRepeatShowPassword] = useState(false);
+  const togglePasswordVisibility = (field:any) => {
+    switch (field) {
+      case 'old':
+        setOldShowPassword((prevShowPassword) => !prevShowPassword);
+        break;
+      case 'new':
+        setNewShowPassword((prevShowPassword) => !prevShowPassword);
+        break;
+      case 'repeat':
+        setRepeatShowPassword((prevShowPassword) => !prevShowPassword);
+        break;
+      // Thêm các trường khác nếu cần
+      default:
+        break;
+    }
+  };
+
+  const dispatch = useDispatch();
     useEffect(() => {
       setCurrentUser(user);
       setEmail(user.email);
@@ -96,6 +123,8 @@ const UserProfile: React.FC = ({ navigation }: any) => {
           }
           case "Password changed successfully" : {
             setIsLoading(false);
+            const response = await loginUser(user.email, user.password);
+            dispatch(login(response.data.body));
             ToastAndroid.showWithGravity(
               "Đổi mật khẩu thành công",
               ToastAndroid.LONG,
@@ -135,11 +164,14 @@ const UserProfile: React.FC = ({ navigation }: any) => {
         });
         if (response.status === 200) {
           setIsLoading(false);
+          const response = await loginUser(email, user.password);
+          dispatch(login(response.data.body));
           ToastAndroid.showWithGravity(
             "Cập nhật thành công",
             ToastAndroid.LONG,
             ToastAndroid.CENTER
           );
+          navigation.navigate("Settings");
         } else {
           setIsLoading(false);
           ToastAndroid.showWithGravity(
@@ -191,26 +223,46 @@ const UserProfile: React.FC = ({ navigation }: any) => {
 
         {isChangePass && <>
           <Text style={styles.label}>Mật khẩu cũ:</Text>
-          <TextInput
-            style={styles.input}
-            value={oldPass}
-            onChangeText={setOldPass}
-            placeholder="Nhập mật khẩu cũ"
-          />
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={{height: 45, flex:1}}
+              value={oldPass}
+              onChangeText={setOldPass}
+              secureTextEntry={!oldShowPassword}
+              placeholder="Nhập mật khẩu cũ"
+            />
+            <TouchableOpacity style={styles.eyeIcon} onPress={() => togglePasswordVisibility('old')}>
+              <Icon name={oldShowPassword ? 'eye-slash' : 'eye'} size={20} color="gray" />
+            </TouchableOpacity>
+          </View>
+
           <Text style={styles.label}>Mật khẩu mới:</Text>
-          <TextInput
-            style={styles.input}
-            value={newPass}
-            onChangeText={setNewPass}
-            placeholder="Nhập mật khẩu mới"
-          />
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={{height: 45, flex:1}}
+              value={newPass}
+              onChangeText={setNewPass}
+              secureTextEntry={!newShowPassword}
+              placeholder="Nhập mật khẩu mới"
+            />
+            <TouchableOpacity style={styles.eyeIcon} onPress={() => togglePasswordVisibility('new')}>
+              <Icon name={newShowPassword ? 'eye-slash' : 'eye'} size={20} color="gray" />
+            </TouchableOpacity>
+          </View>
+
           <Text style={styles.label}>Nhập lại mật khẩu mới:</Text>
-          <TextInput
-            style={styles.input}
-            value={repeatPass}
-            onChangeText={setRepeatPass}
-            placeholder="Nhập lại mật khẩu mới"
-          />
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={{height: 45, flex:1}}
+              value={repeatPass}
+              onChangeText={setRepeatPass}
+              secureTextEntry={!repeatShowPassword}
+              placeholder="Nhập lại mật khẩu mới"
+            />
+            <TouchableOpacity style={styles.eyeIcon} onPress={() => togglePasswordVisibility('repeat')}>
+              <Icon name={repeatShowPassword ? 'eye-slash' : 'eye'} size={20} color="gray" />
+            </TouchableOpacity>
+          </View>
 
           <Text style={{ marginBottom: 10 }} />
           <Button title="Đổi mật khẩu" onPress={handleChangePassword} />
@@ -247,7 +299,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 8,
     marginBottom: 16,
-    fontSize: 16
+    fontSize: 16,
   },
   roleContainer: {
     marginBottom: 16
@@ -266,7 +318,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 16
-  }
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginTop: 5,
+    marginBottom:10
+  },
+  eyeIcon: {
+    padding: 10,
+  },
 });
 
 export default UserProfile;

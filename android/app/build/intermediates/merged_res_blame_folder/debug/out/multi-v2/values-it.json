@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.react_native_project.app-mergeDebugResources-38:/values-it/values-it.xml",
+            "outputFile": "com.react_native_project.app-mergeDebugResources-39:/values-it/values-it.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hoang\\.gradle\\caches\\transforms-3\\7bc2107a0f24dde54b783ba4b64ec0fd\\transformed\\jetified-play-services-base-18.1.0\\res\\values-it\\values.xml",

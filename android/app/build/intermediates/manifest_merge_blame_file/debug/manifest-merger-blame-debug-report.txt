@@ -32,139 +32,243 @@
 19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 19-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:9:5-81
 19-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:9:22-78
-20    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-20-->[com.facebook.flipper:flipper:0.182.0] C:\Users\Admin\.gradle\caches\transforms-3\e13f88164840fe641a466d05cd8edac7\transformed\jetified-flipper-0.182.0\AndroidManifest.xml:16:5-76
-20-->[com.facebook.flipper:flipper:0.182.0] C:\Users\Admin\.gradle\caches\transforms-3\e13f88164840fe641a466d05cd8edac7\transformed\jetified-flipper-0.182.0\AndroidManifest.xml:16:22-73
-21
-22    <application
-22-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:10:5-29:19
-23        android:name="com.react_native_project.MainApplication"
-23-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:11:7-38
-24        android:allowBackup="false"
-24-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:15:7-34
-25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-25-->[androidx.core:core:1.8.0] C:\Users\Admin\.gradle\caches\transforms-3\9623e378e4dfc57c47793d0ffd25ee05\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
-26        android:debuggable="true"
-27        android:icon="@mipmap/ic_launcher"
-27-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:13:7-41
-28        android:label="@string/app_name"
-28-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:12:7-39
-29        android:roundIcon="@mipmap/ic_launcher_round"
-29-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:14:7-52
-30        android:theme="@style/AppTheme"
-30-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:16:7-38
-31        android:usesCleartextTraffic="true" >
-31-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\debug\AndroidManifest.xml:8:9-44
-32        <activity
-32-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\debug\AndroidManifest.xml:11:9-111
-33            android:name="com.facebook.react.devsupport.DevSettingsActivity"
-33-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\debug\AndroidManifest.xml:11:19-83
-34            android:exported="false" />
-34-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\debug\AndroidManifest.xml:11:84-108
-35        <activity
-35-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:17:7-28:18
-36            android:name="com.react_native_project.MainActivity"
-36-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:18:9-37
-37            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
-37-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:20:9-118
-38            android:exported="true"
-38-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:23:9-32
-39            android:label="@string/app_name"
-39-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:19:9-41
-40            android:launchMode="singleTask"
-40-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:21:9-40
-41            android:windowSoftInputMode="adjustResize" >
-41-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:22:9-51
-42            <intent-filter>
-42-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:24:9-27:25
-43                <action android:name="android.intent.action.MAIN" />
-43-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:25:13-65
-43-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:25:21-62
-44
-45                <category android:name="android.intent.category.LAUNCHER" />
-45-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:26:13-73
-45-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:26:23-70
-46            </intent-filter>
-47        </activity>
-48
-49        <provider
-49-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-16:20
-50            android:name="com.imagepicker.ImagePickerProvider"
-50-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-63
-51            android:authorities="com.react_native_project.imagepickerprovider"
-51-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-71
-52            android:exported="false"
-52-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-37
-53            android:grantUriPermissions="true" >
-53-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-47
-54            <meta-data
-54-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-15:70
-55                android:name="android.support.FILE_PROVIDER_PATHS"
-55-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:17-67
-56                android:resource="@xml/imagepicker_provider_paths" />
-56-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:17-67
-57        </provider>
-58        <provider
-58-->[:react-native-webview] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-16:20
-59            android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider"
-59-->[:react-native-webview] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-83
-60            android:authorities="com.react_native_project.fileprovider"
-60-->[:react-native-webview] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-64
-61            android:exported="false"
-61-->[:react-native-webview] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-37
-62            android:grantUriPermissions="true" >
-62-->[:react-native-webview] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-47
-63            <meta-data
-63-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-15:70
-64                android:name="android.support.FILE_PROVIDER_PATHS"
-64-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:17-67
-65                android:resource="@xml/file_provider_paths" />
-65-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:17-67
-66        </provider>
-67
-68        <activity
-68-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\7bc2107a0f24dde54b783ba4b64ec0fd\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
-69            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-69-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\7bc2107a0f24dde54b783ba4b64ec0fd\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:19-85
-70            android:exported="false"
-70-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\7bc2107a0f24dde54b783ba4b64ec0fd\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:22:19-43
-71            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-71-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\7bc2107a0f24dde54b783ba4b64ec0fd\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:21:19-78
-72
-73        <meta-data
-73-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\bf9b6fb405d2f7fd8250171739588e78\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
-74            android:name="com.google.android.gms.version"
-74-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\bf9b6fb405d2f7fd8250171739588e78\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
-75            android:value="@integer/google_play_services_version" />
-75-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\bf9b6fb405d2f7fd8250171739588e78\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
-76        <meta-data
-76-->[com.facebook.soloader:soloader:0.10.5] C:\Users\Admin\.gradle\caches\transforms-3\ec3312a013bd7d8a70466a1977a1dba4\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:12:9-14:37
-77            android:name="com.facebook.soloader.enabled"
-77-->[com.facebook.soloader:soloader:0.10.5] C:\Users\Admin\.gradle\caches\transforms-3\ec3312a013bd7d8a70466a1977a1dba4\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:13:13-57
-78            android:value="false" />
-78-->[com.facebook.soloader:soloader:0.10.5] C:\Users\Admin\.gradle\caches\transforms-3\ec3312a013bd7d8a70466a1977a1dba4\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:14:13-34
-79
-80        <provider
-80-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
-81            android:name="androidx.startup.InitializationProvider"
-81-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
-82            android:authorities="com.react_native_project.androidx-startup"
-82-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
-83            android:exported="false" >
-83-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
-84            <meta-data
-84-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
-85                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-85-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
-86                android:value="androidx.startup" />
-86-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
-87            <meta-data
-87-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Admin\.gradle\caches\transforms-3\b1c537e6049df5a2dcb1a9b20b1a8868\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
-88                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-88-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Admin\.gradle\caches\transforms-3\b1c537e6049df5a2dcb1a9b20b1a8868\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
-89                android:value="androidx.startup" />
-89-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Admin\.gradle\caches\transforms-3\b1c537e6049df5a2dcb1a9b20b1a8868\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
-90        </provider>
-91    </application>
-92
-93</manifest>
+20    <uses-permission android:name="android.permission.VIBRATE" />
+20-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:10:5-65
+20-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:10:22-63
+21    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+21-->[com.facebook.flipper:flipper:0.182.0] C:\Users\Admin\.gradle\caches\transforms-3\e13f88164840fe641a466d05cd8edac7\transformed\jetified-flipper-0.182.0\AndroidManifest.xml:16:5-76
+21-->[com.facebook.flipper:flipper:0.182.0] C:\Users\Admin\.gradle\caches\transforms-3\e13f88164840fe641a466d05cd8edac7\transformed\jetified-flipper-0.182.0\AndroidManifest.xml:16:22-73
+22    <uses-permission android:name="android.permission.CAMERA" />
+22-->[:react-native-camera] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalDebug\AndroidManifest.xml:7:5-65
+22-->[:react-native-camera] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalDebug\AndroidManifest.xml:7:22-62
+23
+24    <uses-feature
+24-->[:react-native-camera] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalDebug\AndroidManifest.xml:9:5-11:36
+25        android:name="android.hardware.camera"
+25-->[:react-native-camera] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalDebug\AndroidManifest.xml:10:9-47
+26        android:required="false" />
+26-->[:react-native-camera] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalDebug\AndroidManifest.xml:11:9-33
+27    <uses-feature
+27-->[:react-native-camera] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalDebug\AndroidManifest.xml:12:5-14:36
+28        android:name="android.hardware.camera.autofocus"
+28-->[:react-native-camera] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalDebug\AndroidManifest.xml:13:9-57
+29        android:required="false" /> <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+29-->[:react-native-camera] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalDebug\AndroidManifest.xml:14:9-33
+30    <!-- <uses-sdk android:minSdkVersion="14"/> -->
+31    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+31-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Admin\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:25:5-79
+31-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Admin\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:25:22-76
+32
+33    <application
+33-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:11:5-30:19
+34        android:name="com.react_native_project.MainApplication"
+34-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:12:7-38
+35        android:allowBackup="false"
+35-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:16:7-34
+36        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+36-->[androidx.core:core:1.8.0] C:\Users\Admin\.gradle\caches\transforms-3\9623e378e4dfc57c47793d0ffd25ee05\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
+37        android:debuggable="true"
+38        android:icon="@mipmap/ic_launcher"
+38-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:14:7-41
+39        android:label="@string/app_name"
+39-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:13:7-39
+40        android:roundIcon="@mipmap/ic_launcher_round"
+40-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:15:7-52
+41        android:theme="@style/AppTheme"
+41-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:17:7-38
+42        android:usesCleartextTraffic="true" >
+42-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\debug\AndroidManifest.xml:8:9-44
+43        <activity
+43-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\debug\AndroidManifest.xml:11:9-111
+44            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+44-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\debug\AndroidManifest.xml:11:19-83
+45            android:exported="false" />
+45-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\debug\AndroidManifest.xml:11:84-108
+46        <activity
+46-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:18:7-29:18
+47            android:name="com.react_native_project.MainActivity"
+47-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:19:9-37
+48            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+48-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:21:9-118
+49            android:exported="true"
+49-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:24:9-32
+50            android:label="@string/app_name"
+50-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:20:9-41
+51            android:launchMode="singleTask"
+51-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:22:9-40
+52            android:windowSoftInputMode="adjustResize" >
+52-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:23:9-51
+53            <intent-filter>
+53-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:25:9-28:25
+54                <action android:name="android.intent.action.MAIN" />
+54-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:26:13-65
+54-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:26:21-62
+55
+56                <category android:name="android.intent.category.LAUNCHER" />
+56-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:27:13-73
+56-->C:\Users\Admin\Documents\ReactNative\React_Native_Project\android\app\src\main\AndroidManifest.xml:27:23-70
+57            </intent-filter>
+58        </activity>
+59
+60        <provider
+60-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-16:20
+61            android:name="com.imagepicker.ImagePickerProvider"
+61-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-63
+62            android:authorities="com.react_native_project.imagepickerprovider"
+62-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-71
+63            android:exported="false"
+63-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-37
+64            android:grantUriPermissions="true" >
+64-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-47
+65            <meta-data
+65-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-15:70
+66                android:name="android.support.FILE_PROVIDER_PATHS"
+66-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:17-67
+67                android:resource="@xml/imagepicker_provider_paths" />
+67-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:17-67
+68        </provider>
+69        <provider
+69-->[:react-native-webview] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-16:20
+70            android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider"
+70-->[:react-native-webview] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-83
+71            android:authorities="com.react_native_project.fileprovider"
+71-->[:react-native-webview] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-64
+72            android:exported="false"
+72-->[:react-native-webview] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-37
+73            android:grantUriPermissions="true" >
+73-->[:react-native-webview] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-47
+74            <meta-data
+74-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-15:70
+75                android:name="android.support.FILE_PROVIDER_PATHS"
+75-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:17-67
+76                android:resource="@xml/file_provider_paths" />
+76-->[:react-native-image-picker] C:\Users\Admin\Documents\ReactNative\React_Native_Project\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:17-67
+77        </provider>
+78
+79        <service
+79-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] C:\Users\Admin\.gradle\caches\transforms-3\97799781954acc3d7354150c72b84ae2\transformed\jetified-play-services-mlkit-barcode-scanning-16.2.0\AndroidManifest.xml:9:9-15:19
+80            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
+80-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] C:\Users\Admin\.gradle\caches\transforms-3\97799781954acc3d7354150c72b84ae2\transformed\jetified-play-services-mlkit-barcode-scanning-16.2.0\AndroidManifest.xml:10:13-91
+81            android:directBootAware="true"
+81-->[com.google.mlkit:common:17.2.0] C:\Users\Admin\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:17:13-43
+82            android:exported="false" >
+82-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] C:\Users\Admin\.gradle\caches\transforms-3\97799781954acc3d7354150c72b84ae2\transformed\jetified-play-services-mlkit-barcode-scanning-16.2.0\AndroidManifest.xml:11:13-37
+83            <meta-data
+83-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] C:\Users\Admin\.gradle\caches\transforms-3\97799781954acc3d7354150c72b84ae2\transformed\jetified-play-services-mlkit-barcode-scanning-16.2.0\AndroidManifest.xml:12:13-14:85
+84                android:name="com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar"
+84-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] C:\Users\Admin\.gradle\caches\transforms-3\97799781954acc3d7354150c72b84ae2\transformed\jetified-play-services-mlkit-barcode-scanning-16.2.0\AndroidManifest.xml:13:17-120
+85                android:value="com.google.firebase.components.ComponentRegistrar" />
+85-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] C:\Users\Admin\.gradle\caches\transforms-3\97799781954acc3d7354150c72b84ae2\transformed\jetified-play-services-mlkit-barcode-scanning-16.2.0\AndroidManifest.xml:14:17-82
+86            <meta-data
+86-->[com.google.android.gms:play-services-mlkit-face-detection:16.2.0] C:\Users\Admin\.gradle\caches\transforms-3\b9f3389d51c178b8d896d7baeb40c059\transformed\jetified-play-services-mlkit-face-detection-16.2.0\AndroidManifest.xml:12:13-14:85
+87                android:name="com.google.firebase.components:com.google.mlkit.vision.face.internal.FaceRegistrar"
+87-->[com.google.android.gms:play-services-mlkit-face-detection:16.2.0] C:\Users\Admin\.gradle\caches\transforms-3\b9f3389d51c178b8d896d7baeb40c059\transformed\jetified-play-services-mlkit-face-detection-16.2.0\AndroidManifest.xml:13:17-114
+88                android:value="com.google.firebase.components.ComponentRegistrar" />
+88-->[com.google.android.gms:play-services-mlkit-face-detection:16.2.0] C:\Users\Admin\.gradle\caches\transforms-3\b9f3389d51c178b8d896d7baeb40c059\transformed\jetified-play-services-mlkit-face-detection-16.2.0\AndroidManifest.xml:14:17-82
+89            <meta-data
+89-->[com.google.android.gms:play-services-mlkit-text-recognition:16.3.0] C:\Users\Admin\.gradle\caches\transforms-3\b92474410cc7ebbd2fad55921816aa5f\transformed\jetified-play-services-mlkit-text-recognition-16.3.0\AndroidManifest.xml:12:13-14:85
+90                android:name="com.google.firebase.components:com.google.mlkit.vision.text.internal.TextRegistrar"
+90-->[com.google.android.gms:play-services-mlkit-text-recognition:16.3.0] C:\Users\Admin\.gradle\caches\transforms-3\b92474410cc7ebbd2fad55921816aa5f\transformed\jetified-play-services-mlkit-text-recognition-16.3.0\AndroidManifest.xml:13:17-114
+91                android:value="com.google.firebase.components.ComponentRegistrar" />
+91-->[com.google.android.gms:play-services-mlkit-text-recognition:16.3.0] C:\Users\Admin\.gradle\caches\transforms-3\b92474410cc7ebbd2fad55921816aa5f\transformed\jetified-play-services-mlkit-text-recognition-16.3.0\AndroidManifest.xml:14:17-82
+92            <meta-data
+92-->[com.google.mlkit:vision-common:16.5.0] C:\Users\Admin\.gradle\caches\transforms-3\b86801a92097a5dcc8fcd3577b45f061\transformed\jetified-vision-common-16.5.0\AndroidManifest.xml:12:13-14:85
+93                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
+93-->[com.google.mlkit:vision-common:16.5.0] C:\Users\Admin\.gradle\caches\transforms-3\b86801a92097a5dcc8fcd3577b45f061\transformed\jetified-vision-common-16.5.0\AndroidManifest.xml:13:17-124
+94                android:value="com.google.firebase.components.ComponentRegistrar" />
+94-->[com.google.mlkit:vision-common:16.5.0] C:\Users\Admin\.gradle\caches\transforms-3\b86801a92097a5dcc8fcd3577b45f061\transformed\jetified-vision-common-16.5.0\AndroidManifest.xml:14:17-82
+95            <meta-data
+95-->[com.google.mlkit:common:17.2.0] C:\Users\Admin\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:20:13-22:85
+96                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
+96-->[com.google.mlkit:common:17.2.0] C:\Users\Admin\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:21:17-120
+97                android:value="com.google.firebase.components.ComponentRegistrar" />
+97-->[com.google.mlkit:common:17.2.0] C:\Users\Admin\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:22:17-82
+98        </service>
+99
+100        <provider
+100-->[com.google.mlkit:common:17.2.0] C:\Users\Admin\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:9:9-13:38
+101            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+101-->[com.google.mlkit:common:17.2.0] C:\Users\Admin\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:10:13-78
+102            android:authorities="com.react_native_project.mlkitinitprovider"
+102-->[com.google.mlkit:common:17.2.0] C:\Users\Admin\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:11:13-69
+103            android:exported="false"
+103-->[com.google.mlkit:common:17.2.0] C:\Users\Admin\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:12:13-37
+104            android:initOrder="99" />
+104-->[com.google.mlkit:common:17.2.0] C:\Users\Admin\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:13:13-35
+105
+106        <activity
+106-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\7bc2107a0f24dde54b783ba4b64ec0fd\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
+107            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+107-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\7bc2107a0f24dde54b783ba4b64ec0fd\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:19-85
+108            android:exported="false"
+108-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\7bc2107a0f24dde54b783ba4b64ec0fd\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:22:19-43
+109            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+109-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\7bc2107a0f24dde54b783ba4b64ec0fd\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+110
+111        <meta-data
+111-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\bf9b6fb405d2f7fd8250171739588e78\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+112            android:name="com.google.android.gms.version"
+112-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\bf9b6fb405d2f7fd8250171739588e78\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+113            android:value="@integer/google_play_services_version" />
+113-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\bf9b6fb405d2f7fd8250171739588e78\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+114        <meta-data
+114-->[com.facebook.soloader:soloader:0.10.5] C:\Users\Admin\.gradle\caches\transforms-3\ec3312a013bd7d8a70466a1977a1dba4\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:12:9-14:37
+115            android:name="com.facebook.soloader.enabled"
+115-->[com.facebook.soloader:soloader:0.10.5] C:\Users\Admin\.gradle\caches\transforms-3\ec3312a013bd7d8a70466a1977a1dba4\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:13:13-57
+116            android:value="false" />
+116-->[com.facebook.soloader:soloader:0.10.5] C:\Users\Admin\.gradle\caches\transforms-3\ec3312a013bd7d8a70466a1977a1dba4\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:14:13-34
+117
+118        <provider
+118-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+119            android:name="androidx.startup.InitializationProvider"
+119-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+120            android:authorities="com.react_native_project.androidx-startup"
+120-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+121            android:exported="false" >
+121-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+122            <meta-data
+122-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+123                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+123-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+124                android:value="androidx.startup" />
+124-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Admin\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+125            <meta-data
+125-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Admin\.gradle\caches\transforms-3\b1c537e6049df5a2dcb1a9b20b1a8868\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+126                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+126-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Admin\.gradle\caches\transforms-3\b1c537e6049df5a2dcb1a9b20b1a8868\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+127                android:value="androidx.startup" />
+127-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Admin\.gradle\caches\transforms-3\b1c537e6049df5a2dcb1a9b20b1a8868\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+128        </provider>
+129
+130        <service
+130-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Admin\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:29:9-35:19
+131            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+131-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Admin\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:30:13-103
+132            android:exported="false" >
+132-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Admin\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:31:13-37
+133            <meta-data
+133-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Admin\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:32:13-34:39
+134                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+134-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Admin\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:33:17-94
+135                android:value="cct" />
+135-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Admin\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:34:17-36
+136        </service>
+137        <service
+137-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Admin\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:26:9-30:19
+138            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+138-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Admin\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:27:13-117
+139            android:exported="false"
+139-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Admin\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:28:13-37
+140            android:permission="android.permission.BIND_JOB_SERVICE" >
+140-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Admin\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:29:13-69
+141        </service>
+142
+143        <receiver
+143-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Admin\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:32:9-34:40
+144            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+144-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Admin\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:33:13-132
+145            android:exported="false" />
+145-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Admin\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:34:13-37
+146    </application>
+147
+148</manifest>

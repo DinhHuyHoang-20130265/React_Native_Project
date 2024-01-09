@@ -5,8 +5,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   TouchableHighlight,
-  useWindowDimensions,
-  PermissionsAndroid,
   Platform, ToastAndroid
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -16,10 +14,8 @@ import RNFS from "react-native-fs";
 import { captureRef } from "react-native-view-shot";
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import QRCode from "react-native-qrcode-svg";
-import svg from "react-native-svg";
 
 const Settings: React.FC = ({ navigation }: any) => {
-  const { width: screenWidth } = useWindowDimensions();
   const [currentUser, setCurrentUser] = useState<any>(null);
   const user = useSelector((state: any) => state.userObj);
   const dispatch = useDispatch();
@@ -75,17 +71,6 @@ const Settings: React.FC = ({ navigation }: any) => {
       <View style={{
         marginBottom: 16
       }}>{currentUser === null ?
-        <TouchableHighlight onPress={() => navigation.navigate("Login")} underlayColor="#400B96FF"
-                            style={{
-                              backgroundColor: "green",
-                              width: 160,
-                              height: 40,
-                              justifyContent: "center",
-                              borderRadius: 8,
-                              marginLeft: 110
-                            }}>
-          <Text style={{ textAlign: "center", color: "white", fontSize: 18 }}>{"Đăng nhập".toUpperCase()}</Text>
-        </TouchableHighlight> :
         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
           <TouchableHighlight onPress={() => navigation.navigate("Login")} underlayColor="#400B96FF"
                               style={{
@@ -98,7 +83,9 @@ const Settings: React.FC = ({ navigation }: any) => {
             <Text style={{ textAlign: "center", color: "white", fontSize: 17 }}>{"Đăng nhập".toUpperCase()}</Text>
           </TouchableHighlight>
           <Text style={{ fontSize: 15, color: "black" }}>Hoặc</Text>
-          <TouchableHighlight onPress={() =>{}} underlayColor="#400B96FF"
+          <TouchableHighlight onPress={() => {
+            navigation.navigate("QRScanLogin");
+          }} underlayColor="#400B96FF"
                               style={{
                                 backgroundColor: "green",
                                 width: 160,
@@ -116,7 +103,7 @@ const Settings: React.FC = ({ navigation }: any) => {
             justifyContent: "space-between",
             borderBottomWidth: 1
           }}>
-            <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginLeft:20}}>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginLeft: 20 }}>
               <Icon name={"user-circle-o"} style={{ fontSize: 30, marginRight: 5 }} />
               <Text style={{ fontSize: 17, fontWeight: "bold" }}>
                 {currentUser.fullName}
@@ -161,9 +148,9 @@ const Settings: React.FC = ({ navigation }: any) => {
                 onPress={saveQRImage}
                 underlayColor="#400B96FF"
               >
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Icon name={"qrcode"} size={25} color="white" style={{ marginLeft: 5, marginRight: 5 }} />
-                  <Text style={{ textAlign: 'center', color: 'white', fontSize: 15 }}>
+                  <Text style={{ textAlign: "center", color: "white", fontSize: 15 }}>
                     {"Lưu QR Đăng nhập".toUpperCase()}
                   </Text>
                 </View>
@@ -180,10 +167,12 @@ const Settings: React.FC = ({ navigation }: any) => {
           }}>
             <QRCode
               value={`${currentUser.email}\n${currentUser.password}`}
-              size={100}
+              size={1000}
               getRef={(c) => {
                 qrCodeRef = c;
               }}
+              backgroundColor="white"
+              color="black"
             />
           </View>
         </View>}

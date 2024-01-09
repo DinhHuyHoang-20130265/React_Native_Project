@@ -19,6 +19,7 @@ import BookMarks from "../../screens/BookMarks";
 import UserProfile from "../../screens/UserProfile";
 import { deleteCate } from "../../apiCalls/deleteCate";
 import { deleteAllBookMarks } from "../../apiCalls/deleteAllBookMarks";
+import QRScanLogin from "../../screens/QRScanLogin";
 
 const Stack = createStackNavigator();
 
@@ -244,6 +245,15 @@ export default function NavigateUser() {
               name={"trash"}
               style={{ fontSize: 23, marginRight: 10 }} />
           );
+        }
+      })} />
+      <Stack.Screen name="QRScanLogin" component={QRScanLogin} options={({ navigation, route }: any) => ({
+        headerTitle: "QRScan Login",
+        headerTitleStyle: styles.headerTitle,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        headerStyle: {
+          elevation: 100,
+          borderBottomWidth: 0.5
         }
       })} />
     </Stack.Navigator>);

@@ -18,6 +18,9 @@ import { passwordValidator } from "../helpers/passwordValidator";
 import { equaPassAndRepeatPass } from "../helpers/equalPassAndRepeatPass";
 import { updateUserProfile } from "../apiCalls/updateUserProfile";
 import { changePass } from "../apiCalls/changePass";
+import { loginUser } from "../apiCalls/loginUser";
+import { login } from "../ReduxStore/Action";
+import { useDispatch } from "react-redux";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -33,6 +36,7 @@ const UserProfile: React.FC = ({ navigation }: any) => {
     const [newPass, setNewPass] = useState<string>("");
     const [repeatPass, setRepeatPass] = useState<string>("");
     const [isChangePass, SetIsChangePass] = useState(false);
+    const dispatch = useDispatch();
     useEffect(() => {
       setCurrentUser(user);
       setEmail(user.email);
@@ -135,11 +139,14 @@ const UserProfile: React.FC = ({ navigation }: any) => {
         });
         if (response.status === 200) {
           setIsLoading(false);
+          const response = await loginUser(email, user.password);
+          dispatch(login(response.data.body));
           ToastAndroid.showWithGravity(
             "Cập nhật thành công",
             ToastAndroid.LONG,
             ToastAndroid.CENTER
           );
+          navigation.navigate("Settings");
         } else {
           setIsLoading(false);
           ToastAndroid.showWithGravity(

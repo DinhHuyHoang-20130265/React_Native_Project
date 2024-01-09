@@ -45,7 +45,7 @@ const Settings: React.FC = ({ navigation }: any) => {
             justifyContent: "space-between",
             borderBottomWidth: 1
           }}>
-            <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginLeft:20}}>
               <Icon name={"user-circle-o"} style={{ fontSize: 30, marginRight: 5 }} />
               <Text style={{ fontSize: 17, fontWeight: "bold" }}>
                 {currentUser.fullName}
@@ -62,8 +62,8 @@ const Settings: React.FC = ({ navigation }: any) => {
           </View>
           <View style={{ flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between" }}>
             <View style={{
-              marginTop: 10,
-              backgroundColor: "green",
+              marginTop: 15,
+              backgroundColor: "red",
               width: "45%",
               height: 40,
               justifyContent: "center",
@@ -79,8 +79,8 @@ const Settings: React.FC = ({ navigation }: any) => {
               </TouchableHighlight>
             </View>
             <View style={{
-              marginTop: 10,
-              backgroundColor: "green",
+              marginTop: 15,
+              backgroundColor: "black",
               width: "45%",
               height: 40,
               justifyContent: "center",
@@ -90,9 +90,12 @@ const Settings: React.FC = ({ navigation }: any) => {
                 onPress={() => {}}
                 underlayColor="#400B96FF"
               >
-                <Text style={{ textAlign: "center", color: "white", fontSize: 15 }}>
-                  {"Lưu QR Đăng nhập".toUpperCase()}
-                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon name={"qrcode"} size={25} color="white" style={{ marginLeft: 5, marginRight: 5 }} />
+                  <Text style={{ textAlign: 'center', color: 'white', fontSize: 15 }}>
+                    {"Lưu QR Đăng nhập".toUpperCase()}
+                  </Text>
+                </View>
               </TouchableHighlight>
             </View>
           </View>

@@ -1,17 +1,14 @@
 import React from "react";
-import { View, Text, StyleSheet, Dimensions, Image, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, Dimensions, Image, ImageBackground, TouchableOpacity } from "react-native";
 
 export const SLIDER_WIDTH = Dimensions.get("window").width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-const CarouselCardItem = ({ item, index }: any): React.JSX.Element | null => {
-  if (!item || !item.title || !item.body || !item.imgUrl) {
-    console.error("Invalid item data:", item);
-    return null;
-  }
+const CarouselCardItem = (props: any): React.JSX.Element | null => {
   return (
-    <View style={styles.container} key={index}>
+    <TouchableOpacity onPress={() => props.navigation.navigate("Details", { item: props.item })}>
+    <View style={styles.container} key={props.item.id}>
       <ImageBackground
-        source={{ uri: item.imgUrl }}
+        source={{ uri: props.item.image }}
         style={{
           height: "100%",
           width: "100%",
@@ -24,14 +21,15 @@ const CarouselCardItem = ({ item, index }: any): React.JSX.Element | null => {
           backgroundColor: "rgba(72,57,57,0.6)",
           borderRadius: 20
         }}>
-          <Text style={styles.timer}>20/12/2023</Text>
+          <Text style={styles.timer}>{props.item.createdDate.substring(0,10)}</Text>
           <View style={styles.content}>
-            <Text style={styles.header}>{item.title}</Text>
-            <Text style={styles.body}>{item.body}</Text>
+            <Text style={styles.header}>{props.item.title}</Text>
+            <Text style={styles.body}>{props.item.createdBy}</Text>
           </View>
         </View>
       </ImageBackground>
     </View>
+    </TouchableOpacity>
   );
 };
 
@@ -45,14 +43,15 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginTop: "5%",
     marginLeft: "65%",
-    fontSize: 15
+    fontSize: 15,
+    color: "white"
   },
   content: {
     marginTop: "17%"
   },
   header: {
     color: "#e7dede",
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: "bold",
     paddingLeft: 10
   },

@@ -11,20 +11,19 @@ import Weather from "../components/elements/Weather";
 
 const newsCategories = [
   { id: 1, title: "Thời sự" },
-  { id: 2, title: "Thể thao" },
-  { id: 3, title: "Giải trí" },
-  { id: 4, title: "Khoa học" }
+  { id: 5, title: "Kinh tế" },
+  { id: 10, title: "Giải trí" }
 ];
 
-const Home: React.FC = () => {
+const Home: React.FC = (props: any) => {
   return (
     <View style={{ minHeight: "100%" }}>
       <ScrollView>
         <View style={{ alignItems: "center", justifyContent: "center", marginBottom: 70 }}>
-          <CarouselParallax />
+          <CarouselParallax navigation={props.navigation} />
           <Weather />
           {
-            newsCategories.map((item) => <CateHome item={item} key={item.id} />)
+            newsCategories.map((item) => <CateHome navigation={props.navigation} item={item} key={item.id} />)
           }
         </View>
       </ScrollView>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { TouchableOpacity, StyleSheet, View, Image, ToastAndroid, ActivityIndicator, Dimensions, TouchableHighlight } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/elements/Background";
-import Button from "../components//elements/Button";
 import TextInput from "../components/elements/TextInput";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";

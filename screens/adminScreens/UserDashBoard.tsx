@@ -51,6 +51,9 @@ const UserDashBoard: React.FC = (props: any) => {
       }
     };
     fetchData();
+    return props.navigation.addListener("focus", () => {
+      fetchData();
+    });
   }, [props, selected, admin, event]);
 
   return (

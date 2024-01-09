@@ -3,15 +3,16 @@ import { View, Text, StyleSheet, Dimensions, Image, ImageBackground } from "reac
 
 export const SLIDER_WIDTH = Dimensions.get("window").width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-const FirstCarouselCardHome = ({ item, index }: any): React.JSX.Element | null => {
-  if (!item || !item.title || !item.body || !item.imgUrl) {
-    console.error("Invalid item data:", item);
+// const FirstCarouselCardHome = ({ item, index }: any): React.JSX.Element | null => {
+export function FirstCarouselCardHome(props: any) {
+  if (!props || !props.title || !props.createdBy || !props.image) {
+    console.error("Invalid item data:", props);
     return null;
   }
   return (
-    <View style={styles.container} key={index}>
+    <View style={styles.container} key={props.id}>
       <ImageBackground
-        source={{ uri: item.imgUrl }}
+        source={{ uri: props.image }}
         style={{
           height: "100%",
           width: "100%"
@@ -23,8 +24,8 @@ const FirstCarouselCardHome = ({ item, index }: any): React.JSX.Element | null =
         }}>
           <Text style={styles.timer}>20/12/2023</Text>
           <View style={styles.content}>
-            <Text style={styles.header}>{item.title}</Text>
-            <Text style={styles.body}>{item.body}</Text>
+            <Text style={styles.header}>{props.title}</Text>
+            <Text style={styles.body}>{props.createdBy}</Text>
           </View>
         </View>
       </ImageBackground>
@@ -48,13 +49,13 @@ const styles = StyleSheet.create({
   },
   header: {
     color: "#e7dede",
-    fontSize: 28,
+    fontSize: 17,
     fontWeight: "bold",
     paddingLeft: SLIDER_WIDTH/8
   },
   body: {
     color: "#e7dede",
-    fontSize: 14,
+    fontSize: 13,
     paddingLeft: SLIDER_WIDTH/8,
     paddingRight: SLIDER_WIDTH/8
   }

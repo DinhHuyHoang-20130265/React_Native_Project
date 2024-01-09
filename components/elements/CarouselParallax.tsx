@@ -1,5 +1,7 @@
-import * as React from "react";
+// import * as React from "react";
 import { Dimensions, View } from "react-native";
+import React, { useEffect, useState } from "react";
+
 import Animated, {
   Extrapolate,
   interpolate,
@@ -19,6 +21,9 @@ const colors = [
 ];
 
 function CarouselParallax() {
+
+  const [listData, setListData] = useState<any[]>([]);
+
   const progressValue = useSharedValue<number>(0);
   const baseOptions =
     ({
@@ -84,12 +89,12 @@ function CarouselParallax() {
 }
 
 const PaginationItem: React.FC<{
-    index: number
-    backgroundColor: string
-    length: number
-    animValue: Animated.SharedValue<number>
-    isRotate?: boolean
-  }> = (props) => {
+  index: number
+  backgroundColor: string
+  length: number
+  animValue: Animated.SharedValue<number>
+  isRotate?: boolean
+}> = (props) => {
   const { animValue, index, length, backgroundColor, isRotate } = props;
   const width = 10;
 

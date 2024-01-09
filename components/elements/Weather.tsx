@@ -54,7 +54,8 @@ const Weather = () => {
     (state ? <View
       style={{
         marginTop: 10,
-        backgroundColor: "rgba(91,236,216, 0.7)",
+        // backgroundColor: "rgba(91,236,216, 0.7)",
+        backgroundColor: "rgb(158 194 236)",
         borderRadius: 10,
         justifyContent: "center",
         alignItems: "center"

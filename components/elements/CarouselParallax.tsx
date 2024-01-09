@@ -1,5 +1,7 @@
-import * as React from "react";
+// import * as React from "react";
 import { Dimensions, View } from "react-native";
+import React, { useEffect, useState } from "react";
+
 import Animated, {
   Extrapolate,
   interpolate,
@@ -10,6 +12,7 @@ import Carousel from "react-native-reanimated-carousel";
 
 import FirstCarouselCardHome from "./FirstCarouselCardHome";
 import { data } from "./data";
+import { newsFlash } from "../../apiCalls/newsFlash";
 
 const PAGE_WIDTH = Dimensions.get("window").width + 80;
 const colors = [
@@ -18,7 +21,18 @@ const colors = [
   "#a4cc38"
 ];
 
-function CarouselParallax() {
+function CarouselParallax(props: any) {
+
+  const [listData, setListData] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchCarroulsel = async () => {
+      const data = await newsFlash();
+      setListData(data);
+    };
+    fetchCarroulsel();
+  }, []);
+  console.log(listData);
   const progressValue = useSharedValue<number>(0);
   const baseOptions =
     ({
@@ -33,7 +47,7 @@ function CarouselParallax() {
         alignItems: "center"
       }}
     >
-      <Carousel
+      {listData ? <Carousel
         {...baseOptions}
         style={{
           width: PAGE_WIDTH
@@ -51,9 +65,9 @@ function CarouselParallax() {
           parallaxScrollingScale: 0.9,
           parallaxScrollingOffset: 50
         }}
-        data={data}
-        renderItem={({ index }) => <FirstCarouselCardHome item={data.at(index)} index={index} />}
-      />
+        data={listData}
+        renderItem={({ index }) => <FirstCarouselCardHome navigation={props.navigation} item={listData.at(index)} index={index} />}
+      /> : <View></View>}
       {!!progressValue && (
         <View
           style={
@@ -84,12 +98,12 @@ function CarouselParallax() {
 }
 
 const PaginationItem: React.FC<{
-    index: number
-    backgroundColor: string
-    length: number
-    animValue: Animated.SharedValue<number>
-    isRotate?: boolean
-  }> = (props) => {
+  index: number
+  backgroundColor: string
+  length: number
+  animValue: Animated.SharedValue<number>
+  isRotate?: boolean
+}> = (props) => {
   const { animValue, index, length, backgroundColor, isRotate } = props;
   const width = 10;
 

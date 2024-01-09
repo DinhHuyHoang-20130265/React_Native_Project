@@ -91,25 +91,6 @@ export function NewsCardItem(props: any) {
             </View>
           </View>
         </View>
-
-        {/*<View style={styles.container}>*/}
-        {/*  <View style={styles.left}>*/}
-        {/*    <View style={{ height: "90%", justifyContent: "center" }}>*/}
-        {/*      <Text style={styles.title}>*/}
-        {/*        Tên bai: {props.cate.name}*/}
-        {/*      </Text>*/}
-        {/*      <Text style={[styles.desc, { color: props.cate.isDelete ? "red" : "green" }]}>*/}
-        {/*        Trạng thái: {props.cate.isDelete ? "Đã ẩn" : "Đang Hoạt Động"}*/}
-        {/*      </Text>*/}
-        {/*      <Text style={styles.desc}>*/}
-        {/*        Người tạo: {props.cate.createdBy}*/}
-        {/*      </Text>*/}
-        {/*      <Text style={[styles.desc]}>*/}
-        {/*        Ngày tạo: {props.cate.createdDate}*/}
-        {/*      </Text>*/}
-        {/*    </View>*/}
-        {/*  </View>*/}
-        {/*</View>*/}
       </Animated.View> : ""}
     </TouchableNativeFeedback>
   );
